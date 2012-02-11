@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+/* ============================= General Content Style ============================== */
+/* Headlines */
+h1 {  }
+h2 {  }
+h3 {  }
+h4 {  }
+h5 {  }
+h6 {  }
+
+/* Links */
+a { outline: none; }
+a:hover {  }
+
+/* Paragraphs */
+p {  }
+strong, b {  }
+
+/* Lists */
+ul {  }
+ul li {  }
+ol {  }
+ol li {  }
+
+/* Image Styles */
+img {  }
+img.alignleft {  }
+img.alignright {  }
+img.aligncenter {  }
+a img {  }
+a:hover img{  }
+
+/* Tables */
+table { border-spacing: 0; }
+table td {  }
+table thead {  }
+table thead td {  }
+
+/* Blockquote */
+blockquote {  }
+
+/* ================================== Page Layout =================================== */
+body { margin: 0; padding: 0; background: #FFF; color: #000; font-family: Arial, Helvetica, sans-serif; min-width: 1050px; }
+.layout { width: 960px; margin: 0 auto; }
+
+
+/* ===================================== Header ===================================== */
+#header {  }
+
+/* Main menu */
+#header .main-menu {  }
+#header .main-menu li {  }
+#header .main-menu li a {  }
+#header .main-menu li a:hover {  }
+
+/* Main menu - 2nd level menus */
+
+/* Main menu - 3rd level menus */
+
+/* Main menu - 4th level menus */
+
+
+/* ===================================== Footer ===================================== */
+#footer {  }
+
+/* Rights */
+#footer .rights {  }

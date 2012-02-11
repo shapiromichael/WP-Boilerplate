@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+/* ================================== General Admin ================================= */
+/* General */
+span.meta { padding-right: 10px; font-size: 12px; font-style: italic; font-family: sans-serif; color: #666; }
+
+/* Fonts & Headlines */
+#site-title { font-family: Arial, Helvetica, sans-serif; }
+h3 { margin: 2em 0 1em 0; padding-bottom: 0.5em; border-bottom: #DFDFDF 1px solid; color: #999; }
+h4 { margin: 1.33em 0 0 0; }
