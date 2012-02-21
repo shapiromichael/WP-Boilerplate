@@ -5,9 +5,11 @@
 <title><?php wp_title(''); ?></title>
 <link rel="icon" href="<?php echo bloginfo('template_directory'); ?>/images/icon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="<?php echo bloginfo('template_directory'); ?>/images/icon.ico" type="image/x-icon">
-<meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=EDGE" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 <meta name="viewport" content="width=device-width" />
 <?php
+	
+	wp_enqueue_script('modernizr');
 	
 	wp_head();
 	

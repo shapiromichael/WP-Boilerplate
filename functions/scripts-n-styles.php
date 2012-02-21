@@ -10,6 +10,7 @@
 	
 	// Scripts
 	wp_register_script('jq', JS_DIR . '/libs/jquery.js');
+	wp_register_script('modernizr', JS_DIR . '/libs/modernizr.js');
 	wp_register_script('fancybox', JS_DIR . '/libs/fancybox.js', array('jq'));
 	
 	wp_register_script('general', JS_DIR . '/general.js', array('jq','fancybox'));

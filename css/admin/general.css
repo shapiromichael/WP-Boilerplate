@@ -8,3 +8,9 @@ span.meta { padding-right: 10px; font-size: 12px; font-style: italic; font-famil
 #site-title { font-family: Arial, Helvetica, sans-serif; }
 h3 { margin: 2em 0 1em 0; padding-bottom: 0.5em; border-bottom: #DFDFDF 1px solid; color: #999; }
 h4 { margin: 1.33em 0 0 0; }
+
+/* Icons */
+#icon-options-32 { background: url(../../images/admin/options-32.png) no-repeat; }
+
+#menu-posts-example .wp-menu-image { background: url(../../images/admin/example-16.png) no-repeat center center !important; }
+#icon-edit.icon32-posts-example { background: url(../../images/admin/example-32.png) no-repeat; }

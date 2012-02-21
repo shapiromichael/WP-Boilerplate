@@ -11,8 +11,7 @@
 		if( isset( $_POST['action'] ) && $_POST['action'] == 'update-general-options' ){
 			
 			$_updateFields = array(
-				'theme_temp_1',
-				'theme_temp_2'				
+				'ga_account'			
 			);
 			
 			foreach($_updateFields as $field){
@@ -38,22 +37,16 @@
 				<h3 class="tm-title">Social Channels</h3>
 				<table class="form-table">
 					<tbody>
+						
 						<tr valign="top">
 							<th scope="row">
-								<label for="theme_temp_1">Temp #1</label>
+								<label for="ga_account">Google Analytics Account</label>
 							</th>
 							<td>
-								<input name="theme_temp_1" type="text" id="theme_temp_1" value="<?php echo get_option('theme_temp_1') ?>" class="regular-text" autocomplete="off">
+								<input name="ga_account" type="text" id="ga_account" value="<?php echo get_option('ga_account') ?>" class="regular-text" autocomplete="off">
 							</td>
 						</tr>
-						<tr valign="top">
-							<th scope="row">
-								<label for="theme_temp_2">Temp #2</label>
-							</th>
-							<td>
-								<input name="theme_temp_2" type="text" id="theme_temp_2" value="<?php echo get_option('theme_temp_2') ?>" class="regular-text" autocomplete="off">
-							</td>
-						</tr>
+						
 					</tbody>
 				</table>
 			

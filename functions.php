@@ -17,7 +17,6 @@
 		require_once('functions/admin/options/general.php');
 		
 		// Metaboxs
-		require_once('functions/admin/metaboxes/post-example.php');
 		
 		// Other
 		require_once('functions/admin/utils.php');

@@ -1,6 +1,5 @@
 <?php
 	
-	define('THEME_DIR', '/wp-content/themes/*****' );
-	define('CSS_DIR', THEME_DIR . '/css' );
-	define('JS_DIR', THEME_DIR . '/js' );
+	define('CSS_DIR', get_bloginfo('template_url') . '/css' );
+	define('JS_DIR', get_bloginfo('template_url') . '/js' );
 	
