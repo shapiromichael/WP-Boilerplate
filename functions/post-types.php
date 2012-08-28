@@ -21,7 +21,7 @@
 			'all_items'          => 'All Examples',
 			'view_item'          => 'View Examples',
 			'search_items'       => 'Search Examples',
-			'not_found'          =>  'No Examples Found',
+			'not_found'          => 'No Examples Found',
 			'not_found_in_trash' => 'No Examples Found in Trash', 
 			'parent_item_colon'  => '',
 			'menu_name'          => 'Examples'
@@ -39,7 +39,9 @@
 			'has_archive'        => false, 
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields')
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'  ),
+			'taxonomies'         => array( 'category', 'post_tag' ),
+			'menu_position'      => 5 // below Posts
 		);
 		register_post_type( 'example', $args );
 		
