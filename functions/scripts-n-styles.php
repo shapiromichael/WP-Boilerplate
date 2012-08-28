@@ -81,7 +81,7 @@ function register_admin_styles( $is_minified = false ) {
 function register_admin_scripts( $is_minified = false ) {
 	wp_register_script('jq-ui',         JS_DIR . '/libs/jquery-ui.js',   array('jq'),                         true );
 	wp_register_script('modernizr',     JS_DIR . '/libs/modernizr.js',   array(),                             true );
-	wp_register_script('colorpick',   JS_DIR . '/libs/colorpicker.js', array('jq'),                         true );
+	wp_register_script('colorpick',     JS_DIR . '/libs/colorpicker.js', array('jq'),                         true );
 	wp_register_script('admin-options', JS_DIR . '/admin/options.js',    array('jq', 'jq-ui', 'colorpicker'), true );
 }
 
