@@ -16,7 +16,6 @@
 		require_once('functions/admin/options/menu.php');
 		require_once('functions/admin/options/general.php');
 		require_once('functions/admin/options/sortlist.php');
-		require_once('functions/admin/options/homepage-options.php');
 		
 		// Metaboxs
 		

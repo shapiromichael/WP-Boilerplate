@@ -161,18 +161,6 @@
 
 			</form>
 
-			<span style="display:none">
-				<?php
-
-					$data = get_option( $items_structure['name'] );
-					print_r( $data );
-
-				?>
-			</span>
-			<script id="another-row">
-				'<tr><td class="drag-handle"></td><td><input type="text" class="slide-image" /></td><td><textarea name="banner-text" style="width:350px; height:60px;"></textarea></td><td><input type="text" class="slide-link" /></td>td class="remove-row"></td></tr>'
-			</script>
-
 		</div>
 
 
