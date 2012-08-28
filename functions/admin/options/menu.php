@@ -1,8 +1,13 @@
 <?php
-	
+
 	function theme_options_menu_setup() {
-		add_menu_page('Options', 'Options', 'publish_posts', 'options', 'theme_options_general', get_bloginfo('template_url').'/images/admin/options-16.png');
-		//add_submenu_page( 'options', 'Homepage', 'Homepage', 'publish_posts', 'options-homepage', 'theme_options_homepage' );
+
+		add_menu_page('Temp-Options', 'Temp Options', 'publish_posts', 'options', 'theme_options_general', get_bloginfo('template_url').'/images/admin/options-16.png');
+
+		// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
+		add_submenu_page( 'options', 'Homepage Option', 'Homepage Options', 'edit_dashboard', 'homepage-options', 'theme_homepage_options' );
+		add_submenu_page( 'options', 'Sortlist', 'Sortlist', 'edit_dashboard', 'sortlist', 'theme_sortlist' );
+
+
 	}
 	add_action('admin_menu', 'theme_options_menu_setup');
-	

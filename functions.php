@@ -15,11 +15,14 @@
 		// Admin option pages
 		require_once('functions/admin/options/menu.php');
 		require_once('functions/admin/options/general.php');
+		require_once('functions/admin/options/sortlist.php');
+		require_once('functions/admin/options/homepage-options.php');
 		
 		// Metaboxs
 		
 		// Other
 		require_once('functions/admin/utils.php');
+		require_once('functions/libs/sortlist.php');
 		
 	}	
 	
