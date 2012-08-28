@@ -1,21 +1,23 @@
 <?php
 	
-	// Styles
-	wp_register_style('fancybox', CSS_DIR . '/libs/fancybox.css');
-	
-	wp_register_style('fonts', CSS_DIR . '/fonts.css');
-	wp_register_style('general', CSS_DIR . '/general.css', array('fonts','fancybox'));
-	wp_register_style('home', CSS_DIR . '/home.css', array('general'));
+	function register_scripts_n_styles() {
 
-	
-	// Scripts
-	wp_register_script('jq', JS_DIR . '/libs/jquery.js');
-	wp_register_script('modernizr', JS_DIR . '/libs/modernizr.js');
-	wp_register_script('fancybox', JS_DIR . '/libs/fancybox.js', array('jq'));
-	
-	wp_register_script('general', JS_DIR . '/general.js', array('jq','fancybox'));
-	wp_register_script('home', JS_DIR . '/home.js', array('general'));
-	
+		// Styles
+		wp_register_style('fancybox', CSS_DIR . '/libs/fancybox.css');
+		wp_register_style('fonts',    CSS_DIR . '/fonts.css');
+		wp_register_style('general',  CSS_DIR . '/general.css', array('fonts','fancybox'));
+		wp_register_style('home',     CSS_DIR . '/home.css', array('general'));
+
+		// Scripts
+		wp_register_script('jq',        JS_DIR . '/libs/jquery.js');
+		wp_register_script('modernizr', JS_DIR . '/libs/modernizr.js');
+		wp_register_script('fancybox',  JS_DIR . '/libs/fancybox.js', array('jq'));
+		wp_register_script('general',   JS_DIR . '/general.js', array('jq','fancybox'));
+		wp_register_script('home',      JS_DIR . '/home.js', array('general'));
+	}
+	add_action( 'init', 'register_scripts_n_styles' );
+
+
 	
 	if ( is_admin() ) {
 		
