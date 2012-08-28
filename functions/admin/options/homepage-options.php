@@ -1,7 +1,5 @@
 <?php
 
-	define('SLDIE_META', 'tfx_slide_meta');
-
 	function theme_homepage_options(){
 
 		// Prevent access for non-administratos
@@ -124,7 +122,7 @@
 
 		?>
 		<div class="wrap">
-			<h2>Traffix - Homepage Options</h2>
+			<h2>Homepage Options</h2>
 			<div style="padding:5px;"></div>
 
 			<form method="post" action="admin.php?page=homepage-options" onSubmit="return parseSlides()" >
