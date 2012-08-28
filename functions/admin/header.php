@@ -7,16 +7,19 @@
 		$templateUrl = get_bloginfo('template_url');
 		
 		?>
-        <link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-		  <link rel="stylesheet" type="text/css" href="<?php echo $templateUrl; ?>/css/admin/general.css" />
+			<link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="stylesheet" type="text/css" href="<?php echo $templateUrl; ?>/css/admin/general.css" />
 		<?php	
 		
 		if( $pagenow == 'admin.php' ){
+
+
+
 			?>
-			   <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/options.css" />
-			   <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/libs/jquery.js"></script>
-            <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/admin/options.js"></script>
+				<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/admin/options.css" />
+				<script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/libs/jquery.js"></script>
+				<script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/admin/options.js"></script>
 			<?php
 		}else{
 			?><!-- PAGE: <?php echo $pagenow; ?>--><?php
@@ -31,18 +34,13 @@
 		$templateUrl = get_bloginfo('template_url');
 		
 		?>
-        <link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-		  <style>
-		     body.login { 
-					/* Here you can set the background style */
-			  }
-			  .login #login h1 a {
-				   width: 327px; height: 54px; background: url(<?php echo $templateUrl; ?>/images/admin/logo.png) no-repeat;
-			  }
-		  </style>
-		  <script language="javascript" type="text/javascript" src="<?php echo $templateUrl; ?>/js/libs/jquery.js"></script>
-        <script language="javascript" type="text/javascript">
+			<link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<style>
+		
+			</style>
+			<script language="javascript" type="text/javascript" src="<?php echo $templateUrl; ?>/js/libs/jquery.js"></script>
+			<script language="javascript" type="text/javascript">
 	     <!--
 	   		
 			$(document).ready(function(){

@@ -4,3 +4,8 @@
 /* General */
 
 /* Content */
+
+
+html *{
+	outline:none;
+}
