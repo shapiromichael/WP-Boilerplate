@@ -1,7 +1,5 @@
 <?php
 
-	define('SLDIE_META', 'tfx_slide_meta');
-
 	function theme_sortlist(){
 
 		// Prevent access for non-administratos
@@ -9,10 +7,6 @@
 			wp_die( __('You do not have sufficient permissions to access this page.') );
 		}
 
-
-		/*
-		SELECT * FROM `wp_options` WHERE `option_name` = 'component_name'
-		*/
 
 		//////////////////////////     Slides      //////////////////////////
 		$items_structure = array(
@@ -155,7 +149,7 @@
 			<h2>Sortlist</h2>
 			<div style="padding:5px;"></div>
 
-			<form method="post" action="admin.php?page=sortlist" onSubmit="return parseSlides()" >
+			<form method="post" action="admin.php?page=sortlist" >
 				<input type="hidden" name="action" value="sortlist"/>
 				<div class="sep"></div>
 

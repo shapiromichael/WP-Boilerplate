@@ -1,6 +1,7 @@
 
 body.login { 
 	/* Here you can set the background style */
+	background: #333;
 }
 
 .login #login h1 a {
