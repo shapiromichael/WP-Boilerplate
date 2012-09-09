@@ -226,6 +226,15 @@ class WP_SortList {
 								$this->get_date_field( $attr_name, $attr_id, $class, $style, $val );
 								break;
 
+							case 'wp_func':
+							case 'wp-func':
+							case 'wp_function':
+							case 'wp-function':
+								$func = $field['function'];
+								$args = ( isset($field['options']) ) ? $field['options'] : null ;
+								$this->get_wordpress_func( $func, $args );
+								break;
+
 							default: // text or any other kind of input
 								$this->get_text_field( $attr_name, $attr_id, $class, $style, $val, $field['placeholder'] );
 								break;
@@ -364,8 +373,8 @@ class WP_SortList {
 	private function get_checkbox( $attr_name, $attr_id, $class, $style, $val ) {
 		$checked = ( $val ) ? ' checked="checked" ' : '' ;
 		?>
-		<input type="checkbox" <?php echo $attr_name . $attr_id . $class . $style . $checked; ?> />
-		<label for="<?php echo $attr_id; ?>"><?php echo $field['title']; ?></label>
+			<input type="checkbox" <?php echo $attr_name . $attr_id . $class . $style . $checked; ?> />
+			<label for="<?php echo $attr_id; ?>"><?php echo $field['title']; ?></label>
 		<?php
 	}
 
@@ -413,6 +422,20 @@ class WP_SortList {
 	}
 
 
+
+
+	/**
+	 *	Function get_wordpress_func
+	 *
+	 *	Calls a wordpress fucntion with any arguemnts that you have passed
+	 *
+	 * @param (array) arguments - any arguments that the wordpress fucntion might excpect.
+	 */
+	private function get_wordpress_func( $func_name, $args = null ) {
+		if ( function_exists($func_name) ) {
+			$func_name( $args );
+		}
+	}
 
 
 }
