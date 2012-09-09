@@ -5,14 +5,18 @@ var sortlist = {
 
 	params: {
 		speed: 250,
+		item_height: 0,
 		autoclose: true
 	},
 
 	init: function() {
 
+		sortlist.params.item_height = $('.sort-list li .details').outerHeight();
+
 		$('.sort-list li .label').live('click', function(){
-			$(this).next('.details').animate({ height : 850 }, 500);
+			$(this).next('.details').animate({ height : sortlist.params.item_height }, 500);
 		});
+
 
 		$('.sort-list ul').sortable({
 			placeholder: 'drop-zone',
@@ -22,6 +26,7 @@ var sortlist = {
 			opacity: 0.9,
 			delay: 0
 		});
+
 		$('.sort-list li .label').click( sortlist.toggle );
 		$('.sort-list .add').click( sortlist.add );
 		$('.sort-list li .remove').click( sortlist.remove );
@@ -85,10 +90,6 @@ var sortlist = {
 	},
 
 	add: function() {
-		// console.log( $(this) );
-		//  var counter = $(this).parents('.sort-list').find('input[type=hidden][counter=true]'),
-		//  	 num = parseInt( counter.val() );
-		//  counter.val( num + 1 );
 		 $(this).parents('.sort-list').append('<input type="hidden" name="add-new-sortlist-item" value="' + ($(this).parents('.sort-list li').size() + 1) + '"/>');
 		 $('form').submit();
 	},

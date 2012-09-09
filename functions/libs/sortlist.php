@@ -79,7 +79,7 @@ class WP_SortList {
 		}
 
 		if( $sortlist['table_title'] ) {
-			?><div class="sort-list-header"><p><?php echo $sortlist['table_title']; ?></p></div><?php
+			?><div class="sort-list-header"><p><?php echo ( empty($sortlist['table_title'])) ? '&nbsp;' : $sortlist['table_title'] ; ?></p></div><?php
 		}
 
 		?>
@@ -407,11 +407,9 @@ class WP_SortList {
 	 */
 	private function get_editor( $attr_id, $attr_name, $content, $settings ) {
 		$settings['textarea_name'] = $attr_name;
-		?>
-		<div class="sortlist-editor">
-            <?php wp_editor( $content, $attr_id, $settings ); ?>
-        </div>
-        <?php
+		?><div class="sortlist-editor"><?php 
+			wp_editor( $content, $attr_id, $settings );
+		?></div><?php
 	}
 
 

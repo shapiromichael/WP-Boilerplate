@@ -18,7 +18,8 @@
 			'add_label'      => 'Add New Slide', // the Add New Item button label.
 			'row_label_name' => 'title',
 			'fields'         =>  array(
-				  array(
+				
+				array(
 					'type'         => 'text',
 					'name'         => 'title',
 					'title'        => 'Title',
@@ -27,7 +28,8 @@
 					'class'        => 'widefat regular-text',
 					'style'        => ''
 				),
-				  array(
+				
+				array(
 					'type'         => 'textarea',
 					'name'         => 'quote',
 					'title'        => 'Quote Text',
