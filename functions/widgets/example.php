@@ -12,8 +12,13 @@ class Theme_Example_Widget extends WP_Widget {
 		extract( $args );
 
 		$title = $instance['title'];
-		echo $title;
-		
+
+		echo $before_widget;
+		?>
+			<h3 class="widget-title"><?php echo $title; ?></h3>
+		<?php
+		echo $after_widget;
+
 	}
 
 	// Updating the widget
