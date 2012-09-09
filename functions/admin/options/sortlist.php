@@ -8,14 +8,14 @@
 		}
 
 
-		//////////////////////////     Slides      //////////////////////////
+		//////////////////////////     Sortlist Itmes      //////////////////////////
 		$items_structure = array(
-			'name'           => 'component_name', // the name of the option - required and unique.
-			'section_title'  => 'Slides', // (optional) - adds a section title.
-			'table_title'    => 'Title', // (optional) - Title that will appear on the tabe.
-			'new_title'      => '[Untitled]', // Default title for new elements.
+			'name'           => 'component_name',     // the name of the option - required and unique.
+			'section_title'  => 'Slides',             // (optional) - adds a section title.
+			'table_title'    => 'Title',              // (optional) - Title that will appear on the tabe.
+			'new_title'      => '[Untitled]',         // Default title for new elements.
 			'remove_label'   => 'Delete Permanently', // the Delete Button label.
-			'add_label'      => 'Add New Slide', // the Add New Item button label.
+			'add_label'      => 'Add New Slide',      // the Add New Item button label.
 			'row_label_name' => 'title',
 			'fields'         =>  array(
 				
@@ -50,6 +50,36 @@
 						'val'      => 'Text',
 						'random'   => 'Random',
 						'slideup'  => 'Slide Up'
+					)
+				),
+
+				array(
+					'type'         => 'wp_func', // can be either one of: wp_func, wp_function, wp-func, wp-function
+					'function'     => 'wp_dropdown_categories',
+					'name'         => 'effect',
+					'title'        => 'Select Effect',
+					'description'  => 'Effect of the slide',
+					'class'        => '',
+					'style'        => '',
+					'options'      => array( // (optional) provide extra arguments for the built in wordpress function
+						'show_option_all'    => '',
+						'show_option_none'   => '',
+						'orderby'            => 'ID', 
+						'order'              => 'ASC',
+						'show_count'         => 0,
+						'hide_empty'         => 1, 
+						'child_of'           => 0,
+						'exclude'            => '',
+						'echo'               => 1,
+						'selected'           => 0,
+						'hierarchical'       => 0, 
+						'name'               => 'cat',
+						'id'                 => '',
+						'class'              => 'postform',
+						'depth'              => 0,
+						'tab_index'          => 0,
+						'taxonomy'           => 'category',
+						'hide_if_empty'      => false
 					)
 				),
 
