@@ -1,8 +1,5 @@
 <?php
 
-define('ENV', 'DEV');
-
-
 /*
  *	Registering all scripts and styles fot this theme.
  *	Will automatically register minified or expanded styles
@@ -22,8 +19,6 @@ function register_scripts_n_styles() {
 
 }
 add_action( 'init', 'register_scripts_n_styles' );
-
-
 
 
 // Website
@@ -70,7 +65,6 @@ function register_scripts( $is_minified = false ) {
 }
 
 
-
 // Dashboard
 function register_admin_styles( $is_minified = false ) {
 	wp_register_style('admin-general',  CSS_DIR . '/admin/general.css' );
@@ -84,8 +78,6 @@ function register_admin_scripts( $is_minified = false ) {
 	wp_register_script('colorpick',     JS_DIR . '/libs/colorpicker.js', array('jq'),                         true );
 	wp_register_script('admin-options', JS_DIR . '/admin/options.js',    array('jq', 'jq-ui', 'colorpicker'), true );
 }
-
-
 
 
 // TinyMCE styles

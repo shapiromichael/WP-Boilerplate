@@ -146,6 +146,7 @@
 
 		?>
 		<div class="wrap">
+			<div id="icon-options-32" class="icon32"></div>
 			<h2>Sortlist</h2>
 			<div style="padding:5px;"></div>
 
