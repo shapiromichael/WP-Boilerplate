@@ -14,7 +14,9 @@
 	require_once('functions/components/sortlist/component.php');
 	
 	if( is_admin() ){
-			
+		
+		require_once('synchi/synchi.php');
+
 		// Admin option pages
 		require_once('functions/admin/options/menu.php');
 		require_once('functions/admin/options/general.php');
