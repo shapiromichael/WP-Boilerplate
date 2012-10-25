@@ -100,7 +100,7 @@ function synchi_initArticleEditor(editor_area) {
             $("#content-tmce").click(function(){
                 // revert to textarea
                 if(synchi_editor) {
-                    synchi_editor.editor.toTextArea();
+                    synchi_editor.editor.toTextArea(); 
                     synchi_editor = false;
                     // swap controls
                     synchi_controls.synchi = $("#ed_toolbar").clone(true);
