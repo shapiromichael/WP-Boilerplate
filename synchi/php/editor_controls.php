@@ -1,12 +1,13 @@
 <?php 
-    
+
+  
 // =============================================================================
 // File: editor_controls.php
 // Version: 1.0
 // 
 // Renders controls for article editor
 // =============================================================================
-
+$synchi_url = get_bloginfo('template_url') . '/synchi/'; //1)this is instead the $synchi_url
 // check access
 if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
 
@@ -24,6 +25,7 @@ $editor_controls = array(
     <?php
     foreach ($editor_controls as $control) {
         $src = $synchi_url . "img/ide/$control.png";
+
         switch ($control) {
             case 'search' :$title = 'Search (Ctrl-F)';
                 break;

@@ -96,6 +96,7 @@ function synchi_initArticleEditor(editor_area) {
         
         // handle TinyMCE
         if(synchi_isTinyMCE()) {
+            
             $("#content-tmce").click(function(){
                 // revert to textarea
                 if(synchi_editor) {
@@ -110,15 +111,21 @@ function synchi_initArticleEditor(editor_area) {
                 switchEditors.switchto($(this).get(0));
                 return false;
             });
+
             $("#content-html").click(function(){
+                if( $('.CodeMirror-wrap').size() ) {
+                    return;
+                }                
                 // default behaviour
                 switchEditors.switchto($(this).get(0));
                 // re-init article editor
-                synchi_editor = $("#content").parent().synchi('file.html');
-                // swap controls
+                synchi_editor = $("#content").parent().synchi('file.html').addClass("init");
+              // swap controls
                 synchi_controls.original = $("#ed_toolbar").clone(true);
                 $("#ed_toolbar").remove();
                 synchi_controls.parent.prepend(synchi_controls.synchi);
+
+                $('#wp-content-wrap').addClass('html-editor-initialized');
                 return false;
             });
         }

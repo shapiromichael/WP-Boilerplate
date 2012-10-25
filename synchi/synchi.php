@@ -46,7 +46,7 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) {
 // if(!defined('$synchi_dir')) define('$synchi_dir', $synchi_dir);            
 // if(!defined('$theme_dir')) define('$theme_dir', $theme_dir);               
 // if(!defined('$admin_url')) define('$admin_url', $admin_url);       
-
+define("SYNCHI",'4.4');
 // define settings page unique name
 define("SYNCHI_SETTINGS_PAGE",'synchi-settings');
 
@@ -219,7 +219,7 @@ function synchi_file_size($file) {
  */
 function synchi_action_get_editor_controls() {
     ob_start();
-    include($synchi_dir . '/synchi/php/editor_controls.php'); 
+    include($synchi_dir . '/php/editor_controls.php'); 
     $html = ob_get_contents();
     ob_clean();
     synchi_ajax_response($html);
@@ -343,7 +343,7 @@ function synchi_action_get_file_contents() {
 function synchi_action_get_ide() {
     ob_start();
     $editor_mode = isset($_REQUEST['editor_mode']) ? substr($_REQUEST['editor_mode'],0,-1) : 'Files';
-    include($synchi_dir . '/synchi/php/synchi_ide.php'); 
+    include($synchi_dir . '/php/synchi_ide.php'); 
     $html = ob_get_contents();
     ob_clean();
     synchi_ajax_response($html);
@@ -518,7 +518,8 @@ function synchi_action_paste_file() {
  */
 function synchi_action_file_tree() {
     ob_start();
-    include($synchi_dir . '/synchi/php/tree.php');
+    include($synchi_dir . '\php\tree.php');
+
     $html = ob_get_contents();
     ob_clean();
     synchi_ajax_response($html);
@@ -595,7 +596,7 @@ function synchi_init() {
     $synchi_settings = synchi_get_settings();
     
     // determine editor root
-    include($synchi_dir . '/php/head/editor.php'); 
+    include($synchi_dir . 'php/head/editor.php'); 
     
 }
 
@@ -624,3 +625,7 @@ add_option('synchi_option_indentWithTabs', 0);
 
 // register menu item
 add_action('admin_menu', 'synchi_menu');
+
+
+
+// include('php/tree.php');

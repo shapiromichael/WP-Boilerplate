@@ -38,7 +38,8 @@ var CodeMirror = (function() {
               '<pre class="CodeMirror-cursor" style="visibility: hidden">&#160;</pre>' + // Used to force a width
               '<div style="position: relative; z-index: -1"></div><div></div>' + // DIVs containing the selection and the actual code
             '</div></div></div></div></div>';
-    if (place.appendChild) place.appendChild(wrapper); else place(wrapper);
+    if (place.appendChild) place.appendChild(wrapper); 
+    else place(wrapper);
     // I've never seen more elegant code in my life.
     var inputDiv = wrapper.firstChild, input = inputDiv.firstChild,
         scroller = wrapper.lastChild, code = scroller.firstChild,

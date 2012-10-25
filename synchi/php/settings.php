@@ -9,18 +9,16 @@
 
 // check access
 if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
-    
+
 ?>
 
 <script type="text/javascript">
-    
     $(function(){
         $("#synchi_theme").change(function(){
-            $("#synchi_theme_preview").attr('src','<?php echo $synchi_url; ?>/synchi/img/theme-previews/' + $(this).val() + '.png');
+            $("#synchi_theme_preview").attr('src','<?php echo $synchi_url; ?>img/theme-previews/' + $(this).val() + '.png');
         });
         $("#synchi_theme").change();
     });
-    
 </script>
 
 <div class="wrap">

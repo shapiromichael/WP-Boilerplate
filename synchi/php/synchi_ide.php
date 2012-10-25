@@ -7,6 +7,7 @@
 // Renders editor HTML.
 // =============================================================================
 
+
 // check access
 if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
 
@@ -80,7 +81,8 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
                 <div id="synchi_ide_editor_controls">
                     <?php
                     foreach($editor_controls as $control) {
-                        $src = $synchi_url . "/synchi/img/ide/$control.png";
+                        $src = $synchi_url . "img/ide/$control.png";
+                        
                         switch($control) {
                             case 'save' :$title = 'Save (Ctrl-S)';break;
                             case 'save_all' :$title = 'Save All (Ctrl-Shift-S)'; break;
@@ -119,7 +121,7 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
 <div class="contextMenu" id="synchi_ide_sidebar_menu" style="display: none">
     <ul>
         <?php foreach($sidebar_controls as $control => $title) { ?>
-        <li id="synchi_sidebar_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "/synchi/img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
+        <li id="synchi_sidebar_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
         <?php } ?>
     </ul>
 </div>
@@ -127,7 +129,7 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
 <div class="contextMenu" id="synchi_ide_tabs_menu" style="display: none">
     <ul>
         <?php foreach($tab_controls as $control => $title) { ?>
-        <li id="synchi_tabs_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "/synchi/img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
+        <li id="synchi_tabs_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
         <?php } ?>
     </ul>
 </div>
