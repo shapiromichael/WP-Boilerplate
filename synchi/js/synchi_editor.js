@@ -110,7 +110,7 @@ function synchi_initArticleEditor(editor_area) {
                 // default behaviour
                 switchEditors.switchto($(this).get(0));
                 return false;
-            });
+            }); 
 
             $("#content-html").click(function(){
                 if( $('.CodeMirror-wrap').size() ) {
