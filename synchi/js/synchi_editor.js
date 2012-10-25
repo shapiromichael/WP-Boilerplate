@@ -126,7 +126,7 @@ function synchi_initArticleEditor(editor_area) {
                 synchi_controls.parent.prepend(synchi_controls.synchi);
 
                 $('#wp-content-wrap').addClass('html-editor-initialized');
-                return false;
+                return false; 
             });
         }
         
