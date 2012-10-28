@@ -1,9 +1,9 @@
 <?php
-	
+
 	add_action('profile_personal_options', 'user_html_theme_style');
 	function user_html_theme_style( $user ) {
-		global $theme_url, $synchi_themes, $default_theme;
 
+		global $theme_url, $synchi_themes, $default_theme;
 		$themes    = $synchi_themes;
 		$thumb_src = $theme_url.'images/admin/editor/theme-previews/';
 		$theme     = get_user_meta( $user->ID, 'user_editor_theme', true );
@@ -55,7 +55,7 @@
 		$val = $_POST['chosenTheme'];
 		update_user_meta( $user_id, "user_editor_theme", $val);
 	}
-	add_action('edit_user_profile_update','update_theme');
+	// add_action('edit_user_profile_update','update_theme');
 	add_action('personal_options_update','update_theme'); 
 
 
