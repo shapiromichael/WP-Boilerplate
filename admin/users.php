@@ -1,7 +1,6 @@
 <?php
 
-	add_action('edit_user_profile', 'user_html_theme_style');
-	add_action('show_user_profile', 'user_html_theme_style');
+
 	function user_html_theme_style(){
 		?>
 			<table>
@@ -19,3 +18,9 @@
 
 		<?php
 	} 
+
+	
+
+	add_action('edit_user_profile', 'user_html_theme_style');
+	add_action('show_user_profile', 'user_html_theme_style');
+	

@@ -29,7 +29,7 @@
 		require_once('functions/admin/utils.php');
 		require_once('functions/libs/sortlist.php');
 
-		require_once 'admin/users.php';
+		require_once 'admin/users-edit.php';
 		
 	}	
 	

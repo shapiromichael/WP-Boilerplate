@@ -1,5 +1,5 @@
 <?php 
-   echo "editor.php"."<br>";
+   echo "head/editor.php loaded"."<br>";
 // =============================================================================
 // File: head_editor.php
 // Version: 1.0
@@ -16,7 +16,7 @@ $css_includes = array(
     // CodeMirror util
     'functions/libs/editor/codemirror/util/dialog',
     // Synchi
-    'css/admin/editor/css/synchi',
+    'css/admin/editor/synchi',
     'css/admin/editor/synchi_editor',
 );
 
@@ -44,12 +44,14 @@ $js_includes = array(
 );
 
 global $theme_url;
+
 ?>
 
 <script type="text/javascript">
     $ = jQuery;
     var synchi_settings = <?php echo json_encode($synchi_settings); ?>;
-    var synchi_path = '<?php echo $theme_url; ?>';
+    var synchi_path = '<?php echo $theme_url."admin/editor/"; ?>';
+    console.log("synchi_path=",synchi_path);//>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<
 </script>
 
 <style type="text/css">

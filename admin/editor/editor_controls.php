@@ -1,5 +1,5 @@
 <?php 
-echo "editor_controls";
+echo "editor controls.php loaded"."<br>";
   
 // =============================================================================
 // File: editor_controls.php
@@ -24,7 +24,7 @@ $editor_controls = array(
 <div id="ed_toolbar" class="synchi_editor_controls">
     <?php
     foreach ($editor_controls as $control) {
-        $src = $theme_url . "img/ide/$control.png";
+        $src = $theme_url . "images/admin/editor/ide/$control.png";
 
         switch ($control) {
             case 'search' :$title = 'Search (Ctrl-F)';

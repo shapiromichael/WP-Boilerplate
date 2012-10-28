@@ -1,5 +1,5 @@
 <?php 
-    
+  // echo "settings.php loaded"."<br>";  
 // =============================================================================
 // File: settings.php
 // Version: 2.0
@@ -14,8 +14,9 @@ if(!defined('SYNCHI')) exit('Direct access is not allowed...');
 
 <script type="text/javascript">
     $(function(){
+        console.log(this);
         $("#synchi_theme").change(function(){
-            $("#synchi_theme_preview").attr('src','<?php echo $synchi_url; ?>img/theme-previews/' + $(this).val() + '.png');
+            $("#synchi_theme_preview").attr('src','<?php echo $theme_url; ?>img/theme-previews/' + $(this).val() + '.png');
         });
         $("#synchi_theme").change();
     });

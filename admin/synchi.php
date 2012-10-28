@@ -1,5 +1,5 @@
 <?php
-
+// echo "synchi.php loaded"."<br>";
 // =============================================================================
 // Synchi
 // 
@@ -23,16 +23,16 @@
 
 /*
   Plugin Name: Synchi
-  Plugin URI: http://projects.djekic.net/synchi
+  Plugin URI: http://projects.djekic.netretret/synchi
   Description: A full IDE inside your Wordpress! Syntax highlighting and powerfull IDE features in WP plugin editor, themes editor and article HTML editor.
   Version: 4.4
   Author: Miloš Đekić
   Author URI: http://milos.djekic.net
  */
-$theme_url = get_bloginfo('template_url')."/";echo $theme_url."<br>"; //1)this is instead the $synchi_url
-$theme_dir = get_template_directory()."/";echo $theme_dir."<br>";//2) this is instead the $synchi_dir
-$themes_dir = WP_CONTENT_DIR . '/themes';echo $theme_dir."<br>";
-$admin_url=get_bloginfo('wpurl') . '/wp-admin';echo $admin_url."<br>";
+$theme_url = get_bloginfo('template_url')."/"; 
+$theme_dir = get_template_directory()."/";
+$themes_dir = WP_CONTENT_DIR . '/themes/'; 
+$admin_url=get_bloginfo('wpurl') . '/wp-admin'; 
 $cssRoot="css/admin/editor/";
 $jsRoot="js/admin/editor/";
 
@@ -41,13 +41,7 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) {
     header('HTTP/1.1 403 Forbidden');
     exit('Direct access not alowed.'); 
 }
-
-
-// define paths
-// if(!defined('$synchi_url')) define('$synchi_url', $synchi_url);             
-// if(!defined('$synchi_dir')) define('$synchi_dir', $synchi_dir);            
-// if(!defined('$theme_dir')) define('$theme_dir', $theme_dir);               
-// if(!defined('$admin_url')) define('$admin_url', $admin_url);       
+     
 define("SYNCHI",'4.4');
 // define settings page unique name
 define("SYNCHI_SETTINGS_PAGE",'synchi-settings');
@@ -55,6 +49,7 @@ define("SYNCHI_SETTINGS_PAGE",'synchi-settings');
 // define themes
 $synchi_themes = array('default','ambiance','blackboard','cobalt','eclipse','elegant','erlang-dark','monokai','neat','night','rubyblue','xq-dark');
 
+$default_theme = 'monokai';
 // define supported modes
 $synchi_modes = array('plugin-editor','theme-editor','post','post-new');
 
@@ -83,6 +78,7 @@ function sychi_clearRequest() {
  * @param string $filepath
  */
 function synchi_echoCSSinclude($filepath) {
+    echo $filepath." = filePath <br>";
     global $theme_url;
     ?>
     <link rel="stylesheet" href="<?php echo $theme_url.$cssRoot.$filepath; ?>.css?version=<?php echo SYNCHI; ?>" />
@@ -520,6 +516,7 @@ function synchi_action_paste_file() {
  */
 function synchi_action_file_tree() {
     ob_start();
+
     include($theme_dir . 'admin/editor/tree.php');
 
     $html = ob_get_contents();
@@ -534,6 +531,7 @@ function synchi_action_file_tree() {
  * perform any actions ('synchi_action' parameter is in the request array)
  */
 function synchi_request_handler() {
+
     // check if synchi action is to be performed
     if(empty($_REQUEST['synchi_action'])) return;
     // check if user is admin
@@ -563,18 +561,23 @@ function synchi_request_handler() {
  */
 function synchi_get_settings() {
     global $synchi_themes;
-    $theme = get_option('synchi_option_theme');
-    if(!isset($theme) || empty($theme) || !in_array($theme, $synchi_themes)) $theme = 'default';
+    
+    $user_id = get_current_user_id();
+    // $theme   = get_option('synchi_option_theme');
+    $theme   = get_user_meta( $user_id, 'user_editor_theme', true );
+    $theme   = ( empty($theme) && in_array($theme, $synchi_themes) ) ? $default_theme : $theme ;
+
+    // if(!isset($theme) || empty($theme) || !in_array($theme, $synchi_themes)) $theme = 'default';
     return array(
-        'flag_plugins' => get_option('synchi_option_flag_plugins') == 1,
-        'flag_themes' => get_option('synchi_option_flag_themes') == 1,
-        'flag_articles' => get_option('synchi_option_flag_articles') == 1,
-        'theme' => $theme,
-        'lineWrapping' => true,
-        'lineNumbers' => get_option('synchi_option_lineNumbers') == 1,
-        'matchBrackets' => get_option('synchi_option_matchBrackets') == 1,
-        'fontSize' => get_option('synchi_option_fontSize'),
-        'tabSize' => get_option('synchi_option_tabSize'),
+        'flag_plugins'   => get_option('synchi_option_flag_plugins') == 1,
+        'flag_themes'    => get_option('synchi_option_flag_themes') == 1,
+        'flag_articles'  => get_option('synchi_option_flag_articles') == 1,
+        'theme'          => $theme,
+        'lineWrapping'   => true,
+        'lineNumbers'    => get_option('synchi_option_lineNumbers') == 1,
+        'matchBrackets'  => get_option('synchi_option_matchBrackets') == 1,
+        'fontSize'       => get_option('synchi_option_fontSize'),
+        'tabSize'        => get_option('synchi_option_tabSize'),
         'indentWithTabs' => get_option('synchi_option_indentWithTabs') == 1,
     );
 }
@@ -600,7 +603,7 @@ function synchi_init() {
     
     // determine editor root
     include($theme_dir . 'admin/editor/head/editor.php'); 
-    echo $theme_dir . 'admin/editor/head/editor.php';echo "<br>";
+    
     
 }
 
@@ -620,7 +623,7 @@ add_option('synchi_option_flag_articles', 0);
 // register editing options
 add_option('synchi_option_serializedTabs_plugins',array());
 add_option('synchi_option_serializedTabs_themes',array());
-add_option('synchi_option_theme', 'default');
+// add_option('synchi_option_theme', 'default');
 add_option('synchi_option_lineNumbers', 1);
 add_option('synchi_option_matchBrackets', 1);
 add_option('synchi_option_fontSize', 12);
