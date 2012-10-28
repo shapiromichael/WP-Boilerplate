@@ -4,7 +4,7 @@
 // File: head_editor.php
 // Version: 1.0
 // 
-// Indcludes head files for synchi editor
+// Indcludes head files for editor_highlight editor
 // =============================================================================
 
 // check access
@@ -15,13 +15,12 @@ $css_includes = array(
     'functions/libs/editor/codemirror/codemirror',
     // CodeMirror util
     'functions/libs/editor/codemirror/util/dialog',
-    // Synchi
-    'css/admin/editor/synchi',
-    'css/admin/editor/synchi_editor',
+    // editor_highlight
+    'css/admin/editor/editor_highlight.all.min',
 );
 
 $js_includes = array(
-    'js/admin/editor/jquery.synchi',
+    'js/admin/editor/jquery.editor_highlight',
     // CodeMirror core
     'functions/libs/editor/codemirror/codemirror',
     // CodeMirror modes
@@ -39,8 +38,8 @@ $js_includes = array(
     'functions/libs/editor/codemirror/util/searchcursor',
     // Keyboard Shortcuts
     'functions/libs/editor/shortcut/shortcut',
-    // Synchi
-    'js/admin/editor/synchi_editor',
+    // editor_highlight
+    'js/admin/editor/editor_highlight_editor',
 );
 
 global $theme_url;
@@ -49,8 +48,8 @@ global $theme_url;
 
 <script type="text/javascript">
     $ = jQuery;
-    var synchi_settings = <?php echo json_encode($synchi_settings); ?>;
-    var synchi_path = '<?php echo $theme_url."admin/editor/"; ?>';
+    var editor_highlight_settings = <?php echo json_encode($editor_highlight_settings); ?>;
+    var editor_highlight_path = '<?php echo $theme_url."admin/editor/"; ?>';
    
 </script>
 
@@ -59,7 +58,7 @@ global $theme_url;
         height: 400px;
     }
     .CodeMirror-scroll {
-        font-size : <?php echo $synchi_settings['fontSize']; ?>px;
+        font-size : <?php echo $editor_highlight_settings['fontSize']; ?>px;
         <?php if($theme == 'default') { ?>background-color: #FAFAFA;<?php } ?>
         height: 100%;
     }
@@ -67,8 +66,8 @@ global $theme_url;
 
 <?php
 
-foreach($css_includes as $css) synchi_echoCSSinclude($css);
-foreach($js_includes as $js) synchi_echoJSinclude($js);
-synchi_echoCSSinclude("functions/libs/editor/codemirror/theme/{$synchi_settings['theme']}");
+foreach($css_includes as $css) editor_highlight_echoCSSinclude($css);
+foreach($js_includes as $js) editor_highlight_echoJSinclude($js);
+editor_highlight_echoCSSinclude("functions/libs/editor/codemirror/theme/{$editor_highlight_settings['theme']}");
 
 ?>

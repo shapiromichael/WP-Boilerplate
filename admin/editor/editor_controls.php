@@ -9,7 +9,7 @@
 // =============================================================================
 global $theme_url;
 // check access
-if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
+if(!defined('editor_highlight')) exit('Direct access is not allowed...'); 
 
 // define editor controls
 $editor_controls = array(
@@ -21,7 +21,7 @@ $editor_controls = array(
 
 ?>
 
-<div id="ed_toolbar" class="synchi_editor_controls">
+<div id="ed_toolbar" class="editor_highlight_editor_controls">
     <?php
     foreach ($editor_controls as $control) {
         $src = $theme_url . "images/admin/editor/ide/$control.png";
@@ -53,9 +53,9 @@ $editor_controls = array(
         }
         ?>
     <?php if ($control == "spacer") { ?>
-            <a href="#" onclick="return false;" class="synchi_spacer"><img src="<?php echo $src; ?>" border="0" /></a>
+            <a href="#" onclick="return false;" class="editor_highlight_spacer"><img src="<?php echo $src; ?>" border="0" /></a>
     <?php } else { ?>
-            <a href="#" onclick="synchi_Control('<?php echo $control; ?>'); return false;" title="<?php echo $title; ?>"><img src="<?php echo $src; ?>" border="0" /></a>
+            <a href="#" onclick="editor_highlight_Control('<?php echo $control; ?>'); return false;" title="<?php echo $title; ?>"><img src="<?php echo $src; ?>" border="0" /></a>
     <?php }
 } ?>
 </div>

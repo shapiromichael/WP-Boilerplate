@@ -15,7 +15,7 @@
 	
 	if( is_admin() ){
 		
-		require_once('admin/synchi.php');
+		require_once('admin/editor_highlight.php');
 
 		// Admin option pages
 		require_once('functions/admin/options/menu.php');

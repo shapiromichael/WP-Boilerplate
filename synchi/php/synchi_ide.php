@@ -9,7 +9,7 @@
 
 
 // check access
-if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
+if(!defined('editor_highlight')) exit('Direct access is not allowed...'); 
 
 // define editor controls
 $editor_controls = array(
@@ -43,7 +43,7 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
 
 ?>
 
-<div id="synchi_ide">
+<div id="editor_highlight_ide">
     <table width="100%" height="500" cellpadding="0" cellspacing="0">
         <tr style="height: 30px; vertical-align: bottom">
             <td style="width: 5px;"></td>
@@ -51,7 +51,7 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
                 <table width="100%" height="100%" cellpadding="0" cellspacing="0">
                     <tr style="vertical-align: bottom">
                         <td width="5"></td>
-                        <td><div id="synchi_ide_tabs"></div></td>
+                        <td><div id="editor_highlight_ide_tabs"></div></td>
                         <td width="5"></td>
                     </tr>
                 </table>
@@ -66,22 +66,22 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
             <td style="width: 5px;"></td>
             <td style="border-left: 1px solid #DFDFDF; ">
                 <div style="margin-right: 6px;">
-                    <div id="synchi_ide_editor"></div>
+                    <div id="editor_highlight_ide_editor"></div>
                 </div>
             </td>
             <td style="width: 10px; border-left: 1px solid #DFDFDF;"></td>
             <td style="width: 300px; border-left: 1px solid #DFDFDF; border-right: 1px solid #DFDFDF;">
-                <div id="synchi_ide_sidebar" tabindex="0"></div>
+                <div id="editor_highlight_ide_sidebar" tabindex="0"></div>
             </td>
             <td style="width: 5px;"></td>
         </tr>
         <tr style="height: 30px">
             <td style="width: 5px;"></td>
             <td style="border-top: 1px solid #DFDFDF; text-align: right">
-                <div id="synchi_ide_editor_controls">
+                <div id="editor_highlight_ide_editor_controls">
                     <?php
                     foreach($editor_controls as $control) {
-                        $src = $synchi_url . "img/ide/$control.png";
+                        $src = $editor_highlight_url . "img/ide/$control.png";
                         
                         switch($control) {
                             case 'save' :$title = 'Save (Ctrl-S)';break;
@@ -102,15 +102,15 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
                         }
                     ?>
                     <?php if($control == "spacer") { ?>
-                    <a href="#" onclick="return false;" class="synchi_spacer"><img src="<?php echo $src; ?>" border="0" /></a>
+                    <a href="#" onclick="return false;" class="editor_highlight_spacer"><img src="<?php echo $src; ?>" border="0" /></a>
                     <?php } else { ?>
-                    <a href="#" onclick="synchiIDE_editor_action('<?php echo $control; ?>'); return false;" title="<?php echo $title; ?>"><img src="<?php echo $src; ?>" border="0" /></a>
+                    <a href="#" onclick="editor_highlightIDE_editor_action('<?php echo $control; ?>'); return false;" title="<?php echo $title; ?>"><img src="<?php echo $src; ?>" border="0" /></a>
                     <?php }} ?>
                 </div>
             </td>
             <td style="width: 10px;"></td>
             <td style="width: 300px; border-top: 1px solid #DFDFDF; text-align: right">
-                <span id="synchi_ide_sidebar_filesize"></span>
+                <span id="editor_highlight_ide_sidebar_filesize"></span>
             </td>
             <td style="width: 5px;"></td>
         </tr>
@@ -118,18 +118,18 @@ if(!isset($editor_mode)) $editor_mode = 'Files';
     <br style="clear: both" />
 </div>
 
-<div class="contextMenu" id="synchi_ide_sidebar_menu" style="display: none">
+<div class="contextMenu" id="editor_highlight_ide_sidebar_menu" style="display: none">
     <ul>
         <?php foreach($sidebar_controls as $control => $title) { ?>
-        <li id="synchi_sidebar_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
+        <li id="editor_highlight_sidebar_<?php echo $control; ?>"><img src="<?php echo $editor_highlight_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
         <?php } ?>
     </ul>
 </div>
 
-<div class="contextMenu" id="synchi_ide_tabs_menu" style="display: none">
+<div class="contextMenu" id="editor_highlight_ide_tabs_menu" style="display: none">
     <ul>
         <?php foreach($tab_controls as $control => $title) { ?>
-        <li id="synchi_tabs_<?php echo $control; ?>"><img src="<?php echo $synchi_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
+        <li id="editor_highlight_tabs_<?php echo $control; ?>"><img src="<?php echo $editor_highlight_url . "img/ide/menu/$control.png"; ?>" /> <?php echo $title; ?></li>
         <?php } ?>
     </ul>
 </div>

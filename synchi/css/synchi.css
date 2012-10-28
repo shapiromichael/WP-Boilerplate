@@ -1,10 +1,10 @@
 /* 
 
 // =============================================================================
-// File: synchi.css
+// File: editor_highlight.css
 // Version: 2.1
 // 
-// Defines Synchi styles and extends some codemirror styles.
+// Defines editor_highlight styles and extends some codemirror styles.
 // ============================================================================
 
 */
@@ -22,11 +22,11 @@
     cursor: pointer;
 }
 
-.synchi_activeline {
+.editor_highlight_activeline {
     background-color: whitesmoke;
 }
 
-.synchi_mesageBox {
+.editor_highlight_mesageBox {
     position: fixed;
     top: 120px;
     left: 50%;

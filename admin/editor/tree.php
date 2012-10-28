@@ -28,9 +28,9 @@ function file_size($file) {
 
 $_POST['dir'] = urldecode($_POST['dir']);
 
-if(endsWith($_POST['dir'], "/plugins/")) $synchi_mode = "plugins";
-else if(endsWith($_POST['dir'], "/themes/")) $synchi_mode = "themes";
-else $synchi_mode = "unknown";
+if(endsWith($_POST['dir'], "/plugins/")) $editor_highlight_mode = "plugins";
+else if(endsWith($_POST['dir'], "/themes/")) $editor_highlight_mode = "themes";
+else $editor_highlight_mode = "unknown";
 
 if (file_exists($root . $_POST['dir'])) {
     $files = scandir($root . $_POST['dir']);
@@ -44,7 +44,7 @@ if (file_exists($root . $_POST['dir'])) {
             }
         }
         // All files
-        if($synchi_mode == "unknown") foreach ($files as $file) {
+        if($editor_highlight_mode == "unknown") foreach ($files as $file) {
             if (file_exists($root . $_POST['dir'] . $file) && $file != '.' && $file != '..' && !is_dir($root . $_POST['dir'] . $file)) {
                 $ext = preg_replace('/^.*\./', '', $file);
                 echo "<li class=\"file ext_$ext\"><a filesize=\"".file_size($root . $_POST['dir'] . $file)."\" href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "\">" . htmlentities($file) . "</a></li>";

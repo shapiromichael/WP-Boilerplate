@@ -56,7 +56,7 @@ if(jQuery) (function($){
                     $(c).addClass('wait');
                     $(".jqueryFileTree.start").remove();
                     // added by mdjekic {
-                    synchi_call('file_tree', {dir:t}, function(response) {
+                    editor_highlight_call('file_tree', {dir:t}, function(response) {
                         if(response.status == 0) return;
                         var data = response.result;
                         $(c).find('.start').html('');

@@ -8,7 +8,7 @@
 // =============================================================================
 
 // check access
-if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
+if(!defined('editor_highlight')) exit('Direct access is not allowed...'); 
 
 // determine if scaling is necessary
 $width = ($image_info[0] > 500) ? 500 : $image_info[0];

@@ -3,11 +3,11 @@
 	add_action('profile_personal_options', 'user_html_theme_style');
 	function user_html_theme_style( $user ) {
 
-		global $theme_url, $synchi_themes, $default_theme;
-		$themes    = $synchi_themes;
+		global $theme_url, $editor_highlight_themes, $default_theme;
+		$themes    = $editor_highlight_themes;
 		$thumb_src = $theme_url.'images/admin/editor/theme-previews/';
 		$theme     = get_user_meta( $user->ID, 'user_editor_theme', true );
-    	$theme     = ( empty($theme) && in_array($theme, $synchi_themes) ) ? $default_theme : $theme ;
+    	$theme     = ( empty($theme) && in_array($theme, $editor_highlight_themes) ) ? $default_theme : $theme ;
 		?>
 		<link rel="stylesheet" href="<?php echo $thumb_src.'thumbs.css';?>">
 			<h3>Choose HTML Editor Style</h3>

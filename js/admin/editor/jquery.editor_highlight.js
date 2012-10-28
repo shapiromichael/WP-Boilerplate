@@ -1,11 +1,11 @@
 // =============================================================================
-// File: synchi.js
+// File: editor_highlight.js
 // Version: 1.0
 // 
-// Synchi global
+// editor_highlight global
 // =============================================================================
 
-if(!synchi_settings) synchi_settings = {
+if(!editor_highlight_settings) editor_highlight_settings = {
     fontSize: "14",
     lineNumbers: true,
     lineWrapping: true,
@@ -36,9 +36,9 @@ if (!$.merge) $.extend({
 });
 
 
-// calls an ajax synchi action
-function synchi_call(action,params,onSuccess,onError,noJSON) {
-    params = $.concat(params,{synchi_action:action});
+// calls an ajax editor_highlight action
+function editor_highlight_call(action,params,onSuccess,onError,noJSON) {
+    params = $.concat(params,{editor_highlight_action:action});
     if(!onError) onError = function(){
         // TODO: handle error
     };
@@ -58,10 +58,10 @@ function synchi_call(action,params,onSuccess,onError,noJSON) {
  * @param text message text
  * @param timeout time to wait and hide (if null, message stays)
  */
-function synchi_showMessage(text,timeout) {
-    var message = $('<div class="synchi_mesageBox"><span>'+text+'</span></div>');
+function editor_highlight_showMessage(text,timeout) {
+    var message = $('<div class="editor_highlight_mesageBox"><span>'+text+'</span></div>');
     $('body').append(message);
-    if(timeout) setTimeout(synchi_hideMessage,timeout);
+    if(timeout) setTimeout(editor_highlight_hideMessage,timeout);
 }
 
 
@@ -71,10 +71,10 @@ function synchi_showMessage(text,timeout) {
  * @param text message text
  * @param timeout time to wait and hide (if null, message stays)
  */
-function synchi_showLoadingMessage(text,timeout) {
-    text = '<img src="'+synchi_path+'img/loading.gif" border="0" /><br />' + text;
+function editor_highlight_showLoadingMessage(text,timeout) {
+    text = '<img src="'+editor_highlight_path+'img/loading.gif" border="0" /><br />' + text;
     if(!timeout) timeout = false;
-    synchi_showMessage(text,timeout)
+    editor_highlight_showMessage(text,timeout)
 }
 
 /**
@@ -82,8 +82,8 @@ function synchi_showLoadingMessage(text,timeout) {
  * 
  * @param callback perform after hiding
  */
-function synchi_hideMessage(callback) {
-    var message = $('.synchi_mesageBox');
+function editor_highlight_hideMessage(callback) {
+    var message = $('.editor_highlight_mesageBox');
     if(message.length == 0) return;
     message.fadeOut(300, function(){ 
         message.remove();
@@ -94,7 +94,7 @@ function synchi_hideMessage(callback) {
 
 $(function(){
     
-    $.fn.synchi = function(file,onChange,owner,onFocus) {
+    $.fn.editor_highlight = function(file,onChange,owner,onFocus) {
         // define self
         var self = $(this); 
         self.owner = (owner) ? owner : {};
@@ -123,14 +123,14 @@ $(function(){
             case 'txt':self.mode = 'txt';break;
             default:return false;
         }
-        self.editor =  CodeMirror.fromTextArea(self.textarea,$.concat(synchi_settings,{
+        self.editor =  CodeMirror.fromTextArea(self.textarea,$.concat(editor_highlight_settings,{
             mode: self.mode,
             tabMode: "indent",
             onCursorActivity: function() {
 //                self.editor.setLineClass(self.line, null, null);
 //                self.line = self.editor.setLineClass(
 //                    self.editor.getCursor().line, 
-//                    null, "synchi_activeline"
+//                    null, "editor_highlight_activeline"
 //                );
                 // self.editor.matchHighlight("CodeMirror-searching");
             },
@@ -142,13 +142,13 @@ $(function(){
         }));
         
         // set first line active line
-        self.line = self.editor.setLineClass(0, "synchi_activeline");
+        self.line = self.editor.setLineClass(0, "editor_highlight_activeline");
         
         self.save = function(success_callback,error_callback) {
             if(self.savingInProgress) return false;
             self.savingInProgress = true;
             $(self.textarea).text(self.editor.getValue());
-            synchi_call('save_file', {'file' : self.file, 'contents': self.editor.getValue()}, 
+            editor_highlight_call('save_file', {'file' : self.file, 'contents': self.editor.getValue()}, 
                 function() { self.savingInProgress = false; success_callback(self.owner); },
                 function() { self.savingInProgress = false; error_callback(self.owner); }
             );
