@@ -1,5 +1,5 @@
 <?php
-// echo "synchi.php loaded"."<br>";
+
 // =============================================================================
 // Synchi
 // 
@@ -78,7 +78,7 @@ function sychi_clearRequest() {
  * @param string $filepath
  */
 function synchi_echoCSSinclude($filepath) {
-    echo $filepath." = filePath <br>";
+    
     global $theme_url;
     ?>
     <link rel="stylesheet" href="<?php echo $theme_url.$cssRoot.$filepath; ?>.css?version=<?php echo SYNCHI; ?>" />
@@ -216,6 +216,7 @@ function synchi_file_size($file) {
  * Renders editor controls
  */
 function synchi_action_get_editor_controls() {
+    global $theme_dir;
     ob_start();
     include($theme_dir . 'admin/editor/editor_controls.php'); 
     $html = ob_get_contents();

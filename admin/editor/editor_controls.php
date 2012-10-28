@@ -1,5 +1,5 @@
 <?php 
-echo "editor controls.php loaded"."<br>";
+
   
 // =============================================================================
 // File: editor_controls.php
@@ -7,7 +7,7 @@ echo "editor controls.php loaded"."<br>";
 // 
 // Renders controls for article editor
 // =============================================================================
-$theme_url = get_bloginfo('template_url')."/";
+global $theme_url;
 // check access
 if(!defined('SYNCHI')) exit('Direct access is not allowed...'); 
 

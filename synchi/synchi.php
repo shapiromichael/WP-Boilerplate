@@ -219,7 +219,7 @@ function synchi_file_size($file) {
  */
 function synchi_action_get_editor_controls() {
     ob_start();
-    include($synchi_dir . '/php/editor_controls.php'); 
+    include($theme_dir . 'admin/editor/editor_controls.php'); 
     $html = ob_get_contents();
     ob_clean();
     synchi_ajax_response($html);

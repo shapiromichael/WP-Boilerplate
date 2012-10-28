@@ -1,5 +1,5 @@
 <?php 
-   echo "head/editor.php loaded"."<br>";
+
 // =============================================================================
 // File: head_editor.php
 // Version: 1.0
@@ -51,7 +51,7 @@ global $theme_url;
     $ = jQuery;
     var synchi_settings = <?php echo json_encode($synchi_settings); ?>;
     var synchi_path = '<?php echo $theme_url."admin/editor/"; ?>';
-    console.log("synchi_path=",synchi_path);//>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<
+   
 </script>
 
 <style type="text/css">
