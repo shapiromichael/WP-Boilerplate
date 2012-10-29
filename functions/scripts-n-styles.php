@@ -8,15 +8,15 @@ function register_scripts_n_styles() {
 
 	$is_minfied = ( defined('ENV') && ENV == 'DEV' ) ? false : true ;
 
-	register_styles(  $is_minfied );
-	register_scripts( $is_minfied );
-
 	if( is_admin() ) {
 		register_admin_styles(  $is_minfied );
 		register_admin_scripts( $is_minfied );
 		add_filter( 'mce_css', 'theme_editor_style' );
+	}else{
+		register_styles(  $is_minfied );
+		register_scripts( $is_minfied );
 	}
-
+	
 }
 add_action( 'init', 'register_scripts_n_styles' );
 

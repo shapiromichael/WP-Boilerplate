@@ -14,7 +14,9 @@
 	require_once('functions/components/sortlist/component.php');
 	
 	if( is_admin() ){
-			
+		
+		require_once('admin/editor_highlight.php');
+
 		// Admin option pages
 		require_once('functions/admin/options/menu.php');
 		require_once('functions/admin/options/general.php');
@@ -26,6 +28,8 @@
 		// Other
 		require_once('functions/admin/utils.php');
 		require_once('functions/libs/sortlist.php');
+
+		require_once 'admin/users-edit.php';
 		
 	}	
 	
