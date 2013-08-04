@@ -35,7 +35,6 @@ var _metabox_fields = {
       this.fancySelect();
       this.oncefancySelect = true;
     }
-    this.load_code_editor();
     this.load_conditinal();
     this.load_time_picker();
     this.load_date_picker();
@@ -66,62 +65,6 @@ var _metabox_fields = {
   get_query_var: function(name){
     var match = RegExp('[?&]' + name + '=([^&#]*)').exec(location.href);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-  },
-  load_code_editor: function(){
-    $(".code_text").each(function() {
-      var lang = $(this).attr("data-lang");
-      //php application/x-httpd-php
-      //css text/css
-      //html text/html
-      //javascript text/javascript
-      switch(lang){
-        case 'php':
-          lang = 'application/x-httpd-php';
-          break;
-        case 'css':
-          lang = 'text/css';
-          break;
-        case 'html':
-          lang = 'text/html';
-          break;
-        case 'javascript':
-          lang = 'text/javascript';
-          break;
-        default:
-          lang = 'application/x-httpd-php';
-      }
-      var theme  = $(this).attr("data-theme");
-      switch(theme){
-        case 'default':
-          theme = 'default';
-          break;
-        case 'light':
-          theme = 'solarizedLight';
-          break;
-        case 'dark':
-          theme = 'solarizedDark';;
-          break;
-        default:
-          theme = 'default';
-      }
-      
-      var editor = CodeMirror.fromTextArea(document.getElementById($(this).attr('id')), {
-        lineNumbers: true,
-        matchBrackets: true,
-        mode: lang,
-        indentUnit: 4,
-        indentWithTabs: true,
-        enterMode: "keep",
-        tabMode: "shift"
-      });
-      editor.setOption("theme", theme);
-      $(editor.getScrollerElement()).width(100); // set this low enough
-      width = $(editor.getScrollerElement()).parent().width();
-      $(editor.getScrollerElement()).width(width); // set it to
-      editor.refresh();
-      Ed_array[e_d_count] = editor;
-      e_d_count++;
-    });
   },
   load_conditinal: function(){
     $(".conditinal_control").click(function(){

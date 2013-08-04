@@ -18,7 +18,6 @@ h4 { margin: 1.33em 0 0 0; }
 
 /* Draggable style */
 td{ padding:6px; }
-.postbox tr:hover{ background-color:#E8E8E8; }
 
 tr .drag-handle{ width:10px; height:24px; background: url(../../images/admin/dragging-pattern.png) repeat; cursor:move; }
 .remove-row, .delete-sidebar{ width:24px; height:24px; cursor:pointer; }

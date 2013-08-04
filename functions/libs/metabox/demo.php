@@ -1,12 +1,4 @@
 <?php
-/*
-Plugin Name: Demo MetaBox
-Plugin URI: http://en.bainternet.info
-Description: My Meta Box Class usage demo
-Version: 3.1.0
-Author: Bainternet, Ohad Raz
-Author URI: http://en.bainternet.info
-*/
 
 if (is_admin()){
   /* 
@@ -34,7 +26,7 @@ if (is_admin()){
   /*
    * Initiate your meta box
    */
-  $my_meta =  new AT_Meta_Box($config);
+  $my_meta =  new Metabox($config);
   
   /*
    * Add fields to your meta box
@@ -83,7 +75,7 @@ if (is_admin()){
   /*
    * Initiate your 2nd meta box
    */
-  $my_meta2 =  new AT_Meta_Box($config2);
+  $my_meta2 =  new Metabox($config2);
   
   /*
    * Add fields to your 2nd meta box
@@ -102,12 +94,6 @@ if (is_admin()){
   $my_meta2->addTaxonomy($prefix.'taxonomy_field_id',array('taxonomy' => 'category'),array('name'=> 'My Taxonomy '));
   //posts field
   $my_meta2->addPosts($prefix.'posts_field_id',array('post_type' => 'post'),array('name'=> 'My Posts '));
-  //add Code editor field
-  $my_meta2->addCode($prefix.'code_field_id',array(
-    'name'   => 'Code editor Field', 
-    'syntax' => 'php',
-    'theme'  => 'light'
-  ));
     
   /*
    * To Create a reapeater Block first create an array of fields
@@ -172,7 +158,7 @@ if (is_admin()){
   /*
    * Initiate your 3rd meta box
    */
-  $my_meta3 =  new AT_Meta_Box($config3);
+  $my_meta3 =  new Metabox($config3);
   //first field of the group has 'group' => 'start' and last field has 'group' => 'end'
   
   //text field

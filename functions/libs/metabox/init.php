@@ -1,35 +1,6 @@
 <?php 
-/**
- * Custom Meta Box Class
- *
- * The Meta Box Class is used by including it in your plugin files and using its methods to 
- * create custom meta boxes for custom post types. It is meant to be very simple and 
- * straightforward. For name spacing purposes, All Types metabox ( meaning you can do anything with it )
- * is used. 
- *
- * This class is derived from Meta Box script by Rilwis<rilwis@gmail.com> version 3.2. which later was forked 
- * by Cory Crowley (email: cory.ivan@gmail.com) The purpose of this class is not to rewrite the script but to 
- * modify and change small things and adding a few field types that i needed to my personal preference. 
- * The original author did a great job in writing this class, so all props goes to him.
- * 
- * @version 3.1.0
- * @copyright 2011 - 2013
- * @author Ohad Raz (email: admin@bainternet.info)
- * @link http://en.bainternet.info
- * 
- * @license GNU General Public LIcense v3.0 - license.txt
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package MY Meta Box Class
- */
 
-if ( ! class_exists( 'AT_Meta_Box') ) :
+if ( ! class_exists( 'Metabox') ) :
 
 /**
  * All Types Meta Box class.
@@ -39,7 +10,7 @@ if ( ! class_exists( 'AT_Meta_Box') ) :
  *
  * @todo Nothing.
  */
-class AT_Meta_Box {
+class Metabox {
   
   /**
    * Holds meta box object
@@ -316,7 +287,7 @@ class AT_Meta_Box {
     $this->inGroup = false;
     global $post;
 
-    wp_nonce_field( basename(__FILE__), 'at_meta_box_nonce' );
+    wp_nonce_field( basename(__FILE__), 'Metabox_nonce' );
     echo '<table class="form-table">';
     foreach ( $this->_fields as $field ) {
       $field['multiple'] = isset($field['multiple']) ? $field['multiple'] : false;
@@ -639,7 +610,7 @@ class AT_Meta_Box {
       
     $this->show_field_begin( $field, $meta );
       foreach ( $field['options'] as $key => $value ) {
-        echo "<input type='radio' ".( isset($field['style'])? "style='{$field['style']}' " : '' )." class='at-radio".( isset($field['class'])? ' ' . $field['class'] : '' )."' name='{$field['id']}' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> <span class='at-radio-label'>{$value}</span>";
+        echo "<label><input type='radio' ".( isset($field['style'])? "style='{$field['style']}' " : '' )." class='at-radio".( isset($field['class'])? ' ' . $field['class'] : '' )."' name='{$field['id']}' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> <span class='at-radio-label'>{$value}</span></label>";
       }
     $this->show_field_end( $field, $meta );
   }
@@ -798,7 +769,7 @@ class AT_Meta_Box {
       $html = array();
     
       foreach ($field['options'] as $key => $value) {
-        $html[] = "<input type='checkbox' ".( isset($field['style'])? "style='{$field['style']}' " : '' )."  class='at-checkbox_list".( isset($field['class'])? ' ' . $field['class'] : '' )."' name='{$field['id']}[]' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> {$value}";
+        $html[] = "<label><input type='checkbox' ".( isset($field['style'])? "style='{$field['style']}' " : '' )."  class='at-checkbox_list".( isset($field['class'])? ' ' . $field['class'] : '' )."' name='{$field['id']}[]' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> {$value}</label>";
       }
     
       echo implode( '<br />' , $html );
@@ -960,7 +931,7 @@ class AT_Meta_Box {
     if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )                      // Check Autosave
     || ( ! isset( $_POST['post_ID'] ) || $post_id != $_POST['post_ID'] )        // Check Revision
     || ( ! in_array( $post_type, $this->_meta_box['pages'] ) )                  // Check if current post type is supported.
-    || ( ! check_admin_referer( basename( __FILE__ ), 'at_meta_box_nonce') )    // Check nonce - Security
+    || ( ! check_admin_referer( basename( __FILE__ ), 'Metabox_nonce') )    // Check nonce - Security
     || ( ! current_user_can( $post_type_object->cap->edit_post, $post_id ) ) )  // Check permission
     {
       return $post_id;
@@ -975,8 +946,8 @@ class AT_Meta_Box {
             
 
       // Validate meta value
-      if ( class_exists( 'at_Meta_Box_Validate' ) && method_exists( 'at_Meta_Box_Validate', $field['validate_func'] ) ) {
-        $new = call_user_func( array( 'at_Meta_Box_Validate', $field['validate_func'] ), $new );
+      if ( class_exists( 'Metabox_Validate' ) && method_exists( 'Metabox_Validate', $field['validate_func'] ) ) {
+        $new = call_user_func( array( 'Metabox_Validate', $field['validate_func'] ), $new );
       }
       
       //skip on Paragraph field
@@ -1289,31 +1260,6 @@ class AT_Meta_Box {
    */
   public function addNumber($id,$args,$repeater=false){
     $new_field = array('type' => 'number','id'=> $id,'std' => '0','desc' => '','style' =>'','name' => 'Number Field','step' => '1','min' => '0');
-    $new_field = array_merge($new_field, $args);
-    if(false === $repeater){
-      $this->_fields[] = $new_field;
-    }else{
-      return $new_field;
-    }
-  }
-
-  /**
-   *  Add code Editor to meta box
-   *  @author Ohad Raz
-   *  @since 2.1
-   *  @access public
-   *  @param $id string  field id, i.e. the meta key
-   *  @param $args mixed|array
-   *    'name' => // field name/label string optional
-   *    'desc' => // field description, string optional
-   *    'std' => // default value, string optional
-   *    'style' =>   // custom style for field, string optional
-   *    'syntax' =>   // syntax language to use in editor (php,javascript,css,html)
-   *    'validate_func' => // validate function, string optional
-   *   @param $repeater bool  is this a field inside a repeatr? true|false(default) 
-   */
-  public function addCode($id,$args,$repeater=false){
-    $new_field = array('type' => 'code','id'=> $id,'std' => '','desc' => '','style' =>'','name' => 'Code Editor Field','syntax' => 'php','theme' => 'defualt');
     $new_field = array_merge($new_field, $args);
     if(false === $repeater){
       $this->_fields[] = $new_field;

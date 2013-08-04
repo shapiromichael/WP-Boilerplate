@@ -4,7 +4,7 @@
 /* Fonts */
 
 /* General */
-.mceContentBody { width: 650px; border-right: 1px dotted #CCC; padding-right: 20px; font-family: Arial, Helvetica, sans-serif; float:left; min-height: 280px; }
+.mceContentBody { width: 650px; border-right: 1px dotted #CCC; padding-right: 20px; font-family: Arial, Helvetica, sans-serif; float:left; min-height: 280px; background: #FFF; }
 
 /* Headlines */
 .mceContentBody h1 {  }
