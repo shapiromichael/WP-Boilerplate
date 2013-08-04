@@ -22,10 +22,13 @@
 		require_once('functions/admin/options/labels.php');
 		
 		// Metaboxs
+		require_once('functions/libs/metabox/init.php');
+		require_once('functions/libs/metabox/demo.php');
 		
 		// Other
 		require_once('functions/admin/utils.php');
 		require_once('functions/libs/sortlist.php');
+		require_once('functions/libs/params.php');
 	}	
 	
 	// Post Types
