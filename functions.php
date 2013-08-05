@@ -11,10 +11,6 @@
 	
 	// Admin header section
 	require_once('functions/admin/header.php'); // This should be outside is_admin() because of the login screen
-
-	// Components
-	require_once('functions/components/settings/component.php');
-	require_once('functions/components/sortlist/component.php');
 	
 	if( is_admin() ){
 		
