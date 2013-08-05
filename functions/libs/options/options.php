@@ -783,14 +783,6 @@ class NHP_Options{
 				echo '<div class="clear"></div><!--clearfix-->';
 				
 				echo '<div id="nhp-opts-footer">';
-				
-					if(isset($this->args['share_icons'])){
-						echo '<div id="nhp-opts-share">';
-						foreach($this->args['share_icons'] as $link){
-							echo '<a href="'.$link['link'].'" title="'.$link['title'].'" target="_blank"><img src="'.$link['img'].'"/></a>';
-						}
-						echo '</div>';
-					}
 					
 					submit_button('', 'primary', '', false);
 					// submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
