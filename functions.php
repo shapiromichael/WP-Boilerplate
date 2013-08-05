@@ -22,6 +22,7 @@
 		require_once('functions/libs/metabox/init.php');
 		require_once('functions/libs/metabox/demo.php');
 		require_once('functions/libs/sortlist.php');
+		require_once('functions/admin/options.php');
 
 		// Admin option pages
 		// require_once('functions/admin/options/menu.php');

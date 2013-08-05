@@ -1,690 +1,941 @@
 <?php
-/*
- * 
- * Require the framework class before doing anything else, so we can use the defined urls and dirs
- * Also if running on windows you may have url problems, which can be fixed by defining the framework url first
- *
- */
-//define('NHP_OPTIONS_URL', site_url('path the options folder'));
-if(!class_exists('NHP_Options')){
-	require_once( dirname( __FILE__ ) . '/options.php' );
-}
-
-/*
- * 
- * Custom function for filtering the sections array given by theme, good for child themes to override or add to the sections.
- * Simply include this function in the child themes functions.php file.
- *
- * NOTE: the defined constansts for urls, and dir will NOT be available at this point in a child theme, so you must use
- * get_template_directory_uri() if you want to use any of the built in icons
- *
- */
-function add_another_section($sections){
+if ( ! class_exists('NHP_Options') ){
 	
-	//$sections = array();
-	$sections[] = array(
-				'title' => __('A Section added by hook', 'nhp-opts'),
-				'desc' => __('<p class="description">This is a section created by adding a filter to the sections array, great to allow child themes, to add/remove sections from the options.</p>', 'nhp-opts'),
-				//all the glyphicons are included in the options folder, so you can hook into them, or link to your own custom ones.
-				//You dont have to though, leave it blank for default.
-				'icon' => trailingslashit(get_template_directory_uri()).'options/img/glyphicons/glyphicons_062_attach.png',
-				//Lets leave this as a blank section, no options just some intro text set above.
-				'fields' => array()
-				);
+	// windows-proof constants: replace backward by forward slashes - thanks to: https://github.com/peterbouwmeester
+	$fslashed_dir = trailingslashit(str_replace('\\','/',dirname(__FILE__)));
+	$fslashed_abs = trailingslashit(str_replace('\\','/',ABSPATH));
 	
-	return $sections;
+	if(!defined('NHP_OPTIONS_DIR')){
+		define('NHP_OPTIONS_DIR', $fslashed_dir);
+	}
 	
-}//function
-//add_filter('nhp-opts-sections-twenty_eleven', 'add_another_section');
-
-
-/*
- * 
- * Custom function for filtering the args array given by theme, good for child themes to override or add to the args array.
- *
- */
-function change_framework_args($args){
+	if(!defined('NHP_OPTIONS_URL')){
+		define('NHP_OPTIONS_URL', site_url(str_replace( $fslashed_abs, '', $fslashed_dir )));
+	}
 	
-	//$args['dev_mode'] = false;
+class NHP_Options{
 	
-	return $args;
-	
-}//function
-//add_filter('nhp-opts-args-twenty_eleven', 'change_framework_args');
-
-
-
-
-
-
-
-
-
-/*
- * This is the meat of creating the optons page
- *
- * Override some of the default values, uncomment the args and change the values
- * - no $args are required, but there there to be over ridden if needed.
- *
- *
- */
-
-function setup_framework_options(){
-$args = array();
-
-//Set it to dev mode to view the class settings/info in the form - default is false
-$args['dev_mode'] = true;
-
-//google api key MUST BE DEFINED IF YOU WANT TO USE GOOGLE WEBFONTS
-//$args['google_api_key'] = '***';
-
-//Remove the default stylesheet? make sure you enqueue another one all the page will look whack!
-//$args['stylesheet_override'] = true;
-
-//Add HTML before the form
-$args['intro_text'] = '';
-
-//Choose to disable the import/export feature
-//$args['show_import_export'] = false;
-
-//Choose a custom option name for your theme options, the default is the theme name in lowercase with spaces replaced by underscores
-$args['opt_name'] = 'twenty_eleven';
-
-//Custom menu icon
-//$args['menu_icon'] = '';
-
-//Custom menu title for options page - default is "Options"
-$args['menu_title'] = __('Options', 'nhp-opts');
-
-//Custom Page Title for options page - default is "Options"
-$args['page_title'] = __('Options', 'nhp-opts');
-
-//Custom page slug for options page (wp-admin/themes.php?page=***) - default is "nhp_theme_options"
-$args['page_slug'] = 'nhp_theme_options';
-
-//Custom page capability - default is set to "manage_options"
-//$args['page_cap'] = 'manage_options';
-
-//page type - "menu" (adds a top menu section) or "submenu" (adds a submenu) - default is set to "menu"
-//$args['page_type'] = 'submenu';
-
-//parent menu - default is set to "themes.php" (Appearance)
-//the list of available parent menus is available here: http://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters
-//$args['page_parent'] = 'themes.php';
-
-//custom page location - default 100 - must be unique or will override other items
-$args['page_position'] = 27;
-
-//Custom page icon class (used to override the page icon next to heading)
-//$args['page_icon'] = 'icon-themes';
-
-//Want to disable the sections showing as a submenu in the admin? uncomment this line
-//$args['allow_sub_menu'] = false;
+	protected $framework_url = 'http://leemason.github.com/NHP-Theme-Options-Framework/';
+	protected $framework_version = '1.0.6';
 		
-//Set ANY custom page help tabs - displayed using the new help tab API, show in order of definition		
-$args['help_tabs'][] = array(
-							'id' => 'nhp-opts-1',
-							'title' => __('Theme Information 1', 'nhp-opts'),
-							'content' => __('<p>This is the tab content, HTML is allowed.</p>', 'nhp-opts')
-							);
-$args['help_tabs'][] = array(
-							'id' => 'nhp-opts-2',
-							'title' => __('Theme Information 2', 'nhp-opts'),
-							'content' => __('<p>This is the tab content, HTML is allowed.</p>', 'nhp-opts')
-							);
-
-//Set the Help Sidebar for the options page - no sidebar by default										
-$args['help_sidebar'] = __('<p>This is the sidebar content, HTML is allowed.</p>', 'nhp-opts');
-
-
-
-$sections = array();
-
-$sections[] = array(
-				'title' => __('Getting Started', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the description field for the Section. HTML is allowed</p>', 'nhp-opts'),
-				//all the glyphicons are included in the options folder, so you can hook into them, or link to your own custom ones.
-				//You dont have to though, leave it blank for default.
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_062_attach.png'
-				//Lets leave this as a blank section, no options just some intro text set above.
-				//'fields' => array()
-				);
-
-				
-$sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_107_text_resize.png',
-				'title' => __('Text Fields', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'nhp-opts'),
-				'fields' => array(
-					array(
-						'id' => '1', //must be unique
-						'type' => 'text', //builtin fields include:
-										  //text|textarea|editor|checkbox|multi_checkbox|radio|radio_img|button_set|select|multi_select|color|date|divide|info|upload
-						'title' => __('Text Option', 'nhp-opts'),
-						'sub_desc' => __('This is a little space under the Field Title in the Options table, additonal info is good in here.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						//'validate' => '', //builtin validation includes: email|html|html_custom|no_html|js|numeric|url
-						//'msg' => 'custom error message', //override the default validation error message for specific fields
-						//'std' => '', //This is a default value, used to set the options on theme activation, and if the user hits the Reset to defaults Button
-						//'class' => '' //Set custom classes for elements if you want to do something a little different - default is "regular-text"
-						),
-					array(
-						'id' => '2',
-						'type' => 'text',
-						'title' => __('Text Option - Email Validated', 'nhp-opts'),
-						'sub_desc' => __('This is a little space under the Field Title in the Options table, additonal info is good in here.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'email',
-						'msg' => 'custom error message',
-						'std' => 'test@test.com'
-						),
-					array(
-						'id' => 'multi_text',
-						'type' => 'multi_text',
-						'title' => __('Multi Text Option', 'nhp-opts'),
-						'sub_desc' => __('This is a little space under the Field Title in the Options table, additonal info is good in here.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						),
-					array(
-						'id' => '3',
-						'type' => 'text',
-						'title' => __('Text Option - URL Validated', 'nhp-opts'),
-						'sub_desc' => __('This must be a URL.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'url',
-						'std' => 'http://no-half-pixels.com'
-						),
-					array(
-						'id' => '4',
-						'type' => 'text',
-						'title' => __('Text Option - Numeric Validated', 'nhp-opts'),
-						'sub_desc' => __('This must be numeric.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'numeric',
-						'std' => '0',
-						'class' => 'small-text'
-						),
-					array(
-						'id' => 'comma_numeric',
-						'type' => 'text',
-						'title' => __('Text Option - Comma Numeric Validated', 'nhp-opts'),
-						'sub_desc' => __('This must be a comma seperated string of numerical values.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'comma_numeric',
-						'std' => '0',
-						'class' => 'small-text'
-						),
-					array(
-						'id' => 'no_special_chars',
-						'type' => 'text',
-						'title' => __('Text Option - No Special Chars Validated', 'nhp-opts'),
-						'sub_desc' => __('This must be a alpha numeric only.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'no_special_chars',
-						'std' => '0'
-						),
-					array(
-						'id' => 'str_replace',
-						'type' => 'text',
-						'title' => __('Text Option - Str Replace Validated', 'nhp-opts'),
-						'sub_desc' => __('You decide.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'str_replace',
-						'str' => array('search' => ' ', 'replacement' => 'thisisaspace'),
-						'std' => '0'
-						),
-					array(
-						'id' => 'preg_replace',
-						'type' => 'text',
-						'title' => __('Text Option - Preg Replace Validated', 'nhp-opts'),
-						'sub_desc' => __('You decide.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'preg_replace',
-						'preg' => array('pattern' => '/[^a-zA-Z_ -]/s', 'replacement' => 'no numbers'),
-						'std' => '0'
-						),
-					array(
-						'id' => 'custom_validate',
-						'type' => 'text',
-						'title' => __('Text Option - Custom Callback Validated', 'nhp-opts'),
-						'sub_desc' => __('You decide.', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate_callback' => 'validate_callback_function',
-						'std' => '0'
-						),
-					array(
-						'id' => '5',
-						'type' => 'textarea',
-						'title' => __('Textarea Option - No HTML Validated', 'nhp-opts'), 
-						'sub_desc' => __('All HTML will be stripped', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'no_html',
-						'std' => 'No HTML is allowed in here.'
-						),
-					array(
-						'id' => '6',
-						'type' => 'textarea',
-						'title' => __('Textarea Option - HTML Validated', 'nhp-opts'), 
-						'sub_desc' => __('HTML Allowed (wp_kses)', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
-						'std' => 'HTML is allowed in here.'
-						),
-					array(
-						'id' => '7',
-						'type' => 'textarea',
-						'title' => __('Textarea Option - HTML Validated Custom', 'nhp-opts'), 
-						'sub_desc' => __('Custom HTML Allowed (wp_kses)', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'html_custom',
-						'std' => 'Some HTML is allowed in here.',
-						'allowed_html' => array('') //see http://codex.wordpress.org/Function_Reference/wp_kses
-						),
-					array(
-						'id' => '8',
-						'type' => 'textarea',
-						'title' => __('Textarea Option - JS Validated', 'nhp-opts'), 
-						'sub_desc' => __('JS will be escaped', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'validate' => 'js'
-						),
-					array(
-						'id' => '9',
-						'type' => 'editor',
-						'title' => __('Editor Option', 'nhp-opts'), 
-						'sub_desc' => __('Can also use the validation methods if required', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'std' => 'OOOOOOhhhh, rich editing.'
-						)
-					,
-					array(
-						'id' => 'editor2',
-						'type' => 'editor',
-						'title' => __('Editor Option 2', 'nhp-opts'), 
-						'sub_desc' => __('Can also use the validation methods if required', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'std' => 'OOOOOOhhhh, rich editing2.'
-						)
-					)
-				);
-$sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_150_check.png',
-				'title' => __('Radio/Checkbox Fields', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
-				'fields' => array(
-					array(
-						'id' => '10',
-						'type' => 'checkbox',
-						'title' => __('Checkbox Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'std' => '1'// 1 = on | 0 = off
-						),
-					array(
-						'id' => '11',
-						'type' => 'multi_checkbox',
-						'title' => __('Multi Checkbox Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for multi checkbox options
-						'std' => array('1' => '1', '2' => '0', '3' => '0')//See how std has changed? you also dont need to specify opts that are 0.
-						),
-					array(
-						'id' => '12',
-						'type' => 'radio',
-						'title' => __('Radio Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-						'std' => '2'
-						),
-					array(
-						'id' => '13',
-						'type' => 'radio_img',
-						'title' => __('Radio Image Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array(
-										'1' => array('title' => 'Opt 1', 'img' => 'images/align-none.png'),
-										'2' => array('title' => 'Opt 2', 'img' => 'images/align-left.png'),
-										'3' => array('title' => 'Opt 3', 'img' => 'images/align-center.png'),
-										'4' => array('title' => 'Opt 4', 'img' => 'images/align-right.png')
-											),//Must provide key => value(array:title|img) pairs for radio options
-						'std' => '2'
-						),
-					array(
-						'id' => 'radio_img',
-						'type' => 'radio_img',
-						'title' => __('Radio Image Option For Layout', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This uses some of the built in images, you can use them for layout options.', 'nhp-opts'),
-						'options' => array(
-										'1' => array('title' => '1 Column', 'img' => NHP_OPTIONS_URL.'img/1col.png'),
-										'2' => array('title' => '2 Column Left', 'img' => NHP_OPTIONS_URL.'img/2cl.png'),
-										'3' => array('title' => '2 Column Right', 'img' => NHP_OPTIONS_URL.'img/2cr.png')
-											),//Must provide key => value(array:title|img) pairs for radio options
-						'std' => '2'
-						)																		
-					)
-				);
-$sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_157_show_lines.png',
-				'title' => __('Select Fields', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
-				'fields' => array(
-					array(
-						'id' => '14',
-						'type' => 'select',
-						'title' => __('Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for select options
-						'std' => '2'
-						),
-					array(
-						'id' => '15',
-						'type' => 'multi_select',
-						'title' => __('Multi Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-						'std' => array('2','3')
-						)									
-					)
-				);
-$sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_023_cogwheels.png',
-				'title' => __('Custom Fields', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
-				'fields' => array(
-					array(
-						'id' => '16',
-						'type' => 'color',
-						'title' => __('Color Option', 'nhp-opts'), 
-						'sub_desc' => __('Only color validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'std' => '#FFFFFF'
-						),
-					array(
-						'id' => 'color_gradient',
-						'type' => 'color_gradient',
-						'title' => __('Color Gradient Option', 'nhp-opts'), 
-						'sub_desc' => __('Only color validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'std' => array('from' => '#000000', 'to' => '#FFFFFF')
-						),
-					array(
-						'id' => '17',
-						'type' => 'date',
-						'title' => __('Date Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						),
-					array(
-						'id' => '18',
-						'type' => 'button_set',
-						'title' => __('Button Set Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts'),
-						'options' => array('1' => 'Opt 1','2' => 'Opt 2','3' => 'Opt 3'),//Must provide key => value pairs for radio options
-						'std' => '2'
-						),
-					array(
-						'id' => '19',
-						'type' => 'upload',
-						'title' => __('Upload Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						),
-					array(
-						'id' => 'pages_select',
-						'type' => 'pages_select',
-						'title' => __('Pages Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the sites pages.', 'nhp-opts'),
-						'args' => array()//uses get_pages
-						),
-					array(
-						'id' => 'pages_multi_select',
-						'type' => 'pages_multi_select',
-						'title' => __('Pages Multiple Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a Multi Select menu of all the sites pages.', 'nhp-opts'),
-						'args' => array('number' => '5')//uses get_pages
-						),
-					array(
-						'id' => 'posts_select',
-						'type' => 'posts_select',
-						'title' => __('Posts Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the sites posts.', 'nhp-opts'),
-						'args' => array('numberposts' => '10')//uses get_posts
-						),
-					array(
-						'id' => 'posts_multi_select',
-						'type' => 'posts_multi_select',
-						'title' => __('Posts Multiple Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a Multi Select menu of all the sites posts.', 'nhp-opts'),
-						'args' => array('numberposts' => '10')//uses get_posts
-						),
-					array(
-						'id' => 'tags_select',
-						'type' => 'tags_select',
-						'title' => __('Tags Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the sites tags.', 'nhp-opts'),
-						'args' => array('number' => '10')//uses get_tags
-						),
-					array(
-						'id' => 'tags_multi_select',
-						'type' => 'tags_multi_select',
-						'title' => __('Tags Multiple Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a Multi Select menu of all the sites tags.', 'nhp-opts'),
-						'args' => array('number' => '10')//uses get_tags
-						),
-					array(
-						'id' => 'cats_select',
-						'type' => 'cats_select',
-						'title' => __('Cats Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the sites cats.', 'nhp-opts'),
-						'args' => array('number' => '10')//uses get_categories
-						),
-					array(
-						'id' => 'cats_multi_select',
-						'type' => 'cats_multi_select',
-						'title' => __('Cats Multiple Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a Multi Select menu of all the sites cats.', 'nhp-opts'),
-						'args' => array('number' => '10')//uses get_categories
-						),
-					array(
-						'id' => 'menu_select',
-						'type' => 'menu_select',
-						'title' => __('Menu Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the sites menus.', 'nhp-opts'),
-						//'args' => array()//uses wp_get_nav_menus
-						),
-					array(
-						'id' => 'select_hide_below',
-						'type' => 'select_hide_below',
-						'title' => __('Select Hide Below Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field requires certain options to be checked before the below field will be shown.', 'nhp-opts'),
-						'options' => array(
-									'1' => array('name' => 'Opt 1 field below allowed', 'allow' => 'true'),
-									'2' => array('name' => 'Opt 2 field below hidden', 'allow' => 'false'),
-									'3' => array('name' => 'Opt 3 field below allowed', 'allow' => 'true')
-									),//Must provide key => value(array) pairs for select options
-						'std' => '2'
-						),
-					array(
-						'id' => 'menu_location_select',
-						'type' => 'menu_location_select',
-						'title' => __('Menu Location Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all the themes menu locations.', 'nhp-opts')
-						),
-					array(
-						'id' => 'checkbox_hide_below',
-						'type' => 'checkbox_hide_below',
-						'title' => __('Checkbox to hide below', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a checkbox which will allow the user to use the next setting.', 'nhp-opts'),
-						),
-						array(
-						'id' => 'post_type_select',
-						'type' => 'post_type_select',
-						'title' => __('Post Type Select Option', 'nhp-opts'), 
-						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
-						'desc' => __('This field creates a drop down menu of all registered post types.', 'nhp-opts'),
-						//'args' => array()//uses get_post_types
-						),
-					array(
-						'id' => 'custom_callback',
-						//'type' => 'nothing',//doesnt need to be called for callback fields
-						'title' => __('Custom Field Callback', 'nhp-opts'), 
-						'sub_desc' => __('This is a completely unique field type', 'nhp-opts'),
-						'desc' => __('This is created with a callback function, so anything goes in this field. Make sure to define the function though.', 'nhp-opts'),
-						'callback' => 'my_custom_field'
-						),
-					array(
-						'id' => 'google_webfonts',
-						'type' => 'google_webfonts',//doesnt need to be called for callback fields
-						'title' => __('Google Webfonts', 'nhp-opts'), 
-						'sub_desc' => __('This is a completely unique field type', 'nhp-opts'),
-						'desc' => __('This is a simple implementation of the developer API for Google webfonts. Preview selection will be coming in future releases.', 'nhp-opts')
-						)							
-					)
-				);
-
-$sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_093_crop.png',
-				'title' => __('Non Value Fields', 'nhp-opts'),
-				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
-				'fields' => array(
-					array(
-						'id' => '20',
-						'type' => 'text',
-						'title' => __('Text Field', 'nhp-opts'), 
-						'sub_desc' => __('Additional Info', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						),
-					array(
-						'id' => '21',
-						'type' => 'divide'
-						),
-					array(
-						'id' => '22',
-						'type' => 'text',
-						'title' => __('Text Field', 'nhp-opts'), 
-						'sub_desc' => __('Additional Info', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						),
-					array(
-						'id' => '23',
-						'type' => 'info',
-						'desc' => __('<p class="description">This is the info field, if you want to break sections up.</p>', 'nhp-opts')
-						),
-					array(
-						'id' => '24',
-						'type' => 'text',
-						'title' => __('Text Field', 'nhp-opts'), 
-						'sub_desc' => __('Additional Info', 'nhp-opts'),
-						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
-						)				
-					)
-				);
-				
-				
-	$tabs = array();
-			
-	if (function_exists('wp_get_theme')){
-		$theme_data = wp_get_theme();
-		$theme_uri = $theme_data->get('ThemeURI');
-		$description = $theme_data->get('Description');
-		$author = $theme_data->get('Author');
-		$version = $theme_data->get('Version');
-		$tags = $theme_data->get('Tags');
-	}else{
-		$theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()).'style.css');
-		$theme_uri = $theme_data['URI'];
-		$description = $theme_data['Description'];
-		$author = $theme_data['Author'];
-		$version = $theme_data['Version'];
-		$tags = $theme_data['Tags'];
-	}	
-
-	$theme_info = '<div class="nhp-opts-section-desc">';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-uri">'.__('<strong>Theme URL:</strong> ', 'nhp-opts').'<a href="'.$theme_uri.'" target="_blank">'.$theme_uri.'</a></p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-author">'.__('<strong>Author:</strong> ', 'nhp-opts').$author.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-version">'.__('<strong>Version:</strong> ', 'nhp-opts').$version.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-description">'.$description.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-tags">'.__('<strong>Tags:</strong> ', 'nhp-opts').implode(', ', $tags).'</p>';
-	$theme_info .= '</div>';
-
-
-
-	$tabs['theme_info'] = array(
-					'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_195_circle_info.png',
-					'title' => __('Theme Information', 'nhp-opts'),
-					'content' => $theme_info
-					);
+	public $dir = NHP_OPTIONS_DIR;
+	public $url = NHP_OPTIONS_URL;
+	public $page = '';
+	public $args = array();
+	public $sections = array();
+	public $extra_tabs = array();
+	public $errors = array();
+	public $warnings = array();
+	public $options = array();
 	
-	if(file_exists(trailingslashit(get_stylesheet_directory()).'README.html')){
-		$tabs['theme_docs'] = array(
-						'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_071_book.png',
-						'title' => __('Documentation', 'nhp-opts'),
-						'content' => nl2br(file_get_contents(trailingslashit(get_stylesheet_directory()).'README.html'))
-						);
-	}//if
-
-	global $NHP_Options;
-	$NHP_Options = new NHP_Options($sections, $args, $tabs);
-
-}//function
-add_action('init', 'setup_framework_options', 0);
-
-/*
- * 
- * Custom function for the callback referenced above
- *
- */
-function my_custom_field($field, $value){
-	print_r($field);
-	print_r($value);
-
-}//function
-
-/*
- * 
- * Custom function for the callback validation referenced above
- *
- */
-function validate_callback_function($field, $value, $existing_value){
 	
-	$error = false;
-	$value =  'just testing';
-	/*
-	do your validation
-	
-	if(something){
-		$value = $value;
-	}elseif(somthing else){
-		$error = true;
-		$value = $existing_value;
-		$field['msg'] = 'your custom error message';
-	}
+
+	/**
+	 * Class Constructor. Defines the args for the theme options class
+	 *
+	 * @since NHP_Options 1.0
+	 *
+	 * @param $array $args Arguments. Class constructor arguments.
 	*/
+	function __construct($sections = array(), $args = array(), $extra_tabs = array()){
+		
+		$defaults = array();
+		
+		$defaults['opt_name'] = '';//must be defined by theme/plugin
+		
+		$defaults['google_api_key'] = '';//must be defined for use with google webfonts field type
+		
+		$defaults['menu_icon'] = get_bloginfo('template_url') . '/images/admin/pixel.png';
+		$defaults['menu_title'] = __('Options', 'nhp-opts');
+		$defaults['page_icon'] = 'icon-options';
+		$defaults['page_title'] = __('Options', 'nhp-opts');
+		$defaults['page_slug'] = '_options';
+		$defaults['page_cap'] = 'manage_options';
+		$defaults['page_type'] = 'menu';
+		$defaults['page_parent'] = '';
+		$defaults['page_position'] = 100;
+		$defaults['allow_sub_menu'] = true;
+		
+		$defaults['show_import_export'] = true;
+		$defaults['dev_mode'] = true;
+		$defaults['stylesheet_override'] = false;
+		
+		$defaults['help_tabs'] = array();
+		$defaults['help_sidebar'] = __('', 'nhp-opts');
+		
+		//get args
+		$this->args = wp_parse_args($args, $defaults);
+		$this->args = apply_filters('nhp-opts-args-'.$this->args['opt_name'], $this->args);
+		
+		//get sections
+		$this->sections = apply_filters('nhp-opts-sections-'.$this->args['opt_name'], $sections);
+		
+		//get extra tabs
+		$this->extra_tabs = apply_filters('nhp-opts-extra-tabs-'.$this->args['opt_name'], $extra_tabs);
+		
+		//set option with defaults
+		add_action('init', array(&$this, '_set_default_options'));
+		
+		//options page
+		add_action('admin_menu', array(&$this, '_options_page'));
+		
+		//register setting
+		add_action('admin_init', array(&$this, '_register_setting'));
+		
+		//add the js for the error handling before the form
+		add_action('nhp-opts-page-before-form-'.$this->args['opt_name'], array(&$this, '_errors_js'), 1);
+		
+		//add the js for the warning handling before the form
+		add_action('nhp-opts-page-before-form-'.$this->args['opt_name'], array(&$this, '_warnings_js'), 2);
+		
+		//hook into the wp feeds for downloading the exported settings
+		add_action('do_feed_nhpopts-'.$this->args['opt_name'], array(&$this, '_download_options'), 1, 1);
+		
+		//get the options for use later on
+		$this->options = get_option($this->args['opt_name']);
+		
+	}//function
 	
-	$return['value'] = $value;
-	if($error == true){
-		$return['error'] = $field;
+	
+	/**
+	 * ->get(); This is used to return and option value from the options array
+	 *
+	 * @since NHP_Options 1.0.1
+	 *
+	 * @param $array $args Arguments. Class constructor arguments.
+	*/
+	function get($opt_name, $default = null){
+		return (!empty($this->options[$opt_name])) ? $this->options[$opt_name] : $default;
+	}//function
+	
+	/**
+	 * ->set(); This is used to set an arbitrary option in the options array
+	 *
+	 * @since NHP_Options 1.0.1
+	 * 
+	 * @param string $opt_name the name of the option being added
+	 * @param mixed $value the value of the option being added
+	 */
+	function set($opt_name = '', $value = '') {
+		if($opt_name != ''){
+			$this->options[$opt_name] = $value;
+			update_option($this->args['opt_name'], $this->options);
+		}//if
 	}
-	return $return;
 	
-}//function
+	/**
+	 * ->show(); This is used to echo and option value from the options array
+	 *
+	 * @since NHP_Options 1.0.1
+	 *
+	 * @param $array $args Arguments. Class constructor arguments.
+	*/
+	function show($opt_name, $default = ''){
+		$option = $this->get($opt_name);
+		if(!is_array($option) && $option != ''){
+			echo $option;
+		}elseif($default != ''){
+			echo $default;
+		}
+	}//function
+	
+	
+	
+	/**
+	 * Get default options into an array suitable for the settings API
+	 *
+	 * @since NHP_Options 1.0
+	 *
+	*/
+	function _default_values(){
+		
+		$defaults = array();
+		
+		foreach($this->sections as $k => $section){
+			
+			if(isset($section['fields'])){
+		
+				foreach($section['fields'] as $fieldk => $field){
+					
+					if(!isset($field['std'])){$field['std'] = '';}
+						
+						$defaults[$field['id']] = $field['std'];
+					
+				}//foreach
+			
+			}//if
+			
+		}//foreach
+		
+		//fix for notice on first page load
+		$defaults['last_tab'] = 0;
+
+		return $defaults;
+		
+	}
+	
+	
+	
+	/**
+	 * Set default options on admin_init if option doesnt exist (theme activation hook caused problems, so admin_init it is)
+	 *
+	 * @since NHP_Options 1.0
+	 *
+	*/
+	function _set_default_options(){
+		if(!get_option($this->args['opt_name'])){
+			add_option($this->args['opt_name'], $this->_default_values());
+		}
+		$this->options = get_option($this->args['opt_name']);
+	}//function
+	
+	
+	/**
+	 * Class Theme Options Page Function, creates main options page.
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _options_page(){
+		if($this->args['page_type'] == 'submenu'){
+			if(!isset($this->args['page_parent']) || empty($this->args['page_parent'])){
+				$this->args['page_parent'] = 'themes.php';
+			}
+			$this->page = add_submenu_page(
+							$this->args['page_parent'],
+							$this->args['page_title'], 
+							$this->args['menu_title'], 
+							$this->args['page_cap'], 
+							$this->args['page_slug'], 
+							array(&$this, '_options_page_html')
+						);
+		}else{
+			$this->page = add_menu_page(
+							$this->args['page_title'], 
+							$this->args['menu_title'], 
+							$this->args['page_cap'], 
+							$this->args['page_slug'], 
+							array(&$this, '_options_page_html'),
+							$this->args['menu_icon'],
+							$this->args['page_position']
+						);
+						
+		if(true === $this->args['allow_sub_menu']){
+						
+			//this is needed to remove the top level menu item from showing in the submenu
+			add_submenu_page($this->args['page_slug'],$this->args['page_title'],'',$this->args['page_cap'],$this->args['page_slug'],create_function( '$a', "return null;" ));
+						
+						
+			foreach($this->sections as $k => $section){
+							
+				add_submenu_page(
+						$this->args['page_slug'],
+						$section['title'], 
+						$section['title'], 
+						$this->args['page_cap'], 
+						$this->args['page_slug'].'&tab='.$k, 
+						create_function( '$a', "return null;" )
+				);
+					
+			}
+			
+			if(true === $this->args['show_import_export']){
+				
+				add_submenu_page(
+						$this->args['page_slug'],
+						__('Import / Export', 'nhp-opts'), 
+						__('Import / Export', 'nhp-opts'), 
+						$this->args['page_cap'], 
+						$this->args['page_slug'].'&tab=import_export_default', 
+						create_function( '$a', "return null;" )
+				);
+					
+			}//if
+						
+
+			foreach($this->extra_tabs as $k => $tab){
+				
+				add_submenu_page(
+						$this->args['page_slug'],
+						$tab['title'], 
+						$tab['title'], 
+						$this->args['page_cap'], 
+						$this->args['page_slug'].'&tab='.$k, 
+						create_function( '$a', "return null;" )
+				);
+				
+			}
+
+			if(true === $this->args['dev_mode']){
+						
+				add_submenu_page(
+						$this->args['page_slug'],
+						__('Dev Mode Info', 'nhp-opts'), 
+						__('Dev Mode Info', 'nhp-opts'), 
+						$this->args['page_cap'], 
+						$this->args['page_slug'].'&tab=dev_mode_default', 
+						create_function( '$a', "return null;" )
+				);
+				
+			}//if
+
+		}//if			
+						
+			
+		}//else
+
+		add_action('admin_print_styles-'.$this->page, array(&$this, '_enqueue'));
+		add_action('load-'.$this->page, array(&$this, '_load_page'));
+	}//function	
+	
+	
+
+	/**
+	 * enqueue styles/js for theme page
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _enqueue(){
+		
+		wp_register_style(
+				'nhp-opts-css', 
+				$this->url.'css/options.css',
+				array('farbtastic'),
+				time(),
+				'all'
+			);
+			
+		wp_register_style(
+			'nhp-opts-jquery-ui-css',
+			apply_filters('nhp-opts-ui-theme', $this->url.'css/jquery-ui-aristo/aristo.css'),
+			'',
+			time(),
+			'all'
+		);
+			
+			
+		if(false === $this->args['stylesheet_override']){
+			wp_enqueue_style('nhp-opts-css');
+		}
+		
+		
+		wp_enqueue_script(
+			'nhp-opts-js', 
+			$this->url.'js/options.min.js', 
+			array('jquery'),
+			time(),
+			true
+		);
+		wp_localize_script('nhp-opts-js', 'nhp_opts', array('reset_confirm' => __('Are you sure? Resetting will loose all custom values.', 'nhp-opts'), 'opt_name' => $this->args['opt_name']));
+		
+		do_action('nhp-opts-enqueue-'.$this->args['opt_name']);
+		
+		
+		foreach($this->sections as $k => $section){
+			
+			if(isset($section['fields'])){
+				
+				foreach($section['fields'] as $fieldk => $field){
+					
+					if(isset($field['type'])){
+					
+						$field_class = 'NHP_Options_'.$field['type'];
+						
+						if(!class_exists($field_class)){
+							require_once($this->dir.'fields/'.$field['type'].'/field_'.$field['type'].'.php');
+						}//if
+				
+						if(class_exists($field_class) && method_exists($field_class, 'enqueue')){
+							$enqueue = new $field_class('','',$this);
+							$enqueue->enqueue();
+						}//if
+						
+					}//if type
+					
+				}//foreach
+			
+			}//if fields
+			
+		}//foreach
+			
+		
+	}//function
+	
+	/**
+	 * Download the options file, or display it
+	 *
+	 * @since NHP_Options 1.0.1
+	*/
+	function _download_options(){
+		//-'.$this->args['opt_name']
+		if(!isset($_GET['secret']) || $_GET['secret'] != md5(AUTH_KEY.SECURE_AUTH_KEY)){wp_die('Invalid Secret for options use');exit;}
+		if(!isset($_GET['feed'])){wp_die('No Feed Defined');exit;}
+		$backup_options = get_option(str_replace('nhpopts-','',$_GET['feed']));
+		$backup_options['nhp-opts-backup'] = '1';
+		$content = '###'.serialize($backup_options).'###';
+		
+		
+		if(isset($_GET['action']) && $_GET['action'] == 'download_options'){
+			header('Content-Description: File Transfer');
+			header('Content-type: application/txt');
+			header('Content-Disposition: attachment; filename="'.str_replace('nhpopts-','',$_GET['feed']).'_options_'.date('d-m-Y').'.txt"');
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			echo $content;
+			exit;
+		}else{
+			echo $content;
+			exit;
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * show page help
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _load_page(){
+		
+		//do admin head action for this page
+		add_action('admin_head', array(&$this, 'admin_head'));
+		
+		$screen = get_current_screen();
+		
+		if(is_array($this->args['help_tabs'])){
+			foreach($this->args['help_tabs'] as $tab){
+				$screen->add_help_tab($tab);
+			}//foreach
+		}//if
+		
+		if($this->args['help_sidebar'] != ''){
+			$screen->set_help_sidebar($this->args['help_sidebar']);
+		}//if
+		
+		do_action('nhp-opts-load-page-'.$this->args['opt_name'], $screen);
+		
+	}//function
+	
+	
+	/**
+	 * do action nhp-opts-admin-head for theme options page
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function admin_head(){
+		
+		do_action('nhp-opts-admin-head-'.$this->args['opt_name'], $this);
+		
+	}//function	
+	
+	
+	
+	/**
+	 * Register Option for use
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _register_setting(){
+		
+		register_setting($this->args['opt_name'].'_group', $this->args['opt_name'], array(&$this,'_validate_options'));
+		
+		foreach($this->sections as $k => $section){
+			
+			add_settings_section($k.'_section', $section['title'], array(&$this, '_section_desc'), $k.'_section_group');
+			
+			if(isset($section['fields'])){
+			
+				foreach($section['fields'] as $fieldk => $field){
+					
+					if(isset($field['title'])){
+					
+						$th = (isset($field['sub_desc']))?$field['title'].'<span class="description">'.$field['sub_desc'].'</span>':$field['title'];
+					}else{
+						$th = '';
+					}
+					
+					add_settings_field($fieldk.'_field', $th, array(&$this,'_field_input'), $k.'_section_group', $k.'_section', $field); // checkbox
+					
+				}//foreach
+			
+			}//if(isset($section['fields'])){
+			
+		}//foreach
+		
+		do_action('nhp-opts-register-settings-'.$this->args['opt_name']);
+		
+	}//function
+	
+	
+	
+	/**
+	 * Validate the Options options before insertion
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _validate_options($plugin_options){
+		
+		set_transient('nhp-opts-saved', '1', 1000 );
+		
+		if(!empty($plugin_options['import'])){
+			
+			if($plugin_options['import_code'] != ''){
+				$import = $plugin_options['import_code'];
+			}elseif($plugin_options['import_link'] != ''){
+				$import = wp_remote_retrieve_body( wp_remote_get($plugin_options['import_link']) );
+			}
+			
+			$imported_options = unserialize(trim($import,'###'));
+			if(is_array($imported_options) && isset($imported_options['nhp-opts-backup']) && $imported_options['nhp-opts-backup'] == '1'){
+				$imported_options['imported'] = 1;
+				return $imported_options;
+			}
+			
+			
+		}
+		
+		
+		if(!empty($plugin_options['defaults'])){
+			$plugin_options = $this->_default_values();
+			return $plugin_options;
+		}//if set defaults
+
+		
+		//validate fields (if needed)
+		$plugin_options = $this->_validate_values($plugin_options, $this->options);
+		
+		if($this->errors){
+			set_transient('nhp-opts-errors-'.$this->args['opt_name'], $this->errors, 1000 );		
+		}//if errors
+		
+		if($this->warnings){
+			set_transient('nhp-opts-warnings-'.$this->args['opt_name'], $this->warnings, 1000 );		
+		}//if errors
+		
+		do_action('nhp-opts-options-validate-'.$this->args['opt_name'], $plugin_options, $this->options);
+		
+		
+		unset($plugin_options['defaults']);
+		unset($plugin_options['import']);
+		unset($plugin_options['import_code']);
+		unset($plugin_options['import_link']);
+		
+		return $plugin_options;	
+	
+	}//function
+	
+	
+	
+	
+	/**
+	 * Validate values from options form (used in settings api validate function)
+	 * calls the custom validation class for the field so authors can override with custom classes
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _validate_values($plugin_options, $options){
+		foreach($this->sections as $k => $section){
+			
+			if(isset($section['fields'])){
+			
+				foreach($section['fields'] as $fieldk => $field){
+					$field['section_id'] = $k;
+					
+					if(isset($field['type']) && $field['type'] == 'multi_text'){continue;}//we cant validate this yet
+					
+					if(!isset($plugin_options[$field['id']]) || $plugin_options[$field['id']] == ''){
+						continue;
+					}
+					
+					//force validate of custom filed types
+					
+					if(isset($field['type']) && !isset($field['validate'])){
+						if($field['type'] == 'color' || $field['type'] == 'color_gradient'){
+							$field['validate'] = 'color';
+						}elseif($field['type'] == 'date'){
+							$field['validate'] = 'date';
+						}
+					}//if
+	
+					if(isset($field['validate'])){
+						$validate = 'NHP_Validation_'.$field['validate'];
+						
+						if(!class_exists($validate)){
+							require_once($this->dir.'validation/'.$field['validate'].'/validation_'.$field['validate'].'.php');
+						}//if
+						
+						if(class_exists($validate)){
+							$validation = new $validate($field, $plugin_options[$field['id']], $options[$field['id']]);
+							$plugin_options[$field['id']] = $validation->value;
+							if(isset($validation->error)){
+								$this->errors[] = $validation->error;
+							}
+							if(isset($validation->warning)){
+								$this->warnings[] = $validation->warning;
+							}
+							continue;
+						}//if
+					}//if
+					
+					
+					if(isset($field['validate_callback']) && function_exists($field['validate_callback'])){
+						
+						$callbackvalues = call_user_func($field['validate_callback'], $field, $plugin_options[$field['id']], $options[$field['id']]);
+						$plugin_options[$field['id']] = $callbackvalues['value'];
+						if(isset($callbackvalues['error'])){
+							$this->errors[] = $callbackvalues['error'];
+						}//if
+						if(isset($callbackvalues['warning'])){
+							$this->warnings[] = $callbackvalues['warning'];
+						}//if
+						
+					}//if
+					
+					
+				}//foreach
+			
+			}//if(isset($section['fields'])){
+			
+		}//foreach
+		return $plugin_options;
+	}//function
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * HTML OUTPUT.
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _options_page_html(){
+		
+		echo '<div class="wrap">';
+			echo '<div id="'.$this->args['page_icon'].'" class="icon32"><br/></div>';
+			echo '<h2 id="nhp-opts-heading">'.get_admin_page_title().'</h2>';
+			echo (isset($this->args['intro_text']))?$this->args['intro_text']:'';
+			
+			do_action('nhp-opts-page-before-form-'.$this->args['opt_name']);
+
+			echo '<form method="post" action="options.php" enctype="multipart/form-data" id="nhp-opts-form-wrapper">';
+				settings_fields($this->args['opt_name'].'_group');
+				
+				$this->options['last_tab'] = (isset($_GET['tab']) && !get_transient('nhp-opts-saved'))?$_GET['tab']:$this->options['last_tab'];
+				
+				echo '<input type="hidden" id="last_tab" name="'.$this->args['opt_name'].'[last_tab]" value="'.$this->options['last_tab'].'" />';
+				
+				echo '<div id="nhp-opts-header">';
+					submit_button('', 'primary', '', false);
+					// submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
+					echo '<div class="clear"></div><!--clearfix-->';
+				echo '</div>';
+				
+					if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('nhp-opts-saved') == '1'){
+						if(isset($this->options['imported']) && $this->options['imported'] == 1){
+							echo '<div id="nhp-opts-imported">'.apply_filters('nhp-opts-imported-text-'.$this->args['opt_name'], __('<strong>Settings Imported!</strong>', 'nhp-opts')).'</div>';
+						}else{
+							echo '<div id="nhp-opts-save">'.apply_filters('nhp-opts-saved-text-'.$this->args['opt_name'], __('<strong>Settings Saved!</strong>', 'nhp-opts')).'</div>';
+						}
+						delete_transient('nhp-opts-saved');
+					}
+					echo '<div id="nhp-opts-save-warn">'.apply_filters('nhp-opts-changed-text-'.$this->args['opt_name'], __('<strong>Settings have changed!, don\'t forget to save!</strong>', 'nhp-opts')).'</div>';
+					echo '<div id="nhp-opts-field-errors">'.__('<strong><span></span> error(s) were found!</strong>', 'nhp-opts').'</div>';
+					
+					echo '<div id="nhp-opts-field-warnings">'.__('<strong><span></span> warning(s) were found!</strong>', 'nhp-opts').'</div>';
+				
+				echo '<div class="clear"></div><!--clearfix-->';
+				
+				echo '<div id="nhp-opts-sidebar">';
+					echo '<ul id="nhp-opts-group-menu">';
+						foreach($this->sections as $k => $section){
+							$icon = (!isset($section['icon']))?'<img src="'.$this->url.'img/glyphicons/glyphicons_019_cogwheel.png" /> ':'<img src="'.$section['icon'].'" /> ';
+							echo '<li id="'.$k.'_section_group_li" class="nhp-opts-group-tab-link-li">';
+								echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="'.$k.'">'.$icon.'<span>'.$section['title'].'</span></a>';
+							echo '</li>';
+						}
+						
+						echo '<li class="divide">&nbsp;</li>';
+						
+						do_action('nhp-opts-after-section-menu-items-'.$this->args['opt_name'], $this);
+						
+						if(true === $this->args['show_import_export']){
+							echo '<li id="import_export_default_section_group_li" class="nhp-opts-group-tab-link-li">';
+									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><img src="'.$this->url.'img/glyphicons/glyphicons_082_roundabout.png" /> <span>'.__('Import / Export', 'nhp-opts').'</span></a>';
+							echo '</li>';
+							echo '<li class="divide">&nbsp;</li>';
+						}//if
+						
+						
+						
+						
+						
+						foreach($this->extra_tabs as $k => $tab){
+							$icon = (!isset($tab['icon']))?'<img src="'.$this->url.'img/glyphicons/glyphicons_019_cogwheel.png" /> ':'<img src="'.$tab['icon'].'" /> ';
+							echo '<li id="'.$k.'_section_group_li" class="nhp-opts-group-tab-link-li">';
+								echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a custom-tab" data-rel="'.$k.'">'.$icon.'<span>'.$tab['title'].'</span></a>';
+							echo '</li>';
+						}
+
+						
+						if(true === $this->args['dev_mode']){
+							echo '<li id="dev_mode_default_section_group_li" class="nhp-opts-group-tab-link-li">';
+									echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="nhp-opts-group-tab-link-a custom-tab" data-rel="dev_mode_default"><img src="'.$this->url.'img/glyphicons/glyphicons_195_circle_info.png" /> <span>'.__('Dev Mode Info', 'nhp-opts').'</span></a>';
+							echo '</li>';
+						}//if
+						
+					echo '</ul>';
+				echo '</div>';
+				
+				echo '<div id="nhp-opts-main">';
+				
+					foreach($this->sections as $k => $section){
+						echo '<div id="'.$k.'_section_group'.'" class="nhp-opts-group-tab">';
+							do_settings_sections($k.'_section_group');
+						echo '</div>';
+					}					
+					
+					
+					if(true === $this->args['show_import_export']){
+						echo '<div id="import_export_default_section_group'.'" class="nhp-opts-group-tab">';
+							echo '<h3>'.__('Import / Export Options', 'nhp-opts').'</h3>';
+							
+							echo '<h4>'.__('Import Options', 'nhp-opts').'</h4>';
+							
+							echo '<p><a href="javascript:void(0);" id="nhp-opts-import-code-button" class="button-secondary">Import from file</a> <a href="javascript:void(0);" id="nhp-opts-import-link-button" class="button-secondary">Import from URL</a></p>';
+							
+							echo '<div id="nhp-opts-import-code-wrapper">';
+							
+								echo '<div class="nhp-opts-section-desc">';
+				
+									echo '<p class="description" id="import-code-description">'.apply_filters('nhp-opts-import-file-description',__('Input your backup file below and hit Import to restore your sites options from a backup.', 'nhp-opts')).'</p>';
+								
+								echo '</div>';
+								
+								echo '<textarea id="import-code-value" name="'.$this->args['opt_name'].'[import_code]" class="large-text" rows="8"></textarea>';
+							
+							echo '</div>';
+							
+							
+							echo '<div id="nhp-opts-import-link-wrapper">';
+							
+								echo '<div class="nhp-opts-section-desc">';
+									
+									echo '<p class="description" id="import-link-description">'.apply_filters('nhp-opts-import-link-description',__('Input the URL to another sites options set and hit Import to load the options from that site.', 'nhp-opts')).'</p>';
+								
+								echo '</div>';
+
+								echo '<input type="text" id="import-link-value" name="'.$this->args['opt_name'].'[import_link]" class="large-text" value="" />';
+							
+							echo '</div>';
+							
+							
+							
+							echo '<p id="nhp-opts-import-action"><input type="submit" id="nhp-opts-import" name="'.$this->args['opt_name'].'[import]" class="button-primary" value="'.__('Import', 'nhp-opts').'"> <span>'.apply_filters('nhp-opts-import-warning', __('WARNING! This will overwrite any existing options, please proceed with caution!', 'nhp-opts')).'</span></p>';
+							echo '<div id="import_divide"></div>';
+							
+							echo '<h4>'.__('Export Options', 'nhp-opts').'</h4>';
+							echo '<div class="nhp-opts-section-desc">';
+								echo '<p class="description">'.apply_filters('nhp-opts-backup-description', __('Here you can copy/download your themes current option settings. Keep this safe as you can use it as a backup should anything go wrong. Or you can use it to restore your settings on this site (or any other site). You also have the handy option to copy the link to yours sites settings. Which you can then use to duplicate on another site', 'nhp-opts')).'</p>';
+							echo '</div>';
+							
+								echo '<p><a href="javascript:void(0);" id="nhp-opts-export-code-copy" class="button-secondary">Copy</a> <a href="'.add_query_arg(array('feed' => 'nhpopts-'.$this->args['opt_name'], 'action' => 'download_options', 'secret' => md5(AUTH_KEY.SECURE_AUTH_KEY)), site_url()).'" id="nhp-opts-export-code-dl" class="button-primary">Download</a> <a href="javascript:void(0);" id="nhp-opts-export-link" class="button-secondary">Copy Link</a></p>';
+								$backup_options = $this->options;
+								$backup_options['nhp-opts-backup'] = '1';
+								$encoded_options = '###'.serialize($backup_options).'###';
+								echo '<textarea class="large-text" id="nhp-opts-export-code" rows="8">';print_r($encoded_options);echo '</textarea>';
+								echo '<input type="text" class="large-text" id="nhp-opts-export-link-value" value="'.add_query_arg(array('feed' => 'nhpopts-'.$this->args['opt_name'], 'secret' => md5(AUTH_KEY.SECURE_AUTH_KEY)), site_url()).'" />';
+							
+						echo '</div>';
+					}
+					
+					
+					
+					foreach($this->extra_tabs as $k => $tab){
+						echo '<div id="'.$k.'_section_group'.'" class="nhp-opts-group-tab">';
+						echo '<h3>'.$tab['title'].'</h3>';
+						echo $tab['content'];
+						echo '</div>';
+					}
+
+					
+					
+					if(true === $this->args['dev_mode']){
+						echo '<div id="dev_mode_default_section_group'.'" class="nhp-opts-group-tab">';
+							echo '<h3>'.__('Dev Mode Info', 'nhp-opts').'</h3>';
+							echo '<div class="nhp-opts-section-desc">';
+							echo '<textarea class="large-text" rows="24">'.print_r($this, true).'</textarea>';
+							echo '</div>';
+						echo '</div>';
+					}
+					
+					
+					do_action('nhp-opts-after-section-items-'.$this->args['opt_name'], $this);
+				
+					echo '<div class="clear"></div><!--clearfix-->';
+				echo '</div>';
+				echo '<div class="clear"></div><!--clearfix-->';
+				
+				echo '<div id="nhp-opts-footer">';
+					
+					submit_button('', 'primary', '', false);
+					// submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
+					echo '<div class="clear"></div><!--clearfix-->';
+				echo '</div>';
+			
+			echo '</form>';
+			
+			do_action('nhp-opts-page-after-form-'.$this->args['opt_name']);
+			
+			echo '<div class="clear"></div><!--clearfix-->';	
+		echo '</div><!--wrap-->';
+
+	}//function
+	
+	
+	
+	/**
+	 * JS to display the errors on the page
+	 *
+	 * @since NHP_Options 1.0
+	*/	
+	function _errors_js(){
+		
+		if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('nhp-opts-errors-'.$this->args['opt_name'])){
+				$errors = get_transient('nhp-opts-errors-'.$this->args['opt_name']);
+				$section_errors = array();
+				foreach($errors as $error){
+					$section_errors[$error['section_id']] = (isset($section_errors[$error['section_id']]))?$section_errors[$error['section_id']]:0;
+					$section_errors[$error['section_id']]++;
+				}
+				
+				
+				echo '<script type="text/javascript">';
+					echo 'jQuery(document).ready(function(){';
+						echo 'jQuery("#nhp-opts-field-errors span").html("'.count($errors).'");';
+						echo 'jQuery("#nhp-opts-field-errors").show();';
+						
+						foreach($section_errors as $sectionkey => $section_error){
+							echo 'jQuery("#'.$sectionkey.'_section_group_li_a").append("<span class=\"nhp-opts-menu-error\">'.$section_error.'</span>");';
+						}
+						
+						foreach($errors as $error){
+							echo 'jQuery("#'.$error['id'].'").addClass("nhp-opts-field-error");';
+							echo 'jQuery("#'.$error['id'].'").closest("td").append("<span class=\"nhp-opts-th-error\">'.$error['msg'].'</span>");';
+						}
+					echo '});';
+				echo '</script>';
+				delete_transient('nhp-opts-errors-'.$this->args['opt_name']);
+			}
+		
+	}//function
+	
+	
+	
+	/**
+	 * JS to display the warnings on the page
+	 *
+	 * @since NHP_Options 1.0.3
+	*/	
+	function _warnings_js(){
+		
+		if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('nhp-opts-warnings-'.$this->args['opt_name'])){
+				$warnings = get_transient('nhp-opts-warnings-'.$this->args['opt_name']);
+				$section_warnings = array();
+				foreach($warnings as $warning){
+					$section_warnings[$warning['section_id']] = (isset($section_warnings[$warning['section_id']]))?$section_warnings[$warning['section_id']]:0;
+					$section_warnings[$warning['section_id']]++;
+				}
+				
+				
+				echo '<script type="text/javascript">';
+					echo 'jQuery(document).ready(function(){';
+						echo 'jQuery("#nhp-opts-field-warnings span").html("'.count($warnings).'");';
+						echo 'jQuery("#nhp-opts-field-warnings").show();';
+						
+						foreach($section_warnings as $sectionkey => $section_warning){
+							echo 'jQuery("#'.$sectionkey.'_section_group_li_a").append("<span class=\"nhp-opts-menu-warning\">'.$section_warning.'</span>");';
+						}
+						
+						foreach($warnings as $warning){
+							echo 'jQuery("#'.$warning['id'].'").addClass("nhp-opts-field-warning");';
+							echo 'jQuery("#'.$warning['id'].'").closest("td").append("<span class=\"nhp-opts-th-warning\">'.$warning['msg'].'</span>");';
+						}
+					echo '});';
+				echo '</script>';
+				delete_transient('nhp-opts-warnings-'.$this->args['opt_name']);
+			}
+		
+	}//function
+	
+	
+
+	
+	
+	/**
+	 * Section HTML OUTPUT.
+	 *
+	 * @since NHP_Options 1.0
+	*/	
+	function _section_desc($section){
+		
+		$id = rtrim($section['id'], '_section');
+		
+		if(isset($this->sections[$id]['desc']) && !empty($this->sections[$id]['desc'])) {
+			echo '<div class="nhp-opts-section-desc">'.$this->sections[$id]['desc'].'</div>';
+		}
+		
+	}//function
+	
+	
+	
+	
+	/**
+	 * Field HTML OUTPUT.
+	 *
+	 * Gets option from options array, then calls the speicfic field type class - allows extending by other devs
+	 *
+	 * @since NHP_Options 1.0
+	*/
+	function _field_input($field){
+		
+		
+		if(isset($field['callback']) && function_exists($field['callback'])){
+			$value = (isset($this->options[$field['id']]))?$this->options[$field['id']]:'';
+			do_action('nhp-opts-before-field-'.$this->args['opt_name'], $field, $value);
+			call_user_func($field['callback'], $field, $value);
+			do_action('nhp-opts-after-field-'.$this->args['opt_name'], $field, $value);
+			return;
+		}
+		
+		if(isset($field['type'])){
+			
+			$field_class = 'NHP_Options_'.$field['type'];
+			
+			if(class_exists($field_class)){
+				require_once($this->dir.'fields/'.$field['type'].'/field_'.$field['type'].'.php');
+			}//if
+			
+			if(class_exists($field_class)){
+				$value = (isset($this->options[$field['id']]))?$this->options[$field['id']]:'';
+				do_action('nhp-opts-before-field-'.$this->args['opt_name'], $field, $value);
+				$render = '';
+				$render = new $field_class($field, $value, $this);
+				$render->render();
+				do_action('nhp-opts-after-field-'.$this->args['opt_name'], $field, $value);
+			}//if
+			
+		}//if $field['type']
+		
+	}//function
+
+	
+}//class
+}//if
 ?>
