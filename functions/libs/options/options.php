@@ -645,7 +645,7 @@ class NHP_Options{
 						}
 						delete_transient('nhp-opts-saved');
 					}
-					echo '<div id="nhp-opts-save-warn">'.apply_filters('nhp-opts-changed-text-'.$this->args['opt_name'], __('<strong>Settings have changed!, you should save them!</strong>', 'nhp-opts')).'</div>';
+					echo '<div id="nhp-opts-save-warn">'.apply_filters('nhp-opts-changed-text-'.$this->args['opt_name'], __('<strong>Settings have changed!, don\'t forget to save!</strong>', 'nhp-opts')).'</div>';
 					echo '<div id="nhp-opts-field-errors">'.__('<strong><span></span> error(s) were found!</strong>', 'nhp-opts').'</div>';
 					
 					echo '<div id="nhp-opts-field-warnings">'.__('<strong><span></span> warning(s) were found!</strong>', 'nhp-opts').'</div>';
