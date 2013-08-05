@@ -82,19 +82,7 @@ $args['dev_mode'] = true;
 //$args['stylesheet_override'] = true;
 
 //Add HTML before the form
-$args['intro_text'] = __('<p>This is the HTML which can be displayed before the form, it isnt required, but more info is always better. Anything goes in terms of markup here, any HTML.</p>', 'nhp-opts');
-
-//Setup custom links in the footer for share icons
-$args['share_icons']['twitter'] = array(
-										'link' => 'http://twitter.com/lee__mason',
-										'title' => 'Folow me on Twitter', 
-										'img' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_322_twitter.png'
-										);
-$args['share_icons']['linked_in'] = array(
-										'link' => 'http://uk.linkedin.com/pub/lee-mason/38/618/bab',
-										'title' => 'Find me on LinkedIn', 
-										'img' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_337_linked_in.png'
-										);
+$args['intro_text'] = '';
 
 //Choose to disable the import/export feature
 //$args['show_import_export'] = false;
