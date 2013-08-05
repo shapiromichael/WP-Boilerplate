@@ -31,6 +31,7 @@
 		// Metaboxs
 		
 		// Other
+		require_once('functions/admin/footer.php');
 		require_once('functions/admin/utils.php');
 	}	
 	

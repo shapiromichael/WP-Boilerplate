@@ -47,7 +47,7 @@ class NHP_Options{
 		
 		$defaults['menu_icon'] = get_bloginfo('template_url') . '/images/admin/pixel.png';
 		$defaults['menu_title'] = __('Options', 'nhp-opts');
-		$defaults['page_icon'] = 'icon-themes';
+		$defaults['page_icon'] = 'icon-options';
 		$defaults['page_title'] = __('Options', 'nhp-opts');
 		$defaults['page_slug'] = '_options';
 		$defaults['page_cap'] = 'manage_options';
@@ -59,8 +59,6 @@ class NHP_Options{
 		$defaults['show_import_export'] = true;
 		$defaults['dev_mode'] = true;
 		$defaults['stylesheet_override'] = false;
-		
-		$defaults['footer_credit'] = __('<span id="footer-thankyou">Options Panel created using the <a href="'.$this->framework_url.'" target="_blank">NHP Theme Options Framework</a> Version '.$this->framework_version.'</span>', 'nhp-opts');
 		
 		$defaults['help_tabs'] = array();
 		$defaults['help_sidebar'] = __('', 'nhp-opts');
@@ -405,9 +403,6 @@ class NHP_Options{
 		//do admin head action for this page
 		add_action('admin_head', array(&$this, 'admin_head'));
 		
-		//do admin footer text hook
-		add_filter('admin_footer_text', array(&$this, 'admin_footer_text'));
-		
 		$screen = get_current_screen();
 		
 		if(is_array($this->args['help_tabs'])){
@@ -434,13 +429,7 @@ class NHP_Options{
 		
 		do_action('nhp-opts-admin-head-'.$this->args['opt_name'], $this);
 		
-	}//function
-	
-	
-	function admin_footer_text($footer_text){
-		return $this->args['footer_credit'];
-	}//function
-	
+	}//function	
 	
 	
 	
@@ -644,7 +633,7 @@ class NHP_Options{
 				
 				echo '<div id="nhp-opts-header">';
 					submit_button('', 'primary', '', false);
-					submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
+					// submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
 					echo '<div class="clear"></div><!--clearfix-->';
 				echo '</div>';
 				
@@ -804,7 +793,7 @@ class NHP_Options{
 					}
 					
 					submit_button('', 'primary', '', false);
-					submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
+					// submit_button(__('Reset to Defaults', 'nhp-opts'), 'secondary', $this->args['opt_name'].'[defaults]', false);
 					echo '<div class="clear"></div><!--clearfix-->';
 				echo '</div>';
 			
