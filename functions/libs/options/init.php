@@ -106,10 +106,10 @@ $args['opt_name'] = 'twenty_eleven';
 //$args['menu_icon'] = '';
 
 //Custom menu title for options page - default is "Options"
-$args['menu_title'] = __('Theme Options', 'nhp-opts');
+$args['menu_title'] = __('Options', 'nhp-opts');
 
 //Custom Page Title for options page - default is "Options"
-$args['page_title'] = __('Twenty Eleven Theme Options', 'nhp-opts');
+$args['page_title'] = __('Options', 'nhp-opts');
 
 //Custom page slug for options page (wp-admin/themes.php?page=***) - default is "nhp_theme_options"
 $args['page_slug'] = 'nhp_theme_options';

@@ -10,9 +10,13 @@ h3 { margin: 2em 0 1em 0; padding-bottom: 0.5em; border-bottom: #DFDFDF 1px soli
 h4 { margin: 1.33em 0 0 0; }
 
 /* Icons */
-#icon-options-32 { background: url(../../images/admin/options-32.png) no-repeat; }
+#toplevel_page_nhp_theme_options .wp-menu-image { background: url(../../images/admin/options-16.png) no-repeat 1px 0 !important; }
+body #adminmenu #toplevel_page_nhp_theme_options.wp-menu-open .wp-menu-open .wp-menu-image, body #adminmenu #toplevel_page_nhp_theme_options:hover .wp-menu-image { background-position: 1px -28px !important; }
+#toplevel_page_nhp_theme_options .wp-menu-image img { display: none; }
 
-#menu-posts-example .wp-menu-image { background: url(../../images/admin/example-16.png) no-repeat center center !important; }
+/* Example post-type icon */
+#menu-posts-example .wp-menu-image { background: url(../../images/admin/example-16.png) no-repeat 0 -2px !important; }
+body #adminmenu #menu-posts-example.wp-menu-open .wp-menu-open .wp-menu-image, body #adminmenu #menu-posts-example:hover .wp-menu-image { background-position: 0 -30px !important; }
 #icon-edit.icon32-posts-example { background: url(../../images/admin/example-32.png) no-repeat; }
 
 

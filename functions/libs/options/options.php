@@ -45,7 +45,7 @@ class NHP_Options{
 		
 		$defaults['google_api_key'] = '';//must be defined for use with google webfonts field type
 		
-		$defaults['menu_icon'] = NHP_OPTIONS_URL.'/img/menu_icon.png';
+		$defaults['menu_icon'] = get_bloginfo('template_url') . '/images/admin/pixel.png';
 		$defaults['menu_title'] = __('Options', 'nhp-opts');
 		$defaults['page_icon'] = 'icon-themes';
 		$defaults['page_title'] = __('Options', 'nhp-opts');
@@ -322,7 +322,7 @@ class NHP_Options{
 		
 		wp_enqueue_script(
 			'nhp-opts-js', 
-			$this->url.'js/options.js', 
+			$this->url.'js/options.min.js', 
 			array('jquery'),
 			time(),
 			true
