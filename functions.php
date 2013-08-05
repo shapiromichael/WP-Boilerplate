@@ -15,20 +15,23 @@
 	
 	if( is_admin() ){
 		
-		// Admin option pages
-		require_once('functions/admin/options/menu.php');
-		require_once('functions/admin/options/general.php');
-		require_once('functions/admin/options/sortlist.php');
-		require_once('functions/admin/options/labels.php');
-		
-		// Metaboxs
+		// Libs
 		require_once('functions/libs/metabox/init.php');
 		require_once('functions/libs/metabox/demo.php');
+		require_once('functions/libs/options/init.php');
+		require_once('functions/libs/sortlist.php');
+		// require_once('functions/libs/params.php');
+
+		// Admin option pages
+		// require_once('functions/admin/options/menu.php');
+		// require_once('functions/admin/options/general.php');
+		// require_once('functions/admin/options/sortlist.php');
+		// require_once('functions/admin/options/labels.php');
+		
+		// Metaboxs
 		
 		// Other
 		require_once('functions/admin/utils.php');
-		require_once('functions/libs/sortlist.php');
-		require_once('functions/libs/params.php');
 	}	
 	
 	// Post Types
