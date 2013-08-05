@@ -1,7 +1,10 @@
 <?php
 	
 	// Theme params
-	require_once('functions/params.php');
+	require_once('functions/config.php');
+
+	// Libs
+	require_once('functions/libs/options/init.php');
 	
 	// Theme support
 	require_once('functions/theme.php');
@@ -18,9 +21,7 @@
 		// Libs
 		require_once('functions/libs/metabox/init.php');
 		require_once('functions/libs/metabox/demo.php');
-		require_once('functions/libs/options/init.php');
 		require_once('functions/libs/sortlist.php');
-		// require_once('functions/libs/params.php');
 
 		// Admin option pages
 		// require_once('functions/admin/options/menu.php');

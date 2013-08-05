@@ -1,4 +1,4 @@
-jQuery(function($){
+(function($){
 	
 	
 	if($('#last_tab').val() == ''){
