@@ -221,7 +221,9 @@ border: 1px solid #e5e5e5;
 	margin-top: 0px;
 	font-size: 1.8em;
 	line-height: 2em;
-	border-bottom: 1px solid #DFDFDF;
+	border-bottom: none;
+	margin-bottom: 0;
+	padding: 0;
 }
 .nhp-opts-group-tab .nhp-opts-section-desc{
 	font-style: italic;
@@ -383,12 +385,18 @@ border: 1px solid #e5e5e5;
 
 
 
-.nhp-opts-screenshot{
+.nhp-opts-screenshot {
 	max-width: 300px;
-	display:block;
+	max-height: 150px;
+	border: 3px solid #FFF;
+	box-shadow: 0 0 0 1px #DDD;
+	float: left;
+	margin-right: 20px;
 }
 
-
+.nhp-opts-screenshot.empty {
+	display: none;
+}
 
 
 

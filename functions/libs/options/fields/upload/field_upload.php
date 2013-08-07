@@ -28,16 +28,21 @@ class NHP_Options_upload extends NHP_Options{
 	function render(){
 		
 		$class = (isset($this->field['class']))?$this->field['class']:'regular-text';
-		
+		$button_title = (isset($this->field['button_title']))?__($this->field['button_title'], 'nhp-opts'):__('Browse', 'nhp-opts');
+		$remove_title = (isset($this->field['remove_title']))?__($this->field['remove_title'], 'nhp-opts'):__('Remove', 'nhp-opts');
 		
 		echo '<input type="hidden" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].']" value="'.$this->value.'" class="'.$class.'" />';
-		//if($this->value != ''){
-			echo '<img class="nhp-opts-screenshot" id="nhp-opts-screenshot-'.$this->field['id'].'" src="'.$this->value.'" />';
-		//}
+			echo '<img class="nhp-opts-screenshot';
+
+		if($this->value == ''){
+			echo ' empty';
+		}
+		
+			echo '" id="nhp-opts-screenshot-'.$this->field['id'].'" src="'.$this->value.'" />';
 		
 		if($this->value == ''){$remove = ' style="display:none;"';$upload = '';}else{$remove = '';$upload = ' style="display:none;"';}
-		echo ' <a href="javascript:void(0);" class="nhp-opts-upload button-secondary"'.$upload.' rel-id="'.$this->field['id'].'">'.__('Browse', 'nhp-opts').'</a>';
-		echo ' <a href="javascript:void(0);" class="nhp-opts-upload-remove"'.$remove.' rel-id="'.$this->field['id'].'">'.__('Remove Upload', 'nhp-opts').'</a>';
+		echo ' <a href="javascript:void(0);" class="nhp-opts-upload button-secondary"'.$upload.' rel-id="'.$this->field['id'].'">'.$button_title.'</a>';
+		echo ' <a href="javascript:void(0);" class="nhp-opts-upload-remove"'.$remove.' rel-id="'.$this->field['id'].'">'.$remove_title.'</a>';
 		
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?'<br/><br/><span class="description">'.$this->field['desc'].'</span>':'';
 		

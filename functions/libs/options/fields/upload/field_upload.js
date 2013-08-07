@@ -1,4 +1,4 @@
-jQuery(document).ready(function(){
+jQuery(document).ready(function($){
 
 	
 	/*
@@ -8,43 +8,48 @@ jQuery(document).ready(function(){
 	 *
 	 */
 	 
-	 var header_clicked = false;
+	 var formfield = '',
+	 	 _header_clicked = false,
+		 _orig_send_attachment = wp.media.editor.send.attachment;
 	 
-	jQuery("img[src='']").attr("src", nhp_upload.url);
+	$("img[src='']").attr("src", nhp_upload.url);
 	
-	jQuery('.nhp-opts-upload').click(function() {
-		header_clicked = true;
-		formfield = jQuery(this).attr('rel-id');
-		preview = jQuery(this).prev('img');
-		tb_show('', 'media-upload.php?type=image&amp;post_id=0&amp;TB_iframe=true');
-		return false;
+	$('.nhp-opts-upload').click(function() {
+		_header_clicked = true;
+		formfield = $(this).attr('rel-id');
+
+		var send_attachment_bkp = wp.media.editor.send.attachment;
+
+	    wp.media.editor.send.attachment = function(props, attachment) {
+
+	    	if (_header_clicked) {
+
+				$('#nhp-opts-screenshot-' + formfield).attr('src', attachment.url).removeAttr('empty');
+				$('#' + formfield).val( attachment.url );
+				$('#' + formfield).next().fadeIn('slow');
+				$('#' + formfield).next().next().fadeOut('slow');
+				$('#' + formfield).next().next().next().fadeIn('slow');
+				tb_remove();
+				_header_clicked = false;
+
+			} else {
+				return _orig_send_attachment.apply( this, [props, attachment] );
+			}
+	    }
+
+	    wp.media.editor.open();
+	    return false;
 	});
 	
-	
-	// Store original function
-	window.original_send_to_editor = window.send_to_editor;
-	
-	
-	window.send_to_editor = function(html) {
-		if (header_clicked) {
-			imgurl = jQuery('img',html).attr('src');
-			jQuery('#' + formfield).val(imgurl);
-			jQuery('#' + formfield).next().fadeIn('slow');
-			jQuery('#' + formfield).next().next().fadeOut('slow');
-			jQuery('#' + formfield).next().next().next().fadeIn('slow');
-			jQuery(preview).attr('src' , imgurl);
-			tb_remove();
-			header_clicked = false;
-		} else {
-			window.original_send_to_editor(html);
-		}
-	}
-	
-	jQuery('.nhp-opts-upload-remove').click(function(){
-		$relid = jQuery(this).attr('rel-id');
-		jQuery('#'+$relid).val('');
-		jQuery(this).prev().fadeIn('slow');
-		jQuery(this).prev().prev().fadeOut('slow', function(){jQuery(this).attr("src", nhp_upload.url);});
-		jQuery(this).fadeOut('slow');
+	$('.nhp-opts-upload-remove').click(function(){
+		$relid = $(this).attr('rel-id');
+		$('#'+$relid).val('');
+		$(this).prev().fadeIn('slow');
+		$(this).prev().prev().fadeOut('slow', function(){$(this).attr("src", nhp_upload.url);});
+		$(this).fadeOut('slow');
+	});
+
+	$('.add_media').on('click', function(){
+	    _header_clicked = false;
 	});
 });
