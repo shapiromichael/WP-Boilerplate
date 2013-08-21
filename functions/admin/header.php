@@ -2,12 +2,13 @@
 	
 	// Loading scripts n styles on the dashboard
 	function theme_admin_head() {
+
 		wp_enqueue_script( array('jq-ui', 'admin-options', 'colorpick') );
 		wp_enqueue_style(  array('admin-general', 'admin-options', 'colorpicker') );
-		$templateUrl = get_bloginfo('template_url');
+
 		?>
-			<link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
 		<?php	
 
 	}
@@ -16,12 +17,13 @@
 
 	// Tweaking the login screen
 	function theme_login_screen() {
+
 		wp_enqueue_script('login');
 		wp_enqueue_style('login');
-		$templateUrl = get_bloginfo('template_url');
+		
 		?>
-			<link rel="icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo $templateUrl; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
 		<?php
 	}
 	add_action('login_head','theme_login_screen');
