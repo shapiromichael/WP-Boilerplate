@@ -63,7 +63,7 @@ function setup_framework_options(){
 $args = array();
 
 //Set it to dev mode to view the class settings/info in the form - default is false
-$args['dev_mode'] = true;
+$args['dev_mode'] = false;
 
 //google api key MUST BE DEFINED IF YOU WANT TO USE GOOGLE WEBFONTS
 //$args['google_api_key'] = '***';
