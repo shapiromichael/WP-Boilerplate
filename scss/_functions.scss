@@ -1,0 +1,90 @@
+@import "params";
+
+@mixin reset {
+	padding: 0;
+	margin: 0;
+}
+
+@mixin section {
+	float: left;
+	clear: left;
+	width: 100%;
+}
+
+@mixin not-selectable {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@mixin box-sizing {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@mixin no-wrap {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+@mixin transition($efx: opacity, $speed: .25s) {
+	-webkit-transition: #{$efx} $speed;
+	-moz-transition: #{$efx} $speed;
+	-ms-transition: #{$efx} $speed;
+	-o-transition: #{$efx} $speed;
+	transition: #{$efx} $speed;
+}
+
+@mixin transform($efx) {
+	-webkit-transform: $efx;
+	-moz-transform: $efx;
+	-ms-transform: $efx;
+	transform: $efx;
+}
+
+@mixin vertical-gradient($top, $bottom, $top-pos: 0%, $bottom-pos: 100%) {
+	background-image: -webkit-linear-gradient(top, $top $top-pos, $bottom $bottom-pos);
+	background-image: -moz-linear-gradient(top, $top $top-pos, $bottom $bottom-pos);
+	background-image: -ms-linear-gradient(top, $top $top-pos, $bottom $bottom-pos);
+	background-image: -o-linear-gradient(top, $top $top-pos, $bottom $bottom-pos);
+	background-image: linear-gradient(to top, $top $top-pos, $bottom $bottom-pos);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{ie-hex-str($bottom)}', endColorstr='#{ie-hex-str($top)}');
+}
+
+@mixin image($url, $size: "", $position: 0 0, $repeat: no-repeat) {
+	background: url($images + $url) $repeat $position;
+
+	@if $size != "" {
+		background-size: $size;
+	}
+}
+
+@mixin ui($url, $size: "", $position: center center, $repeat: no-repeat ) {
+	@include image('ui/' + $url, $size, $position, $repeat );
+}
+
+@mixin font( $name: "" ){
+	@if $name != "" {
+		font-family: $name, $default_fonts;
+	} @else {
+		font-family: $default_fonts;
+	}
+}
+
+@mixin load-font($name, $file_name, $weight: normal, $style: normal ){
+	@if $name != "" and $file_name != "" {
+		@font-face {
+			font-family: $name;
+			src: url( $fonts + $file_name + ".eot" );
+			src: url( $fonts + $file_name + ".eot?#iefix" ) format('embedded-opentype'),
+				 url( $fonts + $file_name + ".woff" ) format('woff'),
+				 url( $fonts + $file_name + ".ttf" ) format('truetype'),
+				 url( $fonts + $file_name + ".svg#" + $name ) format('svg');
+			font-weight: $weight;
+			font-style: $style;
+		}
+	}
+}

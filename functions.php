@@ -1,36 +1,30 @@
 <?php
 	
 	// Theme params
-	require_once('functions/params.php');
+	require_once('functions/config.php');
+
+	// Libs
+	require_once('functions/libs/options/init.php');
 	
 	// Theme support
 	require_once('functions/theme.php');
 	
 	// Admin header section
 	require_once('functions/admin/header.php'); // This should be outside is_admin() because of the login screen
-
-	// Components
-	require_once('functions/components/settings/component.php');
-	require_once('functions/components/sortlist/component.php');
 	
 	if( is_admin() ){
 		
-		require_once('admin/editor_highlight.php');
-
-		// Admin option pages
-		require_once('functions/admin/options/menu.php');
-		require_once('functions/admin/options/general.php');
-		require_once('functions/admin/options/sortlist.php');
-		require_once('functions/admin/options/labels.php');
+		// Libs
+		require_once('functions/libs/metabox/init.php');
+		require_once('functions/libs/metabox/demo.php');
+		require_once('functions/libs/sortlist.php');
+		require_once('functions/admin/options.php');
 		
 		// Metaboxs
 		
 		// Other
+		require_once('functions/admin/footer.php');
 		require_once('functions/admin/utils.php');
-		require_once('functions/libs/sortlist.php');
-
-		require_once 'admin/users-edit.php';
-		
 	}	
 	
 	// Post Types

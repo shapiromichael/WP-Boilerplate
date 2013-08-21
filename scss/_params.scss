@@ -1,0 +1,19 @@
+
+// Vars
+$images: "../images/";
+$fonts: "../fonts/";
+
+$default_fonts: "roboto", Arial, Helvetica, sans-serif;
+
+// Colors
+$background: #FFF;
+
+$font-color: #333;
+
+$links-normal-color: #82AF47;
+$links-hover-color: lighten( $links-normal-color, 25% );
+
+// Admin vars
+$admin-images: "../../images/admin/";
+
+$admin-grey-font-color: #BBB;

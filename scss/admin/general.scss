@@ -1,0 +1,38 @@
+@import "../functions";
+@import "../fonts";
+
+@charset "utf-8";
+
+//
+// Menu icons
+//
+
+// Theme options
+#toplevel_page_nhp_theme_options .wp-menu-image { background: url($admin-images + "options-16.png") no-repeat 1px 0 !important; }
+body #adminmenu #toplevel_page_nhp_theme_options.wp-menu-open .wp-menu-open .wp-menu-image, body #adminmenu #toplevel_page_nhp_theme_options:hover .wp-menu-image { background-position: 1px -28px !important; }
+#toplevel_page_nhp_theme_options .wp-menu-image img { display: none; }
+#icon-options.icon32 { background: url($admin-images + "options-32.png") no-repeat; }
+
+// Example post type
+#menu-posts-example .wp-menu-image { background: url($admin-images + "example-16.png") no-repeat 0 -2px !important; }
+body #adminmenu #menu-posts-example.wp-menu-open .wp-menu-open .wp-menu-image, body #adminmenu #menu-posts-example:hover .wp-menu-image { background-position: 0 -30px !important; }
+#icon-edit.icon32-posts-example { background: url($admin-images + "example-32.png") no-repeat; }
+
+
+//
+// Other tweaks
+//
+span.meta {
+	padding-right: 10px;
+	font-size: 12px;
+	font-style: italic;
+	font-family: sans-serif;
+	color: $admin-grey-font-color;
+}
+span.description {
+	color: $admin-grey-font-color;
+}
+
+.wp_themeSkin iframe {
+	min-height: 150px;
+}
