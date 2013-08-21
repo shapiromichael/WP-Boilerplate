@@ -1,11 +1,1 @@
-
-body.login { 
-	/* Here you can set the background style */
-	background: #333;
-}
-
-.login #login h1 a {
-	width: 327px;
-	height: 54px;
-	background: url(<?php echo $templateUrl; ?>/images/admin/logo.png) no-repeat;
-}
+@charset "utf-8";body.login{background:#E9E9E9}body.login #login h1 a{width:327px;height:54px;background:url("../../images/admin/logo.png") no-repeat}body.login #backtoblog{display:none}

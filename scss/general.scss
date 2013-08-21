@@ -1,0 +1,34 @@
+@import "functions";
+@import "normalize";
+@import "fonts";
+@import "content";
+
+@charset "utf-8";
+
+//
+// Page layout
+//
+body {
+	@include font;
+	color: $font-color;
+}
+.layout {
+	margin: 0 auto;
+}
+section {
+	@include section;
+}
+
+//
+// Header
+//
+header {
+	
+}
+
+//
+// Footer
+//
+footer {
+	
+}
