@@ -1,0 +1,21 @@
+@import "../functions";
+
+@charset "utf-8";
+
+//
+// Login screen
+//
+body.login {
+	
+	background: #E9E9E9;
+
+	#login h1 a {
+		width: 327px;
+		height: 54px;
+		background: url($admin-images + "logo.png") no-repeat; 
+	}
+
+	#backtoblog {
+		display: none;
+	}
+}

@@ -6,5 +6,5 @@
 			
 		}
 	}
-	$(document).ready(theme.home.init);
+	$(theme.home.init);
 	
