@@ -303,6 +303,8 @@ class NHP_Options{
 				time(),
 				'all'
 			);
+
+		wp_register_style( 'fontawesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css' );
 			
 		wp_register_style(
 			'nhp-opts-jquery-ui-css',
@@ -316,7 +318,10 @@ class NHP_Options{
 		if(false === $this->args['stylesheet_override']){
 			wp_enqueue_style('nhp-opts-css');
 		}
+
 		
+		wp_enqueue_style('fontawesome');
+
 		
 		wp_enqueue_script(
 			'nhp-opts-js', 
