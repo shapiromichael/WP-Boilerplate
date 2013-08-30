@@ -57,7 +57,7 @@ class NHP_Options{
 		$defaults['allow_sub_menu'] = true;
 		
 		$defaults['show_import_export'] = true;
-		$defaults['dev_mode'] = true;
+		$defaults['dev_mode'] = false;
 		$defaults['stylesheet_override'] = false;
 		
 		$defaults['help_tabs'] = array();
@@ -646,10 +646,13 @@ class NHP_Options{
 				
 				echo '<div id="nhp-opts-sidebar">';
 					echo '<ul id="nhp-opts-group-menu">';
+
 						foreach($this->sections as $k => $section){
-							$icon = (!isset($section['icon']))?'<img src="'.$this->url.'img/glyphicons/glyphicons_019_cogwheel.png" /> ':'<img src="'.$section['icon'].'" /> ';
+
+							$icon = (!isset($section['icon'])) ? '<i class="icon-chevron-right"></i>' : '<i class="'.$section['icon'].'"></i>' ;
+
 							echo '<li id="'.$k.'_section_group_li" class="nhp-opts-group-tab-link-li">';
-								echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="'.$k.'">'.$icon.'<span>'.$section['title'].'</span></a>';
+							echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="'.$k.'">'.$icon.'<span>'.$section['title'].'</span></a>';
 							echo '</li>';
 						}
 						
@@ -659,9 +662,8 @@ class NHP_Options{
 						
 						if(true === $this->args['show_import_export']){
 							echo '<li id="import_export_default_section_group_li" class="nhp-opts-group-tab-link-li">';
-									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><img src="'.$this->url.'img/glyphicons/glyphicons_082_roundabout.png" /> <span>'.__('Import / Export', 'nhp-opts').'</span></a>';
+									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><i class="icon-download-alt" /></i> <span>Backup</span></a>';
 							echo '</li>';
-							echo '<li class="divide">&nbsp;</li>';
 						}//if
 						
 						

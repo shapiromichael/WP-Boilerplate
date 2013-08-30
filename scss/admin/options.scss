@@ -192,6 +192,10 @@ border: 1px solid #e5e5e5;
     color: #333333;
     font-weight:bold;
     text-decoration:none;
+    
+    i[class^="icon-"] {
+    	margin-right: 10px;
+    }
 }
 #nhp-opts-sidebar #nhp-opts-group-menu li a.custom-tab{
 	background: #f6f6f6;

@@ -62,9 +62,6 @@ function change_framework_args($args){
 function setup_framework_options(){
 $args = array();
 
-//Set it to dev mode to view the class settings/info in the form - default is false
-$args['dev_mode'] = false;
-
 //google api key MUST BE DEFINED IF YOU WANT TO USE GOOGLE WEBFONTS
 //$args['google_api_key'] = '***';
 
@@ -135,14 +132,14 @@ $sections[] = array(
 				'desc' => __('<p class="description">This is the description field for the Section. HTML is allowed</p>', 'nhp-opts'),
 				//all the glyphicons are included in the options folder, so you can hook into them, or link to your own custom ones.
 				//You dont have to though, leave it blank for default.
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_062_attach.png'
+				// 'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_062_attach.png'
 				//Lets leave this as a blank section, no options just some intro text set above.
 				//'fields' => array()
 				);
 
 				
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_107_text_resize.png',
+				'icon' => 'icon-font',
 				'title' => __('Text Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'nhp-opts'),
 				'fields' => array(
@@ -298,7 +295,7 @@ $sections[] = array(
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_150_check.png',
+				'icon' => 'icon-check',
 				'title' => __('Radio/Checkbox Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -358,7 +355,7 @@ $sections[] = array(
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_157_show_lines.png',
+				'icon' => 'icon-sort',
 				'title' => __('Select Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -383,7 +380,7 @@ $sections[] = array(
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_023_cogwheels.png',
+				'icon' => 'icon-wrench',
 				'title' => __('Custom Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -552,7 +549,7 @@ $sections[] = array(
 				);
 
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_093_crop.png',
+				'icon' => 'icon-info',
 				'title' => __('Non Value Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -591,46 +588,6 @@ $sections[] = array(
 				
 				
 	$tabs = array();
-			
-	if (function_exists('wp_get_theme')){
-		$theme_data = wp_get_theme();
-		$theme_uri = $theme_data->get('ThemeURI');
-		$description = $theme_data->get('Description');
-		$author = $theme_data->get('Author');
-		$version = $theme_data->get('Version');
-		$tags = $theme_data->get('Tags');
-	}else{
-		$theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()).'style.css');
-		$theme_uri = $theme_data['URI'];
-		$description = $theme_data['Description'];
-		$author = $theme_data['Author'];
-		$version = $theme_data['Version'];
-		$tags = $theme_data['Tags'];
-	}	
-
-	$theme_info = '<div class="nhp-opts-section-desc">';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-uri">'.__('<strong>Theme URL:</strong> ', 'nhp-opts').'<a href="'.$theme_uri.'" target="_blank">'.$theme_uri.'</a></p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-author">'.__('<strong>Author:</strong> ', 'nhp-opts').$author.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-version">'.__('<strong>Version:</strong> ', 'nhp-opts').$version.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-description">'.$description.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-tags">'.__('<strong>Tags:</strong> ', 'nhp-opts').implode(', ', $tags).'</p>';
-	$theme_info .= '</div>';
-
-
-
-	$tabs['theme_info'] = array(
-					'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_195_circle_info.png',
-					'title' => __('Theme Information', 'nhp-opts'),
-					'content' => $theme_info
-					);
-	
-	if(file_exists(trailingslashit(get_stylesheet_directory()).'README.html')){
-		$tabs['theme_docs'] = array(
-						'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_071_book.png',
-						'title' => __('Documentation', 'nhp-opts'),
-						'content' => nl2br(file_get_contents(trailingslashit(get_stylesheet_directory()).'README.html'))
-						);
-	}//if
 
 	global $NHP_Options;
 	$NHP_Options = new NHP_Options($sections, $args, $tabs);
