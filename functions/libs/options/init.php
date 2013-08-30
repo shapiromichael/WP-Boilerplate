@@ -295,16 +295,6 @@ class NHP_Options{
 	 * @since NHP_Options 1.0
 	*/
 	function _enqueue(){
-		
-		wp_register_style(
-				'nhp-opts-css', 
-				$this->url.'css/options.css',
-				array('farbtastic'),
-				time(),
-				'all'
-			);
-
-		wp_register_style( 'fontawesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css' );
 			
 		wp_register_style(
 			'nhp-opts-jquery-ui-css',
@@ -316,11 +306,8 @@ class NHP_Options{
 			
 			
 		if(false === $this->args['stylesheet_override']){
-			wp_enqueue_style('nhp-opts-css');
+			wp_enqueue_style('admin-options');
 		}
-
-		
-		wp_enqueue_style('fontawesome');
 
 		
 		wp_enqueue_script(
