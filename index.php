@@ -1,7 +1,7 @@
 <?php
 
 	// Styles
-   wp_enqueue_style('general');
+	wp_enqueue_style('general');
 	
 	get_header();
 	

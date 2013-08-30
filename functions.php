@@ -5,6 +5,7 @@
 
 	// Libs
 	require_once('functions/libs/options/init.php');
+	require_once('functions/admin/options.php');
 	
 	// Theme support
 	require_once('functions/theme.php');
@@ -16,11 +17,9 @@
 		
 		// Libs
 		require_once('functions/libs/metabox/init.php');
-		require_once('functions/libs/metabox/demo.php');
-		require_once('functions/libs/sortlist.php');
-		require_once('functions/admin/options.php');
 		
 		// Metaboxs
+		require_once('functions/libs/metabox/demo.php');
 		
 		// Other
 		require_once('functions/admin/footer.php');
