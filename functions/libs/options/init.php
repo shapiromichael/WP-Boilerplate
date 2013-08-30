@@ -14,9 +14,6 @@ if ( ! class_exists('NHP_Options') ){
 	}
 	
 class NHP_Options{
-	
-	protected $framework_url = 'http://leemason.github.com/NHP-Theme-Options-Framework/';
-	protected $framework_version = '1.0.6';
 		
 	public $dir = NHP_OPTIONS_DIR;
 	public $url = NHP_OPTIONS_URL;
@@ -611,12 +608,12 @@ class NHP_Options{
 		
 		echo '<div class="wrap">';
 			echo '<div id="'.$this->args['page_icon'].'" class="icon32"><br/></div>';
-			echo '<h2 id="nhp-opts-heading">'.get_admin_page_title().'</h2>';
+			echo '<h2 id="options-heading">'.get_admin_page_title().'</h2>';
 			echo (isset($this->args['intro_text']))?$this->args['intro_text']:'';
 			
 			do_action('nhp-opts-page-before-form-'.$this->args['opt_name']);
 
-			echo '<form method="post" action="options.php" enctype="multipart/form-data" id="nhp-opts-form-wrapper">';
+			echo '<form method="post" action="options.php" enctype="multipart/form-data" id="options-form">';
 				settings_fields($this->args['opt_name'].'_group');
 				
 				$this->options['last_tab'] = (isset($_GET['tab']) && !get_transient('nhp-opts-saved'))?$_GET['tab']:$this->options['last_tab'];
