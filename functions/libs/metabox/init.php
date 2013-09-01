@@ -466,8 +466,12 @@ class Metabox {
     if ( $field['name'] != '' || $field['name'] != FALSE ) {
       echo "<div class='at-label'>";
         echo "<label for='{$field['id']}'>{$field['name']}</label>";
+        if ( isset($field['desc']) && $field['desc'] != '' ){
+          echo "<div class='desc-field'>{$field['desc']}</div>";
+        }
       echo "</div>";
     }
+     echo "<div class='at-form'>";
   }
   
   /**
@@ -479,9 +483,11 @@ class Metabox {
    * @access public 
    */
   public function show_field_end( $field, $meta=NULL ,$group = false) {
+    echo "</div>";
     //print description
-    if ( isset($field['desc']) && $field['desc'] != '' )
-      echo "<div class='desc-field'>{$field['desc']}</div>";
+    if ( isset($field['sub-desc']) && $field['sub-desc'] != '' ){
+      echo "<div class='sub-desc-field'>{$field['sub-desc']}</div>";
+    }
     echo "</td>";
   }
   
@@ -717,7 +723,7 @@ class Metabox {
     $multiple     = isset($field['multiple'])? $field['multiple'] : false;
     $multiple     = ($multiple)? "multiFile " : "";
 
-    echo "<span class='simplePanelImagePreview'><img {$PreviewStyle} src='{$value['url']}'><br/></span>";
+    echo "<span class='simplePanelImagePreview'><img {$PreviewStyle} src='{$value['url']}'></span>";
     echo "<input type='hidden' name='{$name}[id]' value='{$value['id']}'/>";
     echo "<input type='hidden' name='{$name}[url]' value='{$value['url']}'/>";
     if ($has_image)
