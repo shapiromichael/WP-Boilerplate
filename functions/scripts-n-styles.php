@@ -53,8 +53,9 @@
 
 	// Dashboard
 	function theme_register_admin_styles() {
-		wp_register_style('admin-general',  CSS_DIR . '/admin/general.css', array(),                             VERSION );
-		wp_register_style('admin-options',  CSS_DIR . '/admin/options.css', array('farbtastic', 'font-awesome'), VERSION );
+		wp_register_style('admin-general',    CSS_DIR . '/admin/general.css',   array(),                             VERSION );
+		wp_register_style('admin-options',    CSS_DIR . '/admin/options.css',   array('farbtastic', 'font-awesome'), VERSION );
+		wp_register_style('admin-metaboxes',  CSS_DIR . '/admin/metaboxes.css', array(),                             VERSION );
 	}
 
 	function theme_register_admin_scripts() {

@@ -124,8 +124,9 @@ class Metabox {
      */
     global $typenow;
     if (in_array($typenow,$this->_meta_box['pages']) && $this->is_edit_page()){
+      
       // Enqueue Meta Box Style
-      wp_enqueue_style( 'at-meta-box', $plugin_path . '/css/meta-box.css' );
+      wp_enqueue_style( 'admin-metaboxes' );
       
       // Enqueue Meta Box Scripts
       wp_enqueue_script( 'at-meta-box', $plugin_path . '/js/meta-box.js', array( 'jquery' ), null, true );
