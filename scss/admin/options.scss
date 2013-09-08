@@ -31,6 +31,86 @@
 		margin-bottom: 0;
 		padding: 0;
 	}
+
+	.icon-remove-sign {
+		@include transition(opacity, .25s);
+		text-decoration: none;
+		font-size: 14px;
+		color: #000;
+		opacity: .5;
+		margin: 5px;
+		line-height: 8px;
+		
+		&:hover {
+			color: #D21D00;
+			opacity: .8;
+		} 
+	}
+	
+	//
+	// Fields
+	//
+
+	// Sort Groups
+	.sort-groups {
+		
+		li {
+			float: left;
+			clear: left;
+			border: 1px solid #DFDFDF;
+			box-shadow: inset 0 1px 0 #FFF;
+			border-radius: 3px;
+			margin-bottom: 5px;
+			width: 450px;
+			
+			.header {
+				@include box-sizing;
+				@include vertical-gradient(#ECECEC,#F9F9F9);
+				border-bottom: 1px solid #DFDFDF;
+				box-shadow: 0 1px 0 #FFF;
+				width: 100%;
+				float: left;
+				clear: left;
+				
+				.group-action {
+					background: rgba(0, 0, 0, 0) url("../../../../../wp-admin/images/arrows.png") no-repeat 4px 6px;
+					display: block;
+					width: 24px;
+					height: 26px;
+					cursor: pointer;
+					float: right;
+					
+					&:hover {
+						background: rgba(0, 0, 0, 0) url("../../../../../wp-admin/images/arrows-dark.png") no-repeat 4px 6px;
+					}
+				}
+				h4 {
+					margin: 0;
+					padding-bottom: .2em;
+					line-height: 1;
+					overflow: hidden;
+					white-space: nowrap;
+					float: left;
+					padding: 8px;
+					width: 410px;
+				}
+			}
+			.form {
+				@include box-sizing;
+				@include vertical-gradient(#F5F5F5,#F9F9F9);
+				width: 100%;
+				padding: 12px 12px 10px;
+				font-size: 12px;
+				line-height: 16px;
+				float: left;
+				clear: left;
+			}
+		}
+	}
+	.nhp-opts-sort-groups-add {
+		float: left;
+		clear: left;
+	}
 }
 
 .nhp-opts-info-field{
@@ -210,8 +290,6 @@
 	width:174px;
 	margin-right:-2px;
 }
-
-
 
 
 

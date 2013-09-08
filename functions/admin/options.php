@@ -154,6 +154,7 @@ $sections[] = array(
 						//'msg' => 'custom error message', //override the default validation error message for specific fields
 						//'std' => '', //This is a default value, used to set the options on theme activation, and if the user hits the Reset to defaults Button
 						//'class' => '' //Set custom classes for elements if you want to do something a little different - default is "regular-text"
+						'placeholder' => 'Watermark'
 						),
 					array(
 						'id' => '2',
@@ -171,6 +172,21 @@ $sections[] = array(
 						'title' => __('Multi Text Option', 'nhp-opts'),
 						'sub_desc' => __('This is a little space under the Field Title in the Options table, additonal info is good in here.', 'nhp-opts'),
 						'desc' => __('This is the description field, again good for additional info.', 'nhp-opts')
+						),
+					array(
+						'id' => 'sort_groups',
+						'type' => 'sort_groups',
+						'title' => __('Sortable Grouped Fields', 'nhp-opts'),
+						'sub_desc' => __('You can add as much instances of those grouped fields as you need.', 'nhp-opts'),
+						'desc' => '',
+						'fields' => array(
+								array(
+									'id' => 'grouped-1',
+									'type' => 'text',
+									'title' => 'Text Field',
+									'desc' => 'This is the description.'
+								)
+							)
 						),
 					array(
 						'id' => '3',

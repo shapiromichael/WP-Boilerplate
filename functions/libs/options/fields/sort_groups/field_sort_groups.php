@@ -30,28 +30,50 @@ class NHP_Options_sort_groups extends NHP_Options{
 		
 		$class = (isset($this->field['class']))?$this->field['class']:'regular-text';
 		
-		echo '<ul id="'.$this->field['id'].'-ul">';
+		echo '<ul id="'.$this->field['id'].'-ul" class="sort-groups">';
 		
 		if(isset($this->value) && is_array($this->value)){
 			foreach($this->value as $k => $value){
 				if($value != ''){
-				
-					echo '<li><input type="text" id="'.$this->field['id'].'-'.$k.'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][]" value="'.esc_attr($value).'" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-multi-text-remove">'.__('Remove', 'nhp-opts').'</a></li>';
+					?>
+					<li>
+						<div class="header">
+							<h4>Title</h4>
+							<a class="group-action hide-if-no-js" href="#available-widgets"></a>
+						</div>
+						<div class="form">
+							
+						</div>
+					</li>
+					<?php
+					// echo '<li><input type="text" id="'.$this->field['id'].'-'.$k.'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][]" value="'.esc_attr($value).'" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-multi-text-remove">'.__('Remove', 'nhp-opts').'</a></li>';
 					
 				}//if
 				
 			}//foreach
 		}else{
-		
-			echo '<li><input type="text" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][]" value="" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-multi-text-remove"><i class="icon-remove-sign"></i></a></li>';
+			
+			?>
+					<li>
+						<div class="header">
+							<h4>Title</h4>
+							<a class="group-action hide-if-no-js" href="#available-widgets"></a>
+						</div>
+						<div class="form">
+							
+						</div>
+					</li>
+					<?php
+
+			// echo '<li><input type="text" id="'.$this->field['id'].'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][]" value="" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-sort-groups-remove"><i class="icon-remove-sign"></i></a></li>';
 		
 		}//if
 		
-		echo '<li style="display:none;"><input type="text" id="'.$this->field['id'].'" name="" value="" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-multi-text-remove"><i class="icon-remove-sign"></i></a></li>';
+		echo '<li style="display:none;"><input type="text" id="'.$this->field['id'].'" name="" value="" class="'.$class.'" /> <a href="javascript:void(0);" class="nhp-opts-sort-groups-remove"><i class="icon-remove-sign"></i></a></li>';
 		
 		echo '</ul>';
 		
-		echo '<a href="javascript:void(0);" class="nhp-opts-multi-text-add button action" rel-id="'.$this->field['id'].'-ul" rel-name="'.$this->args['opt_name'].'['.$this->field['id'].'][]">'.__('Add More', 'nhp-opts').'</a><br/>';
+		echo '<a href="javascript:void(0);" class="nhp-opts-sort-groups-add button action" rel-id="'.$this->field['id'].'-ul" rel-name="'.$this->args['opt_name'].'['.$this->field['id'].'][]">'.__('Add More', 'nhp-opts').'</a><br/>';
 		
 		echo (isset($this->field['desc']) && !empty($this->field['desc']))?' <span class="description">'.$this->field['desc'].'</span>':'';
 		
@@ -69,7 +91,7 @@ class NHP_Options_sort_groups extends NHP_Options{
 		
 		wp_enqueue_script(
 			'nhp-opts-field-sort-groups-js', 
-			NHP_OPTIONS_URL.'fields/multi_text/field_sort_groups.js', 
+			NHP_OPTIONS_URL.'fields/sort_groups/field_sort_groups.js', 
 			array('jquery'),
 			time(),
 			true
