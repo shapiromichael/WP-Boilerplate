@@ -6,7 +6,7 @@
 	get_header();
 	
 	// The content
-	//get_template_part('content/pages/404');
+	get_template_part('views/home');
 	
 	// Scripts
 	wp_enqueue_script('home');

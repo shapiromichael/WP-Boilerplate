@@ -14,9 +14,6 @@ if ( ! class_exists('NHP_Options') ){
 	}
 	
 class NHP_Options{
-	
-	protected $framework_url = 'http://leemason.github.com/NHP-Theme-Options-Framework/';
-	protected $framework_version = '1.0.6';
 		
 	public $dir = NHP_OPTIONS_DIR;
 	public $url = NHP_OPTIONS_URL;
@@ -57,7 +54,7 @@ class NHP_Options{
 		$defaults['allow_sub_menu'] = true;
 		
 		$defaults['show_import_export'] = true;
-		$defaults['dev_mode'] = true;
+		$defaults['dev_mode'] = false;
 		$defaults['stylesheet_override'] = false;
 		
 		$defaults['help_tabs'] = array();
@@ -295,14 +292,6 @@ class NHP_Options{
 	 * @since NHP_Options 1.0
 	*/
 	function _enqueue(){
-		
-		wp_register_style(
-				'nhp-opts-css', 
-				$this->url.'css/options.css',
-				array('farbtastic'),
-				time(),
-				'all'
-			);
 			
 		wp_register_style(
 			'nhp-opts-jquery-ui-css',
@@ -314,9 +303,9 @@ class NHP_Options{
 			
 			
 		if(false === $this->args['stylesheet_override']){
-			wp_enqueue_style('nhp-opts-css');
+			wp_enqueue_style('admin-options');
 		}
-		
+
 		
 		wp_enqueue_script(
 			'nhp-opts-js', 
@@ -619,12 +608,12 @@ class NHP_Options{
 		
 		echo '<div class="wrap">';
 			echo '<div id="'.$this->args['page_icon'].'" class="icon32"><br/></div>';
-			echo '<h2 id="nhp-opts-heading">'.get_admin_page_title().'</h2>';
+			echo '<h2 id="options-heading">'.get_admin_page_title().'</h2>';
 			echo (isset($this->args['intro_text']))?$this->args['intro_text']:'';
 			
 			do_action('nhp-opts-page-before-form-'.$this->args['opt_name']);
 
-			echo '<form method="post" action="options.php" enctype="multipart/form-data" id="nhp-opts-form-wrapper">';
+			echo '<form method="post" action="options.php" enctype="multipart/form-data" id="options-form">';
 				settings_fields($this->args['opt_name'].'_group');
 				
 				$this->options['last_tab'] = (isset($_GET['tab']) && !get_transient('nhp-opts-saved'))?$_GET['tab']:$this->options['last_tab'];
@@ -654,10 +643,13 @@ class NHP_Options{
 				
 				echo '<div id="nhp-opts-sidebar">';
 					echo '<ul id="nhp-opts-group-menu">';
+
 						foreach($this->sections as $k => $section){
-							$icon = (!isset($section['icon']))?'<img src="'.$this->url.'img/glyphicons/glyphicons_019_cogwheel.png" /> ':'<img src="'.$section['icon'].'" /> ';
+
+							$icon = (!isset($section['icon'])) ? '<i class="icon-chevron-right"></i>' : '<i class="'.$section['icon'].'"></i>' ;
+
 							echo '<li id="'.$k.'_section_group_li" class="nhp-opts-group-tab-link-li">';
-								echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="'.$k.'">'.$icon.'<span>'.$section['title'].'</span></a>';
+							echo '<a href="javascript:void(0);" id="'.$k.'_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="'.$k.'">'.$icon.'<span>'.$section['title'].'</span></a>';
 							echo '</li>';
 						}
 						
@@ -667,9 +659,8 @@ class NHP_Options{
 						
 						if(true === $this->args['show_import_export']){
 							echo '<li id="import_export_default_section_group_li" class="nhp-opts-group-tab-link-li">';
-									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><img src="'.$this->url.'img/glyphicons/glyphicons_082_roundabout.png" /> <span>'.__('Import / Export', 'nhp-opts').'</span></a>';
+									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><i class="icon-download-alt" /></i> <span>Backup</span></a>';
 							echo '</li>';
-							echo '<li class="divide">&nbsp;</li>';
 						}//if
 						
 						
