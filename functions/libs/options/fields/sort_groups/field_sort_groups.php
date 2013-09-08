@@ -1,5 +1,5 @@
 <?php
-class NHP_Options_multi_text extends NHP_Options{	
+class NHP_Options_sort_groups extends NHP_Options{	
 	
 	/**
 	 * Field Constructor.
@@ -68,8 +68,8 @@ class NHP_Options_multi_text extends NHP_Options{
 	function enqueue(){
 		
 		wp_enqueue_script(
-			'nhp-opts-field-multi-text-js', 
-			NHP_OPTIONS_URL.'fields/multi_text/field_multi_text.js', 
+			'nhp-opts-field-sort-groups-js', 
+			NHP_OPTIONS_URL.'fields/multi_text/field_sort_groups.js', 
 			array('jquery'),
 			time(),
 			true
