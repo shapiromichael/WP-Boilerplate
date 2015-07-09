@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 		// watch for changes and trigger sass, jshint, uglify and livereload
 		watch: {
 			sass: {
-				files: ['assets/scss/**/*.{scss,sass}'],
+				files: ['assets/scss/*.{scss,sass}', 'assets/scss/**/*.{scss,sass}'],
 				tasks: ['sass', 'autoprefixer', 'cssmin']
 			},
 			js: {
@@ -26,11 +26,11 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				options: {
-					style: 'expanded',
+					style: 'compressed',
 				},
 				files: {
-					'assets/css/build/style.css': 'assets/scss/style.scss',
-					'assets/css/build/editor-style.css': 'assets/scss/editor-style.scss'
+					'assets/css/main.css': 'assets/scss/main.scss',
+					'assets/css/admin/editor.css': 'assets/scss/admin/editor.scss'
 				}
 			}
 		},
@@ -84,10 +84,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'assets/js/plugins.min.js': [
-						'assets/js/source/plugins.js',
-						'assets/js/vendor/navigation.js',
-						'assets/js/vendor/skip-link-focus-fix.js',
-						// 'assets/js/vendor/yourplugin/yourplugin.js',
+						'assets/js/vendor/*.js'
 					]
 				}
 			},
@@ -177,6 +174,6 @@ module.exports = function(grunt) {
 	grunt.renameTask('rsync', 'deploy');
 
 	// register task
-	grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'uglify', 'imagemin', 'browserSync', 'watch']);
+	grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'uglify', 'imagemin', 'watch']);
 
 };
