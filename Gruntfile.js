@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'assets/css/main.css': 'assets/scss/main.scss',
-					'assets/css/admin/editor.css': 'assets/scss/admin/editor.scss'
+					'assets/css/admin.css': 'assets/scss/admin.scss'
 				}
 			}
 		},

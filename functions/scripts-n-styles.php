@@ -6,9 +6,6 @@
 	 */
 	function BP_register_scripts_n_styles() {
 
-		// Libs used on both
-		wp_register_style('font-awesome', CSS_DIR . '/libs/font-awesome.css', array(),           '3.2.1' );
-
 		if( is_admin() ) {
 			BP_register_admin_styles();
 			BP_register_admin_scripts();
@@ -29,31 +26,29 @@
 		wp_register_style('fancybox', CSS_DIR . '/libs/fancybox.css', array(),           '1.3.4' );
 		
 		// Site styles
-		wp_register_style('general',  CSS_DIR . '/general.css',       array('fancybox'), VERSION );
-		wp_register_style('home',     CSS_DIR . '/home.css',          array('general'),  VERSION );
+		wp_register_style('main',  CSS_DIR . '/main.css',       array('fancybox'), VERSION );
 
 		// Dashboard login
-		wp_register_style('login',    CSS_DIR . '/admin/login.css',   array(),           VERSION ); 
+		wp_register_style('admin-login',    CSS_DIR . '/admin/login.css',   array(),           VERSION ); 
 	}
 
 
 	function BP_register_scripts() {
 
 		// Libs
-		wp_register_script('fancybox',  JS_DIR . '/libs/fancybox.js',     array('jquery'),     '1.3.4' );
+		wp_register_script('plugins',  JS_DIR . '/plugins.min.js',        array('jquery'),     VERSION );
 
 		// Site scripts
-		wp_register_script('general',   JS_DIR . '/general.js',           array('fancybox'),   VERSION );
-		wp_register_script('home',      JS_DIR . '/home.js',              array('general'),    VERSION );
+		wp_register_script('main',   JS_DIR . '/main.min.js',             array('jquery', 'plugins'),   VERSION );
 		
 		// Dashboard login
-		wp_register_script('login',     JS_DIR . '/admin/login.js',       array('jquery'),     VERSION );
+		// wp_register_script('admin-login',     JS_DIR . '/admin/login.js',       array('jquery'),     VERSION );
 	}
 
 
 	// Dashboard
 	function BP_register_admin_styles() {
-		wp_register_style('admin-general',    CSS_DIR . '/admin/general.css',   array(),                             VERSION );
+		wp_register_style('admin-main',       CSS_DIR . '/admin.css',   array(),                             VERSION );
 		wp_register_style('admin-options',    CSS_DIR . '/admin/options.css',   array('farbtastic', 'font-awesome'), VERSION );
 		wp_register_style('admin-metaboxes',  CSS_DIR . '/admin/metaboxes.css', array(),                             VERSION );
 	}
@@ -65,7 +60,7 @@
 
 	// TinyMCE styles
 	function BP_editor_style( $styles ) {
-		$styles .= ', ' . CSS_DIR . '/admin/' . 'editor.css';
+		$styles .= ', ' . CSS_DIR . '/admin/editor.css';
 		return $styles;
 	}
 	

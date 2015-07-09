@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width" />
 <?php
 	
-	wp_enqueue_script('modernizr');
+	wp_enqueue_script('plugins');
 	
 	wp_head();
 	
