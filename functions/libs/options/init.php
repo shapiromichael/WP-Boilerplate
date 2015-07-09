@@ -1,25 +1,25 @@
 <?php
-if ( ! class_exists('NHP_Options') ){
+if ( ! class_exists('BP_Options') ){
 	
 	// windows-proof constants: replace backward by forward slashes - thanks to: https://github.com/peterbouwmeester
 	$fslashed_dir = trailingslashit(str_replace('\\','/',dirname(__FILE__)));
 	$fslashed_abs = trailingslashit(str_replace('\\','/',ABSPATH));
 	
-	if(!defined('NHP_OPTIONS_DIR')){
-		define('NHP_OPTIONS_DIR', $fslashed_dir);
+	if(!defined('BP_OPTIONS_DIR')){
+		define('BP_OPTIONS_DIR', $fslashed_dir);
 	}
 	
-	if(!defined('NHP_OPTIONS_URL')){
-		define('NHP_OPTIONS_URL', site_url(str_replace( $fslashed_abs, '', $fslashed_dir )));
+	if(!defined('BP_OPTIONS_URL')){
+		define('BP_OPTIONS_URL', site_url(str_replace( $fslashed_abs, '', $fslashed_dir )));
 	}
 	
-class NHP_Options{
+class BP_Options{
 	
 	protected $framework_url = 'http://leemason.github.com/NHP-Theme-Options-Framework/';
 	protected $framework_version = '1.0.6';
 		
-	public $dir = NHP_OPTIONS_DIR;
-	public $url = NHP_OPTIONS_URL;
+	public $dir = BP_OPTIONS_DIR;
+	public $url = BP_OPTIONS_URL;
 	public $page = '';
 	public $args = array();
 	public $sections = array();
@@ -33,7 +33,7 @@ class NHP_Options{
 	/**
 	 * Class Constructor. Defines the args for the theme options class
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	 *
 	 * @param $array $args Arguments. Class constructor arguments.
 	*/
@@ -100,7 +100,7 @@ class NHP_Options{
 	/**
 	 * ->get(); This is used to return and option value from the options array
 	 *
-	 * @since NHP_Options 1.0.1
+	 * @since BP_Options 1.0.1
 	 *
 	 * @param $array $args Arguments. Class constructor arguments.
 	*/
@@ -111,7 +111,7 @@ class NHP_Options{
 	/**
 	 * ->set(); This is used to set an arbitrary option in the options array
 	 *
-	 * @since NHP_Options 1.0.1
+	 * @since BP_Options 1.0.1
 	 * 
 	 * @param string $opt_name the name of the option being added
 	 * @param mixed $value the value of the option being added
@@ -126,7 +126,7 @@ class NHP_Options{
 	/**
 	 * ->show(); This is used to echo and option value from the options array
 	 *
-	 * @since NHP_Options 1.0.1
+	 * @since BP_Options 1.0.1
 	 *
 	 * @param $array $args Arguments. Class constructor arguments.
 	*/
@@ -144,7 +144,7 @@ class NHP_Options{
 	/**
 	 * Get default options into an array suitable for the settings API
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	 *
 	*/
 	function _default_values(){
@@ -179,7 +179,7 @@ class NHP_Options{
 	/**
 	 * Set default options on admin_init if option doesnt exist (theme activation hook caused problems, so admin_init it is)
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	 *
 	*/
 	function _set_default_options(){
@@ -193,7 +193,7 @@ class NHP_Options{
 	/**
 	 * Class Theme Options Page Function, creates main options page.
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _options_page(){
 		if($this->args['page_type'] == 'submenu'){
@@ -292,7 +292,7 @@ class NHP_Options{
 	/**
 	 * enqueue styles/js for theme page
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _enqueue(){
 		
@@ -338,7 +338,7 @@ class NHP_Options{
 					
 					if(isset($field['type'])){
 					
-						$field_class = 'NHP_Options_'.$field['type'];
+						$field_class = 'BP_Options_'.$field['type'];
 						
 						if(!class_exists($field_class)){
 							require_once($this->dir.'fields/'.$field['type'].'/field_'.$field['type'].'.php');
@@ -363,7 +363,7 @@ class NHP_Options{
 	/**
 	 * Download the options file, or display it
 	 *
-	 * @since NHP_Options 1.0.1
+	 * @since BP_Options 1.0.1
 	*/
 	function _download_options(){
 		//-'.$this->args['opt_name']
@@ -396,7 +396,7 @@ class NHP_Options{
 	/**
 	 * show page help
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _load_page(){
 		
@@ -423,7 +423,7 @@ class NHP_Options{
 	/**
 	 * do action nhp-opts-admin-head for theme options page
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function admin_head(){
 		
@@ -436,7 +436,7 @@ class NHP_Options{
 	/**
 	 * Register Option for use
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _register_setting(){
 		
@@ -474,7 +474,7 @@ class NHP_Options{
 	/**
 	 * Validate the Options options before insertion
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _validate_options($plugin_options){
 		
@@ -534,7 +534,7 @@ class NHP_Options{
 	 * Validate values from options form (used in settings api validate function)
 	 * calls the custom validation class for the field so authors can override with custom classes
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _validate_values($plugin_options, $options){
 		foreach($this->sections as $k => $section){
@@ -561,7 +561,7 @@ class NHP_Options{
 					}//if
 	
 					if(isset($field['validate'])){
-						$validate = 'NHP_Validation_'.$field['validate'];
+						$validate = 'BP_Validation_'.$field['validate'];
 						
 						if(!class_exists($validate)){
 							require_once($this->dir.'validation/'.$field['validate'].'/validation_'.$field['validate'].'.php');
@@ -613,7 +613,7 @@ class NHP_Options{
 	/**
 	 * HTML OUTPUT.
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _options_page_html(){
 		
@@ -803,7 +803,7 @@ class NHP_Options{
 	/**
 	 * JS to display the errors on the page
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/	
 	function _errors_js(){
 		
@@ -841,7 +841,7 @@ class NHP_Options{
 	/**
 	 * JS to display the warnings on the page
 	 *
-	 * @since NHP_Options 1.0.3
+	 * @since BP_Options 1.0.3
 	*/	
 	function _warnings_js(){
 		
@@ -881,7 +881,7 @@ class NHP_Options{
 	/**
 	 * Section HTML OUTPUT.
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/	
 	function _section_desc($section){
 		
@@ -901,7 +901,7 @@ class NHP_Options{
 	 *
 	 * Gets option from options array, then calls the speicfic field type class - allows extending by other devs
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function _field_input($field){
 		
@@ -916,7 +916,7 @@ class NHP_Options{
 		
 		if(isset($field['type'])){
 			
-			$field_class = 'NHP_Options_'.$field['type'];
+			$field_class = 'BP_Options_'.$field['type'];
 			
 			if(class_exists($field_class)){
 				require_once($this->dir.'fields/'.$field['type'].'/field_'.$field['type'].'.php');

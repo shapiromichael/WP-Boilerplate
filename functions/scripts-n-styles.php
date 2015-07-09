@@ -4,27 +4,27 @@
  *	Registering all scripts and styles fot this theme.
  *	Will automatically register minified or expanded styles
  */
-function theme_register_scripts_n_styles() {
+function BP_register_scripts_n_styles() {
 
 	if( is_admin() ) {
 
-		theme_register_admin_styles();
-		theme_register_admin_scripts();
-		add_filter( 'mce_css', 'theme_editor_style' );
+		BP_register_admin_styles();
+		BP_register_admin_scripts();
+		add_filter( 'mce_css', 'BP_editor_style' );
 
 	}else{
 
-		theme_register_styles();
-		theme_register_scripts();
+		BP_register_styles();
+		BP_register_scripts();
 
 	}
 	
 }
-add_action( 'init', 'theme_register_scripts_n_styles' );
+add_action( 'init', 'BP_register_scripts_n_styles' );
 
 
 // Website
-function theme_register_styles() {
+function BP_register_styles() {
 
 	// Already Minified files
 	wp_register_style('fancybox', CSS_DIR . '/libs/fancybox.css' );
@@ -39,7 +39,7 @@ function theme_register_styles() {
 }
 
 
-function theme_register_scripts() {
+function BP_register_scripts() {
 
 	wp_register_script('jq',        JS_DIR . '/libs/jquery.js',       array(),                true );
 	wp_register_script('modernizr', JS_DIR . '/libs/modernizr.js',    array(),                true );
@@ -54,17 +54,17 @@ function theme_register_scripts() {
 
 
 // Dashboard
-function theme_register_admin_styles() {
+function BP_register_admin_styles() {
 	wp_register_style('admin-general',  CSS_DIR . '/admin/general.css' );
 }
 
-function theme_register_admin_scripts() {
+function BP_register_admin_scripts() {
 
 }
 
 
 // TinyMCE styles
-function theme_editor_style( $styles ) {
+function BP_editor_style( $styles ) {
 	$styles .= ', ' . CSS_DIR . '/admin/' . 'editor.css';
 	return $styles;
 }

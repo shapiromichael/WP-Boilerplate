@@ -1,12 +1,12 @@
 <?php
-class NHP_Options_button_set extends NHP_Options{	
+class BP_Options_button_set extends BP_Options{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
@@ -24,7 +24,7 @@ class NHP_Options_button_set extends NHP_Options{
 	 *
 	 * Takes the vars and outputs the HTML for the field in the settings
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function render(){
 		
@@ -52,7 +52,7 @@ class NHP_Options_button_set extends NHP_Options{
 	 *
 	 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function enqueue(){
 		
@@ -60,7 +60,7 @@ class NHP_Options_button_set extends NHP_Options{
 
 		wp_enqueue_script(
 			'nhp-opts-field-button_set-js', 
-			NHP_OPTIONS_URL.'fields/button_set/field_button_set.js', 
+			BP_OPTIONS_URL.'fields/button_set/field_button_set.js', 
 			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog'),
 			time(),
 			true

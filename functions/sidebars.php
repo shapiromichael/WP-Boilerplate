@@ -1,6 +1,6 @@
 <?php
 
-	function theme_sidebars(){
+	function BP_sidebars(){
 		
 		// Default sidebar
 		register_sidebar(
@@ -16,4 +16,4 @@
 		);
 		
 	}
-	add_action('widgets_init','theme_sidebars');
+	add_action('widgets_init','BP_sidebars');

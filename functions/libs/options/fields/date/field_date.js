@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
 	
 	/*
 	 *
-	 * NHP_Options_date function
+	 * BP_Options_date function
 	 * Adds datepicker js
 	 *
 	 */

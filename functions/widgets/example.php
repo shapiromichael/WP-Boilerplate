@@ -1,6 +1,6 @@
 <?php
 
-class Theme_Example_Widget extends WP_Widget {
+class BP_Example_Widget extends WP_Widget {
 	
 	// Constructor
 	function __construct() {
@@ -42,4 +42,4 @@ class Theme_Example_Widget extends WP_Widget {
 	}
 
 }
-register_widget('Theme_Example_Widget');
+register_widget('BP_Example_Widget');

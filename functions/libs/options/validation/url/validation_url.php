@@ -1,12 +1,12 @@
 <?php
-class NHP_Validation_url extends NHP_Options{	
+class BP_Validation_url extends BP_Options{	
 	
 	/**
 	 * Field Constructor.
 	 *
 	 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function __construct($field, $value, $current){
 		
@@ -26,7 +26,7 @@ class NHP_Validation_url extends NHP_Options{
 	 *
 	 * Takes the vars and validates them
 	 *
-	 * @since NHP_Options 1.0
+	 * @since BP_Options 1.0
 	*/
 	function validate(){
 		

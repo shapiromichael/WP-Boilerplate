@@ -1,7 +1,7 @@
 <?php
 	
 	/* 
-	 *  The theme prefix is: "theme_", you can global find & replace that to whatever feels right
+	 *  The theme prefix is: "BP_", you can global find & replace that to whatever feels right
 	 */
 
 	define('DIR', get_bloginfo('template_url') );

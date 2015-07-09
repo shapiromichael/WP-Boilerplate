@@ -1,7 +1,7 @@
 <?php
 	
 	// Disable unsupported widgets
-	function theme_unregister_widgets() {
+	function BP_unregister_widgets() {
 		
 		unregister_widget('WP_Widget_Meta');
 		//unregister_widget('WP_Widget_Calendar');
@@ -17,5 +17,5 @@
 		//unregister_widget( 'WP_Widget_Text' );
 		
 	}
-	add_action('widgets_init','theme_unregister_widgets', 1);
+	add_action('widgets_init','BP_unregister_widgets', 1);
 	

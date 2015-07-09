@@ -135,14 +135,14 @@ $sections[] = array(
 				'desc' => __('<p class="description">This is the description field for the Section. HTML is allowed</p>', 'nhp-opts'),
 				//all the glyphicons are included in the options folder, so you can hook into them, or link to your own custom ones.
 				//You dont have to though, leave it blank for default.
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_062_attach.png'
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_062_attach.png'
 				//Lets leave this as a blank section, no options just some intro text set above.
 				//'fields' => array()
 				);
 
 				
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_107_text_resize.png',
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_107_text_resize.png',
 				'title' => __('Text Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed2</p>', 'nhp-opts'),
 				'fields' => array(
@@ -298,7 +298,7 @@ $sections[] = array(
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_150_check.png',
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_150_check.png',
 				'title' => __('Radio/Checkbox Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -349,16 +349,16 @@ $sections[] = array(
 						'sub_desc' => __('No validation can be done on this field type', 'nhp-opts'),
 						'desc' => __('This uses some of the built in images, you can use them for layout options.', 'nhp-opts'),
 						'options' => array(
-										'1' => array('title' => '1 Column', 'img' => NHP_OPTIONS_URL.'img/1col.png'),
-										'2' => array('title' => '2 Column Left', 'img' => NHP_OPTIONS_URL.'img/2cl.png'),
-										'3' => array('title' => '2 Column Right', 'img' => NHP_OPTIONS_URL.'img/2cr.png')
+										'1' => array('title' => '1 Column', 'img' => BP_OPTIONS_URL.'img/1col.png'),
+										'2' => array('title' => '2 Column Left', 'img' => BP_OPTIONS_URL.'img/2cl.png'),
+										'3' => array('title' => '2 Column Right', 'img' => BP_OPTIONS_URL.'img/2cr.png')
 											),//Must provide key => value(array:title|img) pairs for radio options
 						'std' => '2'
 						)																		
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_157_show_lines.png',
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_157_show_lines.png',
 				'title' => __('Select Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -383,7 +383,7 @@ $sections[] = array(
 					)
 				);
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_023_cogwheels.png',
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_023_cogwheels.png',
 				'title' => __('Custom Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -552,7 +552,7 @@ $sections[] = array(
 				);
 
 $sections[] = array(
-				'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_093_crop.png',
+				'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_093_crop.png',
 				'title' => __('Non Value Fields', 'nhp-opts'),
 				'desc' => __('<p class="description">This is the Description. Again HTML is allowed</p>', 'nhp-opts'),
 				'fields' => array(
@@ -619,21 +619,21 @@ $sections[] = array(
 
 
 	$tabs['theme_info'] = array(
-					'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_195_circle_info.png',
+					'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_195_circle_info.png',
 					'title' => __('Theme Information', 'nhp-opts'),
 					'content' => $theme_info
 					);
 	
 	if(file_exists(trailingslashit(get_stylesheet_directory()).'README.html')){
 		$tabs['theme_docs'] = array(
-						'icon' => NHP_OPTIONS_URL.'img/glyphicons/glyphicons_071_book.png',
+						'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_071_book.png',
 						'title' => __('Documentation', 'nhp-opts'),
 						'content' => nl2br(file_get_contents(trailingslashit(get_stylesheet_directory()).'README.html'))
 						);
 	}//if
 
-	global $NHP_Options;
-	$NHP_Options = new NHP_Options($sections, $args, $tabs);
+	global $BP_Options;
+	$BP_Options = new BP_Options($sections, $args, $tabs);
 
 }//function
 add_action('init', 'setup_framework_options', 0);

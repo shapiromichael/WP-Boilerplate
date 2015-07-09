@@ -1,15 +1,15 @@
 <?php
 	
-	function theme_register_posttype(){
+	function BP_register_posttype(){
 		
-		theme_register_posttype_example();
+		BP_register_posttype_example();
 		
 	}
-	add_action('init','theme_register_posttype');
+	add_action('init','BP_register_posttype');
 	
 	
 	// Register example post type
-	function theme_register_posttype_example(){
+	function BP_register_posttype_example(){
 		
 		$labels = array(
 			'name'               => 'Example',

@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
 	
 	/*
 	 *
-	 * NHP_Options_color function
+	 * BP_Options_color function
 	 * Adds farbtastic to color elements
 	 *
 	 */

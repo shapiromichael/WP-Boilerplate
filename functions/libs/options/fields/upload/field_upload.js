@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
 	
 	/*
 	 *
-	 * NHP_Options_upload function
+	 * BP_Options_upload function
 	 * Adds media upload functionality to the page
 	 *
 	 */
