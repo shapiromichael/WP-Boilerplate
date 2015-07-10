@@ -1,21 +1,26 @@
+@import "../variables";
 @import "../functions";
 
 @charset "utf-8";
 
 //
 // Login screen
-//
-body.login {
+html {
+	background-color: $color-white;
+
+	body.login {
 	
-	background: #E9E9E9;
+		background: $color-white url($admin-images + "background.svg") no-repeat center top;
+		background-size: contain;
 
-	#login h1 a {
-		width: 327px;
-		height: 54px;
-		background: url($admin-images + "logo.png") no-repeat; 
-	}
+		#login h1 a {
+			width: 314px;
+			height: 65px;
+			background: url($admin-images + "logo.png") no-repeat; 
+		}
 
-	#backtoblog {
-		display: none;
+		#backtoblog {
+			display: none;
+		}
 	}
 }

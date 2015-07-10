@@ -19,7 +19,7 @@
 	function BP_login_screen() {
 
 		wp_enqueue_script('login');
-		wp_enqueue_style('login');
+		wp_enqueue_style('admin-login');
 		
 		?>
 			<link rel="icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
