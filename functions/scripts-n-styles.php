@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 	/*
 	 *	Registering all scripts and styles fot this theme.
@@ -10,7 +10,6 @@
 			BP_register_admin_styles();
 			BP_register_admin_scripts();
 			add_filter( 'mce_css', 'BP_editor_style' );
-
 		}else{
 			BP_register_styles();
 			BP_register_scripts();
@@ -33,10 +32,10 @@
 	function BP_register_scripts() {
 
 		// Libs
-		wp_register_script('plugins', JS_DIR . '/plugins.min.js', array('jquery'),            VERSION );
+		wp_register_script('plugins', JS_DIR . '/plugins.min.js', array(),            VERSION );
 
 		// Site scripts
-		wp_register_script('main',    JS_DIR . '/main.min.js',    array('jquery', 'plugins'), VERSION );
+		wp_register_script('main',    JS_DIR . '/main.min.js',    array('plugins'), VERSION );
 		
 		// Dashboard login
 		// wp_register_script('admin-login',     JS_DIR . '/admin/login.js',       array('jquery'),     VERSION );

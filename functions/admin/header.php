@@ -7,8 +7,8 @@
 		wp_enqueue_style(  array('admin-general', 'admin-options', 'colorpicker') );
 
 		?>
-			<link rel="icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
 		<?php	
 
 	}
@@ -17,13 +17,12 @@
 
 	// Tweaking the login screen
 	function BP_login_screen() {
-
-		wp_enqueue_script('login');
+		
 		wp_enqueue_style('admin-login');
 		
 		?>
-			<link rel="icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo DIR; ?>/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
 		<?php
 	}
 	add_action('login_head','BP_login_screen');
