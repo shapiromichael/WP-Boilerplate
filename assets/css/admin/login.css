@@ -1,2 +1,2 @@
-html{background-color:#FFF}html body.login{background:#FFF url("../../images/admin/background.svg") no-repeat center top;background-size:contain}html body.login #login h1 a{width:314px;height:65px;background:url("../../images/admin/logo.png") no-repeat}html body.login #backtoblog{display:none}
+html{background-color:#FFF}html body.login{background:#FFF url("../../images/admin/background.svg") no-repeat center top;background-size:contain}html body.login #login h1 a{width:314px;height:65px;background:url("../../images/admin/logo.png") no-repeat}html body.login #backtoblog{display:none}html body.login.interim-login #login{padding:20px 5px 5px;margin:5px auto 0 auto}
 /*# sourceMappingURL=login.css.map */
