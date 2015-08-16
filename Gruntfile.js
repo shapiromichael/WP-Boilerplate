@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 		// Watch for changes and trigger sass, jshint, uglify and livereload
 		watch: {
 			sass: {
-				files: ['assets/scss/*.{scss,sass}', 'assets/scss/**/*.{scss,sass}'],
+				files: ['assets/scss/*.{scss,sass}', 'assets/scss/**/*.{scss,sass}', 'functions/libs/options/scss/options.scss'],
 				tasks: ['sass']
 			},
 			js: {
@@ -33,7 +33,8 @@ module.exports = function(grunt) {
 					'assets/css/vendor.css': 'assets/scss/vendor.scss',
 					'assets/css/admin.css': 'assets/scss/admin.scss',
 					'assets/css/admin/editor.css': 'assets/scss/admin/editor.scss',
-					'assets/css/admin/login.css': 'assets/scss/admin/login.scss'
+					'assets/css/admin/login.css': 'assets/scss/admin/login.scss',
+					'functions/libs/options/css/options.css': 'functions/libs/options/scss/options.scss'
 				}
 			}
 		},
@@ -73,6 +74,13 @@ module.exports = function(grunt) {
 				files: {
 					'assets/js/main.min.js': [
 						'assets/js/source/main.js'
+					]
+				}
+			},
+			admin: {
+				files: {
+					'functions/libs/options/js/options.min.js': [
+						'functions/libs/options/js/options.js'
 					]
 				}
 			}

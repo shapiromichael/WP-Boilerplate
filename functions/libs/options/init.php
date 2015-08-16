@@ -45,7 +45,7 @@ class BP_Options{
 		
 		$defaults['google_api_key'] = '';//must be defined for use with google webfonts field type
 		
-		$defaults['menu_icon'] = get_bloginfo('template_url') . '/images/admin/pixel.png';
+		$defaults['menu_icon'] = PATH . '/assets/images/admin/pixel.png';
 		$defaults['menu_title'] = __('Options', 'nhp-opts');
 		$defaults['page_icon'] = 'icon-options';
 		$defaults['page_title'] = __('Options', 'nhp-opts');
@@ -669,11 +669,7 @@ class BP_Options{
 							echo '<li id="import_export_default_section_group_li" class="nhp-opts-group-tab-link-li">';
 									echo '<a href="javascript:void(0);" id="import_export_default_section_group_li_a" class="nhp-opts-group-tab-link-a" data-rel="import_export_default"><img src="'.$this->url.'img/glyphicons/glyphicons_082_roundabout.png" /> <span>'.__('Import / Export', 'nhp-opts').'</span></a>';
 							echo '</li>';
-							echo '<li class="divide">&nbsp;</li>';
-						}//if
-						
-						
-						
+						}
 						
 						
 						foreach($this->extra_tabs as $k => $tab){

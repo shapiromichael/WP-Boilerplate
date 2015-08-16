@@ -1,5 +1,6 @@
 (function($){
 	
+	var _transition_speed = 0;
 	
 	if($('#last_tab').val() == ''){
 
@@ -28,9 +29,9 @@
 		
 		$('.nhp-opts-group-tab').each(function(){
 			if($(this).attr('id') == relid+'_section_group'){
-				$(this).delay(400).fadeIn(1200);
+				$(this).delay(_transition_speed).fadeIn(_transition_speed);
 			}else{
-				$(this).fadeOut('fast');
+				$(this).fadeOut(_transition_speed);
 			}
 			
 		});
@@ -49,11 +50,11 @@
 	
 	
 	if($('#nhp-opts-save').is(':visible')){
-		$('#nhp-opts-save').delay(4000).slideUp('slow');
+		$('#nhp-opts-save').delay(2000).slideUp('slow');
 	}
 	
 	if($('#nhp-opts-imported').is(':visible')){
-		$('#nhp-opts-imported').delay(4000).slideUp('slow');
+		$('#nhp-opts-imported').delay(2000).slideUp('slow');
 	}	
 	
 	$('input, textarea, select').change(function(){
@@ -63,30 +64,30 @@
 	
 	$('#nhp-opts-import-code-button').click(function(){
 		if($('#nhp-opts-import-link-wrapper').is(':visible')){
-			$('#nhp-opts-import-link-wrapper').fadeOut('fast');
+			$('#nhp-opts-import-link-wrapper').fadeOut(_transition_speed);
 			$('#import-link-value').val('');
 		}
-		$('#nhp-opts-import-code-wrapper').fadeIn('slow');
+		$('#nhp-opts-import-code-wrapper').fadeIn(_transition_speed);
 	});
 	
 	$('#nhp-opts-import-link-button').click(function(){
 		if($('#nhp-opts-import-code-wrapper').is(':visible')){
-			$('#nhp-opts-import-code-wrapper').fadeOut('fast');
+			$('#nhp-opts-import-code-wrapper').fadeOut(_transition_speed);
 			$('#import-code-value').val('');
 		}
-		$('#nhp-opts-import-link-wrapper').fadeIn('slow');
+		$('#nhp-opts-import-link-wrapper').fadeIn(_transition_speed);
 	});
 	
 	
 	
 	
 	$('#nhp-opts-export-code-copy').click(function(){
-		if($('#nhp-opts-export-link-value').is(':visible')){$('#nhp-opts-export-link-value').fadeOut('slow');}
+		if($('#nhp-opts-export-link-value').is(':visible')){$('#nhp-opts-export-link-value').fadeOut(_transition_speed);}
 		$('#nhp-opts-export-code').toggle('fade');
 	});
 	
 	$('#nhp-opts-export-link').click(function(){
-		if($('#nhp-opts-export-code').is(':visible')){$('#nhp-opts-export-code').fadeOut('slow');}
+		if($('#nhp-opts-export-code').is(':visible')){$('#nhp-opts-export-code').fadeOut(_transition_speed);}
 		$('#nhp-opts-export-link-value').toggle('fade');
 	});
 	

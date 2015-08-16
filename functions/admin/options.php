@@ -591,46 +591,6 @@ $sections[] = array(
 				
 				
 	$tabs = array();
-			
-	if (function_exists('wp_get_theme')){
-		$theme_data = wp_get_theme();
-		$theme_uri = $theme_data->get('ThemeURI');
-		$description = $theme_data->get('Description');
-		$author = $theme_data->get('Author');
-		$version = $theme_data->get('Version');
-		$tags = $theme_data->get('Tags');
-	}else{
-		$theme_data = get_theme_data(trailingslashit(get_stylesheet_directory()).'style.css');
-		$theme_uri = $theme_data['URI'];
-		$description = $theme_data['Description'];
-		$author = $theme_data['Author'];
-		$version = $theme_data['Version'];
-		$tags = $theme_data['Tags'];
-	}	
-
-	$theme_info = '<div class="nhp-opts-section-desc">';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-uri">'.__('<strong>Theme URL:</strong> ', 'nhp-opts').'<a href="'.$theme_uri.'" target="_blank">'.$theme_uri.'</a></p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-author">'.__('<strong>Author:</strong> ', 'nhp-opts').$author.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-version">'.__('<strong>Version:</strong> ', 'nhp-opts').$version.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-description">'.$description.'</p>';
-	$theme_info .= '<p class="nhp-opts-theme-data description theme-tags">'.__('<strong>Tags:</strong> ', 'nhp-opts').implode(', ', $tags).'</p>';
-	$theme_info .= '</div>';
-
-
-
-	$tabs['theme_info'] = array(
-					'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_195_circle_info.png',
-					'title' => __('Theme Information', 'nhp-opts'),
-					'content' => $theme_info
-					);
-	
-	if(file_exists(trailingslashit(get_stylesheet_directory()).'README.html')){
-		$tabs['theme_docs'] = array(
-						'icon' => BP_OPTIONS_URL.'img/glyphicons/glyphicons_071_book.png',
-						'title' => __('Documentation', 'nhp-opts'),
-						'content' => nl2br(file_get_contents(trailingslashit(get_stylesheet_directory()).'README.html'))
-						);
-	}//if
 
 	global $BP_Options;
 	$BP_Options = new BP_Options($sections, $args, $tabs);
