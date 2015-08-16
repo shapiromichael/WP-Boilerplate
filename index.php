@@ -1,7 +1,4 @@
 <?php
-
-	// Styles
-	wp_enqueue_style('main');
 	
 	get_header();
 	
