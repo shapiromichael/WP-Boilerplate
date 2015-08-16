@@ -1,2 +1,2 @@
-a{outline:none}body{font-family:"roboto",Arial,Helvetica,sans-serif;color:#000}.layout{margin:0 auto}section{float:left;clear:left;width:100%}header .navbar-brand>img{display:inline-block;margin-right:10px}.input-group .form-control{height:33px}
+a{outline:none}body{font-family:"roboto",Arial,Helvetica,sans-serif;color:#000}.layout{margin:0 auto}section{float:left;clear:left;width:100%}header .navbar-fixed-top{top:auto}header .navbar-brand>img{display:inline-block;margin-right:10px}footer{position:absolute;bottom:0;width:100%;background-color:#F5F5F5;padding:20px 0}footer p{margin:0}.input-group .form-control{height:33px}
 /*# sourceMappingURL=main.css.map */

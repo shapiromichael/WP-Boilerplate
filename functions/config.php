@@ -24,3 +24,8 @@
 	define('ABS_DIR', get_template_directory());
 	define('VIEWS_DIR', 'views' );
 	define('PARTIALS_DIR', VIEWS_DIR . '/partials');
+
+	define('GA_ACCOUNT', '');
+
+	
+

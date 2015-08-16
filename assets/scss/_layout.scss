@@ -17,6 +17,10 @@ section {
 // Header
 header {
 	
+	.navbar-fixed-top {
+		top: auto;
+	}
+	
 	.navbar-brand {
 		& > img {
 			display: inline-block;
@@ -28,7 +32,15 @@ header {
 //
 // Footer
 footer {
-	
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #F5F5F5;
+	padding: 20px 0;
+
+	p {
+		margin: 0;
+	}
 }
 
 // Fixes

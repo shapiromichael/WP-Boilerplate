@@ -1,22 +1,20 @@
-	<div id="footer">
-		<div class="rights">
-			<p>&copy; <?php echo date('Y'); ?>. All Rights Reserved.</p>
+	<footer>
+		<div class="container rights">
+			<p class="text-muted rights">&copy; <?php echo date('Y'); ?>. All Rights Reserved.</p>
 		</div>
-	</div>
+	</footer>
 	<?php
 	
-		if( $ga_account = get_option('ga_account') ){
+		if( GA_ACCOUNT ){
 			?>
 			<script>
-				var _gaq=[['_setAccount','<?php echo $ga_account; ?>'],['_trackPageview']];
+				var _gaq=[['_setAccount','<?php echo GA_ACCOUNT ?>'],['_trackPageview']];
 				(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 				g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 				s.parentNode.insertBefore(g,s)}(document,'script'));
 			</script>
 			<?php
 		}
-		
-		if( WP_DEBUG ){ echo '<!-- #footer -->'; }
 		
 		wp_footer();
 		
