@@ -7,8 +7,8 @@
 		wp_enqueue_style(  array('admin-general', 'admin-options', 'colorpicker') );
 
 		?>
-			<link rel="icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo PATH; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo PATH; ?>/assets/images/icon.ico" type="image/x-icon">
 		<?php	
 
 	}
@@ -21,8 +21,8 @@
 		wp_enqueue_style('admin-login');
 		
 		?>
-			<link rel="icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
-			<link rel="shortcut icon" href="<?php echo DIR; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="icon" href="<?php echo PATH; ?>/assets/images/icon.ico" type="image/x-icon">
+			<link rel="shortcut icon" href="<?php echo PATH; ?>/assets/images/icon.ico" type="image/x-icon">
 		<?php
 	}
 	add_action('login_head','BP_login_screen');
