@@ -92,7 +92,7 @@ class Metabox {
     $this->_fields = $this->_meta_box['fields'];
     $this->_Local_images = (isset($meta_box['local_images'])) ? true : false;
     $this->add_missed_values();
-    $this->SelfPath = DIR . "/functions/libs/metabox";
+    $this->SelfPath = PATH . "/functions/libs/metabox";
     
     // Add metaboxes
     add_action( 'add_meta_boxes', array( $this, 'add' ) );

@@ -1,0 +1,37 @@
+//
+// Page layout
+body {
+	@include font;
+	color: $font-color;
+}
+
+.layout {
+	margin: 0 auto;
+}
+
+section {
+	@include section;
+}
+
+//
+// Header
+header {
+	
+	.navbar-brand {
+		& > img {
+			display: inline-block;
+			margin-right: 10px;
+		}
+	}
+}
+
+//
+// Footer
+footer {
+	
+}
+
+// Fixes
+.input-group .form-control {
+	height: 33px;
+}

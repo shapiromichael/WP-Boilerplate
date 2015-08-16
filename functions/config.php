@@ -14,6 +14,12 @@
 	}
 	define('VERSION', $theme_version );
 
-	define('DIR', get_bloginfo('template_url') );
-	define('CSS_DIR', DIR . '/assets/css' );
-	define('JS_DIR',  DIR . '/assets/js' );
+	define('DEBUG', WP_DEBUG );
+
+	define('PATH', get_bloginfo('template_url'));
+	define('CSS_PATH', PATH . '/assets/css');
+	define('JS_PATH',  PATH . '/assets/js');
+	define('UI_PATH',  PATH . '/assets/images/ui');
+	define('ABS_DIR', get_template_directory());
+	define('VIEWS_DIR', 'views' );
+	define('PARTIALS_DIR', VIEWS_DIR . '/partials');

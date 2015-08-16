@@ -6,9 +6,11 @@ $fonts: "../../fonts/";
 $default_fonts: "roboto", Arial, Helvetica, sans-serif;
 
 // Colors
+$color-primary: #005EFF;
+$color-secondary: #FF00FB;
 $color-white: #FFF;
 
-$font-color: #333;
+$font-color: #000;
 
 $links-normal-color: #82AF47;
 $links-hover-color: lighten( $links-normal-color, 25% );

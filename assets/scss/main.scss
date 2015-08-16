@@ -5,31 +5,5 @@
 
 @import "fonts";
 @import "content";
+@import "layout";
 
-//
-// Page layout
-//
-body {
-	@include font;
-	color: $font-color;
-}
-.layout {
-	margin: 0 auto;
-}
-section {
-	@include section;
-}
-
-//
-// Header
-//
-header {
-	
-}
-
-//
-// Footer
-//
-footer {
-	
-}
