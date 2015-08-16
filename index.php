@@ -8,7 +8,4 @@
 		//get_template_part('content/loop/posts');
 	}
 	
-	// Scripts
-	wp_enqueue_script('main');
-	
 	get_footer();

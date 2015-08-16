@@ -15,6 +15,8 @@
 			</script>
 			<?php
 		}
+
+		wp_enqueue_script('main');
 		
 		wp_footer();
 		

@@ -16,9 +16,11 @@ section {
 //
 // Header
 header {
-	
-	.navbar-fixed-top {
-		top: auto;
+	@include section;
+
+	.navbar {
+		border-width: 0 0 1px;
+		border-radius: 0;
 	}
 	
 	.navbar-brand {
@@ -32,6 +34,7 @@ header {
 //
 // Footer
 footer {
+	@include section;
 	position: absolute;
 	bottom: 0;
 	width: 100%;

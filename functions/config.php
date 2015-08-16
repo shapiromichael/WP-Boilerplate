@@ -16,7 +16,6 @@
 
 	define('DEBUG', WP_DEBUG );
 
-	define('HOME', get_bloginfo('url'));
 	define('PATH', get_bloginfo('template_url'));
 	define('CSS_PATH', PATH . '/assets/css');
 	define('JS_PATH',  PATH . '/assets/js');

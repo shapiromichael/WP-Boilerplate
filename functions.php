@@ -5,9 +5,13 @@
 
 	// Libs
 	require_once('functions/libs/options/init.php');
+	require_once('functions/libs/wp_bootstrap_navwalker.php');
 	
 	// Theme support
 	require_once('functions/theme.php');
+
+	// Menus
+	require_once('functions/menus.php');
 	
 	// Admin header section
 	require_once('functions/admin/header.php'); // This should be outside is_admin() because of the login screen
