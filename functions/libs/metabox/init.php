@@ -680,6 +680,7 @@ class Metabox {
     $id       = $field['id'];
     $li       = ($has_file)? "<li><a href='{$value['url']}' target='_blank'>{$value['url']}</a></li>": "";
 
+    echo "<div class='field-desc'>";
     echo "<span class='simplePanelfilePreview'><ul>{$li}</ul></span>";
     echo "<input type='hidden' name='{$name}[id]' value='{$value['id']}'/>";
     echo "<input type='hidden' name='{$name}[url]' value='{$value['url']}'/>";
@@ -687,6 +688,7 @@ class Metabox {
       echo "<input type='button' class='{$multiple} button simplePanelfileUploadclear' id='{$id}' value='Remove File' data-mime_type='{$type}' data-ext='{$ext}'/>";
     else
       echo "<input type='button' class='{$multiple} button simplePanelfileUpload' id='{$id}' value='Upload File' data-mime_type='{$type}' data-ext='{$ext}'/>";
+    echo "</div>";
 
     $this->show_field_end( $field, $meta );
   }
@@ -716,6 +718,7 @@ class Metabox {
     $multiple     = isset($field['multiple'])? $field['multiple'] : false;
     $multiple     = ($multiple)? "multiFile " : "";
 
+    echo "<div class='field-desc'>";
     echo "<span class='simplePanelImagePreview'><img {$PreviewStyle} src='{$value['url']}'><br/></span>";
     echo "<input type='hidden' name='{$name}[id]' value='{$value['id']}'/>";
     echo "<input type='hidden' name='{$name}[url]' value='{$value['url']}'/>";
@@ -723,6 +726,7 @@ class Metabox {
       echo "<input class='{$multiple} button  simplePanelimageUploadclear' id='{$id}' value='Remove Image' type='button'/>";
     else
       echo "<input class='{$multiple} button simplePanelimageUpload' id='{$id}' value='Upload Image' type='button'/>";
+    echo "</div>";
     $this->show_field_end( $field, $meta );
   }
   

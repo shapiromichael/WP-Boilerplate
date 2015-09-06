@@ -97,6 +97,26 @@
 				@include section;
 			}
 		}
+
+		.simplePanelfilePreview {
+			ul:empty {
+				display: none;
+			}
+		}
+		
+		.simplePanelImagePreview {
+			float: left;
+			margin-bottom: 10px;
+
+			img {
+				max-width: 100% !important;
+			}
+		}
+
+		.field-desc {
+			float: left;
+			width: 80%;
+		}
 	}
 
 	//
