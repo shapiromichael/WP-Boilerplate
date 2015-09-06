@@ -1,0 +1,207 @@
+@import "../variables";
+@import "../functions";
+
+@charset "utf-8";
+
+
+.postbox {
+	
+	// Common rules for all fields.			
+	.at-file-upload-label{
+		clear: both;
+		margin: 5px 0 5px 1px;
+	}
+
+	.form-table tr {
+
+		td {
+			border-bottom: 1px solid #EEE;
+		}
+
+		&:last-child td {
+			border-bottom: none;
+		}
+
+	}
+
+
+	//
+	// Form fields
+	//
+	.at-field {
+		padding: 10px 0;
+		
+		.at-label {
+			@include not-selectable;
+			color: #333;
+			font-weight: bold;
+			width: 20%;
+			float: left;
+			text-shadow: 0 1px 0 #FFF;
+			
+			.desc-field {
+				font-weight: normal;
+				color: #AAA;
+				font-size: 12px;
+				font-style: italic;
+				font-family: sans-serif;
+			}
+		}
+
+		.at-form {
+			margin-left: 5%;
+			width: 75%;
+			float: left;
+			
+			label {
+				@include not-selectable;
+				@include section;
+			}
+		}
+
+		input {
+			line-height: 18px;
+			
+			&[type="checkbox"],
+			&[type="radio"] {
+				margin: 1px 5px 0 0;
+			}
+
+			.at-color{
+				border: 0px;
+				border-radius: 5px;
+				margin-right: 10px;
+				min-width: 100px;
+			}
+
+			.desc-field {
+				color: #AAA;
+				font-style: italic;
+				margin: 5px 0 0 3px !important;
+				font-size: 13px;
+			}
+		}
+
+		textarea {
+			padding: 5px;
+			line-height: 18px;
+		}
+	}
+
+	//
+	// Uploaded image
+	//
+	.at-images {
+		$at-image-size: 150px;
+
+		li {
+			margin: 5px 10px 0px 0;
+			float: left;
+			width: $at-image-size;
+			height: $at-image-size;
+			text-align: center;
+			border: 3px solid #ccc;
+			cursor: move;
+			position: relative;
+			border-radius: 3px;
+		}
+
+		img {
+			width: $at-image-size;
+			height: $at-image-size;
+		}
+
+		a {
+			position: absolute;
+			top: -12px;
+			right: -12px;
+			color: #fff;
+			font-weight: bold;
+			padding: 5px;
+		}
+
+		.at-delete-file img{
+			width: 16px;
+			height: 16px;
+		}
+	}
+	.at-upload-button { 
+		float: left;
+		clear: both;
+		margin-top: 10px;
+	}
+	.at-add-file {
+		float: left;
+		clear: both;
+		margin-top: 10px;
+	}
+
+	//
+	// Time picker
+	//
+	.ui-timepicker-div {
+		font-size: 0.9em;
+		
+		.ui-widget-header { margin-bottom: 8px; }
+		dl {
+			text-align: left;
+
+			dt { 
+				height: 25px;
+			}
+
+			dd {
+				margin: -25px 0 10px 65px;
+			}
+		}
+
+		td {
+			font-size: 90%;
+		}
+	}
+
+	//
+	// Repater block
+	//
+	.at-inline {
+
+		label {
+			font-size: 12px !important;
+		}
+		textarea{ height: 130px;
+			width: 200px;
+		}
+	}
+
+	.CodeMirror{
+		background-color: #FFF;
+	}
+}
+
+// Other
+#wpcontent select.at-select {
+	height: 30px !important;
+	padding: 5px;
+	display: block;
+	min-width: 200px;
+}
+#post-body .at-field .wp_themeSkin .mceStatusbar a.mceResize{ 
+	top: -25px;
+}
+
+// Small layout
+#post-body.columns-2 #postbox-container-1 .postbox {
+	.at-field {
+		.at-label {
+			font-weight: normal;
+			width: 100%;
+			float: none;
+			margin-bottom: 5px;
+		}
+		.at-form {
+			width: 100%;
+			float: none;
+			margin-left: 0;
+		}
+	}
+}
