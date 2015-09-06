@@ -1,4 +1,4 @@
-![preview](https://raw.githubusercontent.com/syncode/WP-Boilerplate/develop/assets/ui/featured-logo.png)
+![preview](https://raw.githubusercontent.com/syncode/WP-Boilerplate/develop/assets/images/ui/featured-logo.png)
 
 [prd]: https://github.com/syncode/WP-Boilerplate/archive/master.zip
 [max]: https://github.com/syncode/WP-Boilerplate/archive/develop.zip
