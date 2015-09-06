@@ -39,6 +39,7 @@
 			'has_archive'        => false, 
 			'hierarchical'       => false,
 			'menu_position'      => null,
+			'menu_icon'			 => 'dashicons-edit',
 			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'  ),
 			'taxonomies'         => array( 'category', 'post_tag' ),
 			'menu_position'      => 5 // below Posts

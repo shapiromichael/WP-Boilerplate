@@ -14,9 +14,6 @@ if ( ! class_exists('BP_Options') ){
 	}
 	
 class BP_Options{
-	
-	protected $framework_url = 'http://leemason.github.com/NHP-Theme-Options-Framework/';
-	protected $framework_version = '1.0.6';
 		
 	public $dir = BP_OPTIONS_DIR;
 	public $url = BP_OPTIONS_URL;
@@ -45,19 +42,19 @@ class BP_Options{
 		
 		$defaults['google_api_key'] = '';//must be defined for use with google webfonts field type
 		
-		$defaults['menu_icon'] = PATH . '/assets/images/admin/pixel.png';
+		$defaults['menu_icon'] = 'dashicons-admin-generic';
 		$defaults['menu_title'] = __('Options', 'nhp-opts');
 		$defaults['page_icon'] = 'icon-options';
 		$defaults['page_title'] = __('Options', 'nhp-opts');
-		$defaults['page_slug'] = '_options';
+		$defaults['page_slug'] = 'options';
 		$defaults['page_cap'] = 'manage_options';
 		$defaults['page_type'] = 'menu';
 		$defaults['page_parent'] = '';
 		$defaults['page_position'] = 100;
-		$defaults['allow_sub_menu'] = true;
+		$defaults['allow_sub_menu'] = false;
 		
 		$defaults['show_import_export'] = true;
-		$defaults['dev_mode'] = true;
+		$defaults['dev_mode'] = false;
 		$defaults['stylesheet_override'] = false;
 		
 		$defaults['help_tabs'] = array();
