@@ -103,7 +103,7 @@
 				display: none;
 			}
 		}
-		
+
 		.simplePanelImagePreview {
 			float: left;
 			margin-bottom: 10px;
@@ -116,6 +116,14 @@
 		.field-desc {
 			float: left;
 			width: 80%;
+
+			li a {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				width: 95%;
+				float: left;
+				margin-bottom: 10px;
+			}
 		}
 	}
 
@@ -233,6 +241,9 @@
 			width: 100%;
 			float: none;
 			margin-left: 0;
+		}
+		.field-desc {
+			width: 100% !important;
 		}
 	}
 }
