@@ -4,7 +4,7 @@ class BP_Example_Widget extends WP_Widget {
 	
 	// Constructor
 	function __construct() {
-		parent::WP_Widget( 'theme_example_widget_id', 'Widget Title', array( 'description' => 'This is a simple description which will show up below the title on the widgets dashboard' ) );
+		parent::__construct( 'theme_example_widget_id', 'Widget Title', array( 'description' => 'This is a simple description which will show up below the title on the widgets dashboard' ) );
 	}
 
 	// The widget view

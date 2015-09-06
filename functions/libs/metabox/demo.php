@@ -94,25 +94,6 @@ if (is_admin()){
   $my_meta2->addTaxonomy($prefix.'taxonomy_field_id',array('taxonomy' => 'category'),array('name'=> 'My Taxonomy '));
   //posts field
   $my_meta2->addPosts($prefix.'posts_field_id',array('post_type' => 'post'),array('name'=> 'My Posts '));
-    
-  /*
-   * To Create a reapeater Block first create an array of fields
-   * use the same functions as above but add true as a last param
-   */
-  $repeater_fields[] = $my_meta2->addText($prefix.'re_text_field_id',array('name'=> 'My Text '),true);
-  $repeater_fields[] = $my_meta2->addTextarea($prefix.'re_textarea_field_id',array('name'=> 'My Textarea '),true);
-  $repeater_fields[] = $my_meta2->addCheckbox($prefix.'re_checkbox_field_id',array('name'=> 'My Checkbox '),true);
-  $repeater_fields[] = $my_meta2->addImage($prefix.'image_field_id',array('name'=> 'My Image '),true);
-  /*
-   * Then just add the fields to the repeater block
-   */
-  //repeater block
-  $my_meta2->addRepeaterBlock($prefix.'re_',array(
-    'inline'   => true, 
-    'name'     => 'This is a Repeater Block',
-    'fields'   => $repeater_fields, 
-    'sortable' => true
-  ));
   
   /*
    * To Create a conditinal Block first create an array of fields

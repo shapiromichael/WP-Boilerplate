@@ -85,6 +85,17 @@
 		textarea {
 			padding: 5px;
 			line-height: 18px;
+			width: 80%;
+		}
+
+		.checkbox-list {
+			@include not-selectable;
+			float: left;
+			widows: 80%;
+
+			label {
+				@include section;
+			}
 		}
 	}
 

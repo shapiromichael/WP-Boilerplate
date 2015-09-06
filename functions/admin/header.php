@@ -4,7 +4,7 @@
 	function BP_admin_head() {
 
 		wp_enqueue_script( array('jq-ui', 'admin-options', 'colorpick') );
-		wp_enqueue_style(  array('admin-general', 'admin-options', 'colorpicker') );
+		wp_enqueue_style(  array('admin', 'colorpicker') );
 
 		?>
 			<link rel="icon" href="<?php echo PATH; ?>/assets/images/icon.ico" type="image/x-icon">

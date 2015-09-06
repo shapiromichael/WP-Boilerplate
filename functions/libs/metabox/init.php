@@ -767,12 +767,16 @@ class Metabox {
     $this->show_field_begin($field, $meta);
     
       $html = array();
+
+      $html[] = '<div class="checkbox-list">';
     
       foreach ($field['options'] as $key => $value) {
         $html[] = "<label><input type='checkbox' ".( isset($field['style'])? "style='{$field['style']}' " : '' )."  class='at-checkbox_list".( isset($field['class'])? ' ' . $field['class'] : '' )."' name='{$field['id']}[]' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> {$value}</label>";
       }
+
+      $html[] = '</div>';
     
-      echo implode( '<br />' , $html );
+      echo implode( $html );
       
     $this->show_field_end($field, $meta);
     

@@ -44,9 +44,7 @@
 
 	// Dashboard
 	function BP_register_admin_styles() {
-		wp_register_style('admin-main',      CSS_PATH . '/admin.css',           array(),             VERSION );
-		wp_register_style('admin-options',   CSS_PATH . '/admin/options.css',   array('farbtastic'), VERSION );
-		wp_register_style('admin-metaboxes', CSS_PATH . '/admin/metaboxes.css', array(),             VERSION );
+		wp_register_style('admin',      CSS_PATH . '/admin.css',           array(),             VERSION );
 	}
 
 	function BP_register_admin_scripts() {
