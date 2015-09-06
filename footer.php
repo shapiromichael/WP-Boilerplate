@@ -1,6 +1,6 @@
 	<footer>
 		<div class="container rights">
-			<p class="text-muted rights">&copy; <?php echo date('Y'); ?>. All Rights Reserved.</p>
+			<p class="text-muted rights">Made with <i class="fa fa-heart" style="color: #FF0091;"></i> by Syncode Software Ltd.</p>
 		</div>
 	</footer>
 	<?php
