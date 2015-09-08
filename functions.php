@@ -4,9 +4,9 @@
 	require_once('functions/config.php');
 
 	// Libs
-	require_once('functions/libs/options/init.php');
 	require_once('functions/libs/wp_bootstrap_navwalker.php');
-	
+		require_once('functions/admin/theme_options.php');
+
 	// Theme support
 	require_once('functions/theme.php');
 
@@ -21,10 +21,8 @@
 		// Libs
 		require_once('functions/libs/metabox/init.php');
 		require_once('functions/libs/metabox/demo.php');
-		require_once('functions/libs/sortlist.php');
-		require_once('functions/admin/options.php');
 		
-		// Metaboxs
+		// Theme Options
 		
 		// Other
 		require_once('functions/admin/footer.php');
